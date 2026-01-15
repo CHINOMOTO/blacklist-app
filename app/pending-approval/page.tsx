@@ -1,0 +1,55 @@
+"use client";
+
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
+
+export default function PendingApprovalPage() {
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        router.push("/login");
+    };
+
+    return (
+        <div className="min-h-screen flex items-center justify-center p-4 bg-[url('/grid.svg')] bg-fixed bg-center">
+            {/* 背景装飾 */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute top-20 left-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div className="relative w-full max-w-lg glass-panel rounded-2xl p-10 text-center animate-fade-in border-t border-slate-600/50">
+
+                <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-emerald-500/30">
+                    <span className="text-4xl">⏳</span>
+                </div>
+
+                <h1 className="text-2xl font-bold text-white mb-3">
+                    承認待ちです
+                </h1>
+
+                <p className="text-slate-300 mb-8 leading-relaxed">
+                    アカウント登録の申請を受け付けました。<br />
+                    現在、管理者による確認を行っております。
+                </p>
+
+                <div className="bg-slate-900/40 rounded-xl p-6 text-left mb-8 border border-slate-700/50">
+                    <h3 className="text-xs font-bold text-emerald-400 mb-2 uppercase tracking-widest">Next Steps</h3>
+                    <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>管理者があなたの所属情報を確認します</li>
+                        <li>承認されると、メール等の通知なく利用可能になります</li>
+                        <li>しばらくしてから再度ログインをお試しください</li>
+                    </ul>
+                </div>
+
+                <button
+                    onClick={handleLogout}
+                    className="btn-secondary w-full"
+                >
+                    一度ログアウトして待機する
+                </button>
+            </div>
+        </div>
+    );
+}

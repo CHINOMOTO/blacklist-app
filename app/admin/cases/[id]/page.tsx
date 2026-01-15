@@ -1,0 +1,379 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
+import { RequireAdmin } from "@/components/RequireAdmin";
+
+type CaseDetail = {
+  id: string;
+  full_name: string;
+  full_name_kana: string | null;
+  gender: "male" | "female" | "other" | "unknown";
+  birth_date: string;
+  phone_last4: string | null;
+  occurrence_date: string;
+  reason_text: string;
+  status: "pending" | "approved" | "rejected";
+  created_at: string;
+  approved_at: string | null;
+  rejected_reason: string | null;
+  evidence_urls?: string[]; // 追加
+  registered_company_id?: string;
+};
+
+type EvidenceFile = {
+  path: string;
+  signedUrl: string;
+  type: 'image' | 'other';
+  name: string;
+}
+
+function genderLabel(g: CaseDetail["gender"]) {
+  switch (g) {
+    case "male":
+      return "男性";
+    case "female":
+      return "女性";
+    case "other":
+      return "その他";
+    case "unknown":
+    default:
+      return "未設定";
+  }
+}
+
+function statusLabel(status: CaseDetail["status"]) {
+  switch (status) {
+    case "approved":
+      return "承認済み";
+    case "pending":
+      return "審査中";
+    case "rejected":
+      return "却下";
+  }
+}
+
+export default function AdminCaseDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const id = params?.id as string;
+
+  const [caseDetail, setCaseDetail] = useState<CaseDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState<string | null>(null);
+  const [rejectReason, setRejectReason] = useState("");
+  const [isApproving, setIsApproving] = useState(false);
+  const [isRejecting, setIsRejecting] = useState(false);
+
+  // Storage files
+  const [evidenceFiles, setEvidenceFiles] = useState<EvidenceFile[]>([]);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchDetail = async () => {
+      setLoading(true);
+      setErrorMsg(null);
+
+      const { data, error } = await supabase
+        .from("blacklist_cases")
+        .select(
+          "id, full_name, full_name_kana, gender, birth_date, phone_last4, occurrence_date, reason_text, status, created_at, approved_at, rejected_reason, evidence_urls, registered_company_id"
+        )
+        .eq("id", id)
+        .maybeSingle();
+
+      if (error) {
+        setErrorMsg(error.message || "データの取得に失敗しました。");
+        setLoading(false);
+        return;
+      }
+
+      if (!data) {
+        setErrorMsg("該当するデータが見つかりません。");
+        setLoading(false);
+        return;
+      }
+
+      setCaseDetail(data as CaseDetail);
+
+      // Fetch Company Name if exists
+      if (data.registered_company_id) {
+        const { data: comp } = await supabase
+          .from("companies")
+          .select("name")
+          .eq("id", data.registered_company_id)
+          .single();
+        if (comp) {
+          setCompanyName(comp.name);
+        }
+      }
+
+      // 証拠ファイルの署名付きURLを取得
+      if (data.evidence_urls && Array.isArray(data.evidence_urls) && data.evidence_urls.length > 0) {
+        const files: EvidenceFile[] = [];
+        for (const path of data.evidence_urls) {
+          const { data: signedData } = await supabase.storage
+            .from('case-evidence')
+            .createSignedUrl(path, 3600); // 1時間有効
+
+          if (signedData) {
+            const isImage = path.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+            files.push({
+              path,
+              signedUrl: signedData.signedUrl,
+              type: isImage ? 'image' : 'other',
+              name: path.split('/').pop() || 'file'
+            });
+          }
+        }
+        setEvidenceFiles(files);
+      } else {
+        setEvidenceFiles([]);
+      }
+
+      setLoading(false);
+    };
+
+    fetchDetail();
+  }, [id]);
+
+  const handleApprove = async () => {
+    if (!caseDetail) return;
+    setErrorMsg(null);
+    setIsApproving(true);
+
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setErrorMsg("ログイン情報を取得できませんでした。再度ログインしてください。");
+        setIsApproving(false);
+        return;
+      }
+
+      const { error: updateError } = await supabase
+        .from("blacklist_cases")
+        .update({
+          status: "approved",
+          approved_by: user.id,
+          approved_at: new Date().toISOString(),
+          rejected_reason: null,
+        })
+        .eq("id", caseDetail.id);
+
+      if (updateError) {
+        setErrorMsg(updateError.message || "承認に失敗しました。");
+        setIsApproving(false);
+        return;
+      }
+
+      router.push("/admin/cases");
+    } catch {
+      setErrorMsg("予期せぬエラーが発生しました。");
+      setIsApproving(false);
+    }
+  };
+
+  const handleReject = async () => {
+    if (!caseDetail) return;
+
+    if (!rejectReason.trim()) {
+      setErrorMsg("却下理由を入力してください。");
+      return;
+    }
+
+    setErrorMsg(null);
+    setIsRejecting(true);
+
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setErrorMsg("ログイン情報を取得できませんでした。再度ログインしてください。");
+        setIsRejecting(false);
+        return;
+      }
+
+      const { error: updateError } = await supabase
+        .from("blacklist_cases")
+        .update({
+          status: "rejected",
+          approved_by: user.id,
+          approved_at: new Date().toISOString(),
+          rejected_reason: rejectReason.trim(),
+        })
+        .eq("id", caseDetail.id);
+
+      if (updateError) {
+        setErrorMsg(updateError.message || "却下に失敗しました。");
+        setIsRejecting(false);
+        return;
+      }
+
+      router.push("/admin/cases");
+    } catch {
+      setErrorMsg("予期せぬエラーが発生しました。");
+      setIsRejecting(false);
+    }
+  };
+
+  return (
+    <RequireAdmin>
+      <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center pt-12 pb-12">
+        <div className="max-w-3xl w-full mx-4 bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl">
+          {loading ? (
+            <p className="text-sm text-slate-200">読み込み中です...</p>
+          ) : errorMsg ? (
+            <p className="text-sm text-red-400 bg-red-950/40 border border-red-700 rounded-md px-3 py-2">
+              {errorMsg}
+            </p>
+          ) : !caseDetail ? (
+            <p className="text-sm text-slate-300">データが見つかりません。</p>
+          ) : (
+            <>
+              <div className="mb-4">
+                <Link
+                  href="/admin/cases"
+                  className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors inline-block mb-2"
+                >
+                  一覧へ戻る
+                </Link>
+                <h1 className="text-xl font-bold text-emerald-400">
+                  承認・却下（詳細）
+                </h1>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">基本情報</h2>
+                  <div className="space-y-2 text-sm">
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">氏名：</span>
+                      <span className="text-slate-50 font-semibold">{caseDetail.full_name}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">氏名（カナ）：</span>
+                      <span className="text-slate-50">{caseDetail.full_name_kana || "-"}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">性別：</span>
+                      <span className="text-slate-50">{genderLabel(caseDetail.gender)}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">生年月日：</span>
+                      <span className="text-slate-50">{caseDetail.birth_date?.replace(/-/g, "/")}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">電話番号（下4桁）：</span>
+                      <span className="text-slate-50">{caseDetail.phone_last4 || "-"}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">発生日：</span>
+                      <span className="text-slate-50">{caseDetail.occurrence_date?.replace(/-/g, "/")}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">登録日：</span>
+                      <span className="text-slate-50">
+                        {caseDetail.created_at
+                          ? new Date(caseDetail.created_at).toLocaleDateString()
+                          : "-"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">登録元：</span>
+                      <span className="text-slate-50">{companyName || "-"}</span>
+                    </div>
+                    <div className="grid grid-cols-[140px_1fr]">
+                      <span className="text-slate-400">ステータス：</span>
+                      <span className="text-slate-50 font-bold">{statusLabel(caseDetail.status)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">トラブル詳細・理由</h2>
+                  <div className="text-sm text-slate-100 whitespace-pre-wrap leading-relaxed">
+                    {caseDetail.reason_text}
+                  </div>
+                </div>
+
+                {/* 証拠ファイルセクション */}
+                <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">添付資料</h2>
+                  {evidenceFiles.length === 0 ? (
+                    <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
+                  ) : (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {evidenceFiles.map((file, i) => (
+                        <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-emerald-500/50 transition-colors">
+                          {file.type === 'image' ? (
+                            <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
+                              <div className="aspect-square relative flex items-center justify-center bg-slate-950">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src={file.signedUrl} alt={file.name} className="max-w-full max-h-full object-contain" />
+                              </div>
+                              <div className="p-2 text-xs text-slate-300 truncate text-center group-hover:text-emerald-400 bg-slate-900/80 absolute bottom-0 w-full backdrop-blur-sm">
+                                {file.name}
+                              </div>
+                            </a>
+                          ) : (
+                            <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none h-full p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-emerald-400">
+                              <span className="text-3xl">📄</span>
+                              <span className="text-xs truncate w-full text-center">{file.name}</span>
+                            </a>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm mb-1 text-slate-300">
+                  却下理由（却下する場合のみ必須）
+                </label>
+                <textarea
+                  value={rejectReason}
+                  onChange={(e) => setRejectReason(e.target.value)}
+                  rows={3}
+                  className="w-full bg-slate-900/50 border border-slate-600 rounded-md px-3 py-2 text-slate-100 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all"
+                  placeholder="例: 情報不足のため、本人確認が取れないため等"
+                />
+              </div>
+
+              <div className="flex gap-3 mt-8">
+                <button
+                  type="button"
+                  onClick={handleApprove}
+                  disabled={isApproving || isRejecting}
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800/60 text-white font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-emerald-900/20"
+                >
+                  {isApproving ? "承認中..." : "承認する"}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReject}
+                  disabled={isApproving || isRejecting}
+                  className="flex-1 bg-red-600 hover:bg-red-500 disabled:bg-red-800/60 text-white font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-red-900/20"
+                >
+                  {isRejecting ? "却下中..." : "却下する"}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </RequireAdmin >
+  );
+}
