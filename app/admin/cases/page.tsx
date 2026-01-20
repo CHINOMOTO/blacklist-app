@@ -49,7 +49,7 @@ export default function AdminCaseList() {
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">承認待ち案件</h1>
-              <p className="text-emerald-400 font-medium">審査が必要な申請一覧</p>
+              <p className="text-[#00e5ff] font-medium">審査が必要な申請一覧</p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
               戻る
@@ -66,9 +66,9 @@ export default function AdminCaseList() {
           {loading ? (
             <div className="flex justify-center py-24">
               <div className="relative">
-                <div className="animate-spin h-12 w-12 border-4 border-emerald-500/20 rounded-full border-t-emerald-400"></div>
+                <div className="animate-spin h-12 w-12 border-4 border-[#00e5ff]/20 rounded-full border-t-[#00e5ff]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-4 w-4 bg-emerald-500/20 rounded-full blur-md"></div>
+                  <div className="h-4 w-4 bg-[#00e5ff]/20 rounded-full blur-md"></div>
                 </div>
               </div>
             </div>
@@ -84,14 +84,14 @@ export default function AdminCaseList() {
                 <Link
                   key={c.id}
                   href={`/admin/cases/${c.id}`}
-                  className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-emerald-500/5 hover:border-emerald-500/30 transition-all group border-l-4 border-l-yellow-500"
+                  className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-[#00e5ff]/5 hover:border-[#00e5ff]/30 transition-all group border-l-4 border-l-yellow-500"
                 >
                   <div className="flex items-center gap-6">
                     <div className="h-12 w-12 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
                       ⚠️
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">
+                      <h3 className="text-lg font-bold text-white group-hover:text-[#00e5ff] transition-colors">
                         {c.full_name}
                       </h3>
                       <div className="flex gap-4 text-sm text-slate-400 mt-1">
@@ -105,7 +105,7 @@ export default function AdminCaseList() {
                     <div className="font-mono text-slate-300 text-sm">
                       {new Date(c.created_at).toLocaleDateString()}
                     </div>
-                    <span className="text-emerald-400 text-xs mt-2 inline-block font-bold hover:underline decoration-emerald-500/30 underline-offset-4 pointer-events-none">
+                    <span className="text-[#00e5ff] text-xs mt-2 inline-block font-bold hover:underline decoration-[#00e5ff]/30 underline-offset-4 pointer-events-none">
                       審査詳細
                     </span>
                   </div>

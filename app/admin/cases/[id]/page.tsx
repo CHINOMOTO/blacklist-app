@@ -244,18 +244,18 @@ export default function AdminCaseDetailPage() {
               <div className="mb-4">
                 <Link
                   href="/admin/cases"
-                  className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors inline-block mb-2"
+                  className="text-sm text-[#00e5ff] hover:text-[#00e5ff] transition-colors inline-block mb-2"
                 >
                   一覧へ戻る
                 </Link>
-                <h1 className="text-xl font-bold text-emerald-400">
+                <h1 className="text-xl font-bold text-[#00e5ff]">
                   承認・却下（詳細）
                 </h1>
               </div>
 
               <div className="space-y-4 mb-8">
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">基本情報</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">基本情報</h2>
                   <div className="space-y-2 text-sm">
                     <div className="grid grid-cols-[140px_1fr]">
                       <span className="text-slate-400">氏名：</span>
@@ -301,7 +301,7 @@ export default function AdminCaseDetailPage() {
                 </div>
 
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">トラブル詳細・理由</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">トラブル詳細・理由</h2>
                   <div className="text-sm text-slate-100 whitespace-pre-wrap leading-relaxed">
                     {caseDetail.reason_text}
                   </div>
@@ -309,25 +309,25 @@ export default function AdminCaseDetailPage() {
 
                 {/* 証拠ファイルセクション */}
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest mb-4 border-b border-emerald-500/20 pb-2">添付資料</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">添付資料</h2>
                   {evidenceFiles.length === 0 ? (
                     <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
                   ) : (
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {evidenceFiles.map((file, i) => (
-                        <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-emerald-500/50 transition-colors">
+                        <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-[#00e5ff]/50 transition-colors">
                           {file.type === 'image' ? (
                             <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
                               <div className="aspect-square relative flex items-center justify-center bg-slate-950">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={file.signedUrl} alt={file.name} className="max-w-full max-h-full object-contain" />
                               </div>
-                              <div className="p-2 text-xs text-slate-300 truncate text-center group-hover:text-emerald-400 bg-slate-900/80 absolute bottom-0 w-full backdrop-blur-sm">
+                              <div className="p-2 text-xs text-slate-300 truncate text-center group-hover:text-[#00e5ff] bg-slate-900/80 absolute bottom-0 w-full backdrop-blur-sm">
                                 {file.name}
                               </div>
                             </a>
                           ) : (
-                            <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none h-full p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-emerald-400">
+                            <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none h-full p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-[#00e5ff]">
                               <span className="text-3xl">📄</span>
                               <span className="text-xs truncate w-full text-center">{file.name}</span>
                             </a>
@@ -347,7 +347,7 @@ export default function AdminCaseDetailPage() {
                   value={rejectReason}
                   onChange={(e) => setRejectReason(e.target.value)}
                   rows={3}
-                  className="w-full bg-slate-900/50 border border-slate-600 rounded-md px-3 py-2 text-slate-100 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all"
+                  className="w-full bg-slate-900/50 border border-slate-600 rounded-md px-3 py-2 text-slate-100 text-sm focus:border-[#00e5ff] focus:outline-none focus:ring-1 focus:ring-[#00e5ff] transition-all"
                   placeholder="例: 情報不足のため、本人確認が取れないため等"
                 />
               </div>
@@ -357,7 +357,7 @@ export default function AdminCaseDetailPage() {
                   type="button"
                   onClick={handleApprove}
                   disabled={isApproving || isRejecting}
-                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800/60 text-white font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-emerald-900/20"
+                  className="flex-1 bg-[#00e5ff]/80 hover:bg-[#00e5ff] disabled:bg-[#00e5ff]/40 text-black font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-[#00e5ff]/20"
                 >
                   {isApproving ? "承認中..." : "承認する"}
                 </button>

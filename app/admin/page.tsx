@@ -47,7 +47,7 @@ export default function AdminDashboardPage() {
         <RequireAdmin>
             <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center">
                 <div className="max-w-4xl w-full mx-4">
-                    <h1 className="text-3xl font-bold text-emerald-400 mb-8 text-center">
+                    <h1 className="text-3xl font-bold text-[#00e5ff] mb-8 text-center">
                         管理者ダッシュボード
                     </h1>
 
@@ -55,13 +55,13 @@ export default function AdminDashboardPage() {
                         {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-emerald-500/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-emerald-400 transition-colors">
+                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
                                     承認待ちリスト
                                 </h2>
-                                <span className="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-1 rounded border border-emerald-500/30">
+                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
                                     要対応
                                 </span>
                             </div>

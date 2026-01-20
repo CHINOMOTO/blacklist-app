@@ -113,7 +113,7 @@ export default function CasesPage() {
               </div>
             </div>
           ) : (
-            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 shadow-2xl border border-white/10">
+            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 shadow-2xl border border-[#00e5ff]/30 shadow-[#00e5ff]/10">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm text-slate-300">
                   <thead className="bg-slate-900/60 text-xs uppercase font-bold text-slate-400">
@@ -200,7 +200,7 @@ function StatusBadge({ status }: { status: string }) {
     styles = "bg-yellow-500/10 text-yellow-400 border-yellow-500/30 shadow-[0_0_10px_rgba(234,179,8,0.2)]";
     label = "承認待ち";
   } else if (status === "approved") {
-    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30 shadow-[0_0_10px_rgba(0,255,65,0.2)]";
+    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30 shadow-[0_0_10px_rgba(0,229,255,0.2)]";
     label = "承認済み";
   } else if (status === "rejected") {
     styles = "bg-red-500/10 text-red-400 border-red-500/30";

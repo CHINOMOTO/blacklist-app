@@ -81,7 +81,7 @@ export default function AdminUsersPage() {
 
                     {loading ? (
                         <div className="flex justify-center py-20">
-                            <div className="animate-spin h-10 w-10 border-4 border-emerald-500 rounded-full border-t-transparent"></div>
+                            <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
                         </div>
                     ) : pendingUsers.length === 0 ? (
                         <div className="glass-panel p-10 text-center rounded-2xl animate-fade-in">

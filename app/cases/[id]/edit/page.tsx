@@ -160,7 +160,7 @@ export default function EditCasePage() {
         return (
             <RequireAdmin>
                 <div className="min-h-screen flex items-center justify-center">
-                    <div className="animate-spin h-10 w-10 border-4 border-emerald-500 rounded-full border-t-transparent"></div>
+                    <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
                 </div>
             </RequireAdmin>
         );
@@ -267,7 +267,7 @@ export default function EditCasePage() {
                                     {/* Existing Files */}
                                     {existingFiles.length > 0 && (
                                         <div className="mb-4 space-y-2">
-                                            <p className="text-xs text-emerald-400 font-bold mb-2">登録済みファイル:</p>
+                                            <p className="text-xs text-[#00e5ff] font-bold mb-2">登録済みファイル:</p>
                                             {existingFiles.map((file) => (
                                                 <div key={file.path} className="flex items-center justify-between bg-slate-800/80 p-3 rounded-lg border border-slate-600">
                                                     <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-cyan-300 hover:underline truncate max-w-[80%] flex items-center gap-2">
@@ -349,7 +349,7 @@ export default function EditCasePage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary flex-1 py-3 text-base shadow-lg shadow-emerald-500/20"
+                                    className="btn-primary flex-1 py-3 text-base shadow-lg shadow-[#00e5ff]/20"
                                 >
                                     {saving ? "更新中..." : "変更を保存"}
                                 </button>
@@ -366,7 +366,7 @@ export default function EditCasePage() {
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
         <div className="space-y-4">
-            <h3 className="text-sm font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-500/20 pb-2">
+            <h3 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">
                 {title}
             </h3>
             {children}
@@ -379,7 +379,7 @@ function Label({ children, required }: { children: React.ReactNode, required?: b
         <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
             {children}
             {required ? (
-                <span className="text-emerald-500 text-[10px] border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                <span className="text-[#00e5ff] text-[10px] border border-[#00e5ff]/30 bg-[#00e5ff]/10 px-1.5 py-0.5 rounded">
                     必須
                 </span>
             ) : (

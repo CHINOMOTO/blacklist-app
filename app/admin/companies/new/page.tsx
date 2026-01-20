@@ -50,7 +50,7 @@ export default function NewCompanyPage() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-300">
-                                    会社名 <span className="text-emerald-500">*</span>
+                                    会社名 <span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -68,7 +68,7 @@ export default function NewCompanyPage() {
                                     id="isMain"
                                     checked={isMain}
                                     onChange={(e) => setIsMain(e.target.checked)}
-                                    className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-emerald-500 focus:ring-emerald-500/50"
+                                    className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-[#00e5ff] focus:ring-[#00e5ff]/50"
                                 />
                                 <label htmlFor="isMain" className="cursor-pointer">
                                     <span className="block text-sm font-semibold text-slate-200">メイン会社として登録</span>
@@ -86,7 +86,7 @@ export default function NewCompanyPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-emerald-500/20"
+                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-[#00e5ff]/20"
                                 >
                                     {loading ? "登録中..." : "会社情報を保存"}
                                 </button>

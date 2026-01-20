@@ -65,7 +65,7 @@ export default function EditCompanyPage() {
         return (
             <RequireAdmin>
                 <div className="min-h-screen flex items-center justify-center">
-                    <div className="animate-spin h-10 w-10 border-4 border-emerald-500 rounded-full border-t-transparent"></div>
+                    <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
                 </div>
             </RequireAdmin>
         );
@@ -87,7 +87,7 @@ export default function EditCompanyPage() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-300">
-                                    会社名 <span className="text-emerald-500">*</span>
+                                    会社名 <span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -105,7 +105,7 @@ export default function EditCompanyPage() {
                                     id="isMain"
                                     checked={isMain}
                                     onChange={(e) => setIsMain(e.target.checked)}
-                                    className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-emerald-500 focus:ring-emerald-500/50"
+                                    className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-[#00e5ff] focus:ring-[#00e5ff]/50"
                                 />
                                 <label htmlFor="isMain" className="cursor-pointer">
                                     <span className="block text-sm font-semibold text-slate-200">メイン会社として登録</span>
@@ -123,7 +123,7 @@ export default function EditCompanyPage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-emerald-500/20"
+                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-[#00e5ff]/20"
                                 >
                                     {saving ? "更新中..." : "変更を保存"}
                                 </button>
