@@ -90,7 +90,7 @@ export default function CasesPage() {
               <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
                 戻る
               </Link>
-              <Link href="/cases/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
+              <Link href="/cases/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-[#00e5ff]/20 hover:shadow-[#00e5ff]/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
                 <span>+</span> 新規登録
               </Link>
             </div>
@@ -106,9 +106,9 @@ export default function CasesPage() {
           {isLoading ? (
             <div className="flex justify-center py-24">
               <div className="relative">
-                <div className="animate-spin h-12 w-12 border-4 border-emerald-500/20 rounded-full border-t-emerald-400"></div>
+                <div className="animate-spin h-12 w-12 border-4 border-[#00e5ff]/20 rounded-full border-t-[#00e5ff]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-4 w-4 bg-emerald-500/20 rounded-full blur-md"></div>
+                  <div className="h-4 w-4 bg-[#00e5ff]/20 rounded-full blur-md"></div>
                 </div>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function CasesPage() {
                         <td className="px-6 py-4">
                           <Link
                             href={`/cases/${c.id}`}
-                            className="text-white font-bold text-lg hover:text-emerald-400 transition-colors inline-block truncate max-w-[200px]"
+                            className="text-white font-bold text-lg hover:text-[#00e5ff] transition-colors inline-block truncate max-w-[200px]"
                           >
                             {c.full_name}
                           </Link>
@@ -156,7 +156,7 @@ export default function CasesPage() {
                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                               <Link
                                 href={`/cases/${c.id}/edit`}
-                                className="p-2 bg-slate-800 hover:bg-emerald-500/20 text-slate-400 hover:text-emerald-400 rounded-lg transition-colors"
+                                className="p-2 bg-slate-800 hover:bg-[#00e5ff]/20 text-slate-400 hover:text-[#00e5ff] rounded-lg transition-colors"
                                 title="編集"
                               >
                                 ✎
@@ -200,7 +200,7 @@ function StatusBadge({ status }: { status: string }) {
     styles = "bg-yellow-500/10 text-yellow-400 border-yellow-500/30 shadow-[0_0_10px_rgba(234,179,8,0.2)]";
     label = "承認待ち";
   } else if (status === "approved") {
-    styles = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]";
+    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30 shadow-[0_0_10px_rgba(0,255,65,0.2)]";
     label = "承認済み";
   } else if (status === "rejected") {
     styles = "bg-red-500/10 text-red-400 border-red-500/30";

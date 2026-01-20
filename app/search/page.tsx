@@ -143,7 +143,7 @@ export default function SearchPage() {
                     type="text"
                     value={nameQuery}
                     onChange={(e) => setNameQuery(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
+                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                     placeholder="例: 山田 太郎"
                   />
                 </div>
@@ -162,19 +162,19 @@ export default function SearchPage() {
                     type="date"
                     value={dateQuery}
                     onChange={(e) => setDateQuery(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
+                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                   />
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-2">
                 <p className="text-xs text-slate-500">
-                  ※氏名または生年月日の<span className="text-emerald-400 font-bold">どちらか一方は必須</span>です
+                  ※氏名または生年月日の<span className="text-[#00e5ff] font-bold">どちらか一方は必須</span>です
                 </p>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-primary min-w-[160px] shadow-lg shadow-emerald-500/20 py-3 rounded-xl font-bold tracking-wide"
+                  className="btn-primary min-w-[160px] shadow-lg shadow-[#00e5ff]/20 py-3 rounded-xl font-bold tracking-wide"
                 >
                   {isLoading ?
                     <span className="flex items-center justify-center gap-2">
@@ -199,7 +199,7 @@ export default function SearchPage() {
             <div className="animate-fade-in delay-200">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                 検索結果
-                <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-bold text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/20 px-2.5 py-0.5 rounded-full">
                   {results.length} 件
                 </span>
               </h2>
@@ -223,7 +223,7 @@ export default function SearchPage() {
                         <div className="flex-1">
                           <div className="flex items-start gap-4 mb-3">
                             <div className="flex-1">
-                              <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                              <h3 className="text-xl font-bold text-white group-hover:text-[#00e5ff] transition-colors">
                                 {item.full_name}
                               </h3>
                               <p className="text-sm text-slate-500 font-medium">
@@ -263,7 +263,7 @@ export default function SearchPage() {
 
                           <Link
                             href={`/cases/${item.id}`} // 詳細ページができたら飛ぶ想定（なければ#）
-                            className="mt-4 text-xs text-emerald-400 hover:text-emerald-300 font-bold hover:underline decoration-emerald-500/30 underline-offset-4 transition-all"
+                            className="mt-4 text-xs text-[#00e5ff] hover:text-[#00e5ff] font-bold hover:underline decoration-[#00e5ff]/30 underline-offset-4 transition-all"
                           >
                             詳細を見る
                           </Link>

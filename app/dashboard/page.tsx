@@ -45,8 +45,8 @@ export default function DashboardPage() {
               subtitle="SEARCH"
               description="氏名・カナ・生年月日などから要注意人物を照会します。"
               icon="🔍"
-              colorClass="group-hover:text-emerald-400 group-hover:border-emerald-500/50"
-              bgGradient="group-hover:bg-emerald-500/10"
+              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
+              bgGradient="group-hover:bg-[#00e5ff]/10"
               onClick={() => router.push("/search")}
             />
 
@@ -56,8 +56,8 @@ export default function DashboardPage() {
               subtitle="LIST"
               description="現在登録されているブラックリストの全データを確認します。"
               icon="📋"
-              colorClass="group-hover:text-cyan-400 group-hover:border-cyan-500/50"
-              bgGradient="group-hover:bg-cyan-500/10"
+              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
+              bgGradient="group-hover:bg-[#00e5ff]/10"
               onClick={() => router.push("/cases")}
             />
 
@@ -67,8 +67,8 @@ export default function DashboardPage() {
               subtitle="REGISTER"
               description="新たな対象者をブラックリストに追加登録します。"
               icon="✍️"
-              colorClass="group-hover:text-purple-400 group-hover:border-purple-500/50"
-              bgGradient="group-hover:bg-purple-500/10"
+              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
+              bgGradient="group-hover:bg-[#00e5ff]/10"
               onClick={() => router.push("/cases/new")}
             />
 
@@ -100,7 +100,7 @@ function DashboardCard({
       onClick={onClick}
       className={`group relative text-left p-8 rounded-3xl border transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-2xl flex flex-col h-full overflow-hidden
             ${isAdmin
-          ? 'border-emerald-500/40 bg-emerald-900/20 hover:bg-emerald-900/30'
+          ? 'border-[#00e5ff]/40 bg-[#00e5ff]/10 hover:bg-[#00e5ff]/20'
           : 'border-white/10 hover:border-white/20'
         }`}
     >
@@ -109,17 +109,17 @@ function DashboardCard({
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start justify-between mb-6 w-full">
-          <div className={`p-4 rounded-2xl text-4xl shadow-inner transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-emerald-500/20' : 'bg-white/5'}`}>
+          <div className={`p-4 rounded-2xl text-4xl shadow-inner transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-[#00e5ff]/20' : 'bg-white/5'}`}>
             {icon}
           </div>
           {isAdmin && (
-            <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-lg border border-emerald-500/30 uppercase tracking-wider shadow-sm">
+            <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
               Admin Only
             </span>
           )}
         </div>
 
-        <h3 className={`text-2xl font-bold text-slate-100 mb-2 transition-colors duration-300 ${colorClass} ${isAdmin ? 'text-emerald-100' : ''}`}>
+        <h3 className={`text-2xl font-bold text-slate-100 mb-2 transition-colors duration-300 ${colorClass} ${isAdmin ? 'text-[#00e5ff]' : ''}`}>
           {title}
         </h3>
         <div className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">

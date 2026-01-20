@@ -58,7 +58,7 @@ function statusLabel(status: CaseDetail["status"]) {
 function statusColor(status: CaseDetail["status"]) {
     switch (status) {
         case "approved":
-            return "text-emerald-400 border-emerald-500/30 bg-emerald-500/20";
+            return "text-[#00e5ff] border-[#00e5ff]/30 bg-[#00e5ff]/20";
         case "pending":
             return "text-amber-400 border-amber-500/30 bg-amber-500/20";
         case "rejected":
@@ -162,7 +162,7 @@ export default function CaseDetailPage() {
                     <div className="glass-panel rounded-2xl p-8 shadow-xl animate-fade-in delay-100">
                         {loading ? (
                             <div className="flex justify-center py-12">
-                                <span className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></span>
+                                <span className="w-8 h-8 border-4 border-[#00e5ff] border-t-transparent rounded-full animate-spin"></span>
                             </div>
                         ) : errorMsg ? (
                             <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-sm">
@@ -199,7 +199,7 @@ export default function CaseDetailPage() {
                                 {/* Info Grid */}
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-500/20 pb-2">基本情報</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">基本情報</h2>
                                         <dl className="space-y-3 text-sm">
                                             <div className="grid grid-cols-[120px_1fr]">
                                                 <dt className="text-slate-400">性別</dt>
@@ -233,7 +233,7 @@ export default function CaseDetailPage() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-500/20 pb-2">トラブル詳細・理由</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">トラブル詳細・理由</h2>
                                         <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700 min-h-[160px]">
                                             <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">
                                                 {caseDetail.reason_text}
@@ -244,25 +244,25 @@ export default function CaseDetailPage() {
 
                                 {/* Evidence Files */}
                                 <div className="space-y-4">
-                                    <h2 className="text-sm font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-500/20 pb-2">添付資料</h2>
+                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">添付資料</h2>
                                     {evidenceFiles.length === 0 ? (
                                         <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
                                     ) : (
                                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                             {evidenceFiles.map((file, i) => (
-                                                <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-emerald-500/50 transition-colors">
+                                                <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-[#00e5ff]/50 transition-colors">
                                                     {file.type === 'image' ? (
                                                         <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
                                                             <div className="aspect-square relative flex items-center justify-center bg-slate-950">
                                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                                 <img src={file.signedUrl} alt={file.name} className="max-w-full max-h-full object-contain" />
                                                             </div>
-                                                            <div className="p-2 text-xs text-slate-300 truncate text-center group-hover:text-emerald-400 bg-slate-900/80 absolute bottom-0 w-full backdrop-blur-sm">
+                                                            <div className="p-2 text-xs text-slate-300 truncate text-center group-hover:text-[#00e5ff] bg-slate-900/80 absolute bottom-0 w-full backdrop-blur-sm">
                                                                 {file.name}
                                                             </div>
                                                         </a>
                                                     ) : (
-                                                        <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none h-full p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-emerald-400 aspect-square">
+                                                        <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none h-full p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-[#00e5ff] aspect-square">
                                                             <span className="text-3xl">📄</span>
                                                             <span className="text-xs truncate w-full text-center">{file.name}</span>
                                                         </a>

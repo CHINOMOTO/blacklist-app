@@ -54,14 +54,14 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 aurora-bg relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#00e5ff]/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#00e5ff]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
         <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl border border-white/5 animate-fade-in backdrop-blur-xl">
 
           <div className="mb-10 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 mb-6 border border-white/5 shadow-inner">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00e5ff]/20 to-[#00e5ff]/10 mb-6 border border-white/5 shadow-inner">
               <span className="text-3xl filter drop-shadow-lg">🛡️</span>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
@@ -84,7 +84,7 @@ export default function LoginPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-300"
+                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                     placeholder="name@company.com"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-500 opacity-50">
@@ -109,7 +109,7 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-cyan-500/10 transition-all duration-300"
+                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                     placeholder="••••••••"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-500 opacity-50">
@@ -133,7 +133,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00e5ff] shadow-lg shadow-[#00e5ff]/25 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
@@ -160,7 +160,7 @@ export default function LoginPage() {
             </p>
             <Link
               href="/signup"
-              className="inline-block text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition-colors hover:underline decoration-emerald-400/50 underline-offset-4"
+              className="inline-block text-[#00e5ff] hover:text-[#00e5ff] font-semibold text-sm transition-colors hover:underline decoration-[#00e5ff]/50 underline-offset-4"
             >
               新規アカウント作成
             </Link>
