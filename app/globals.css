@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-scouter-green: #00ff41;
-  --color-scouter-green-dim: #008f11;
+  --color-scouter-green: #00e5ff;
+  --color-scouter-green-dim: #008299;
   --color-scouter-red: #ff0000;
   --color-scouter-bg: #0d0208;
   --font-orbitron: "Orbitron", sans-serif;
