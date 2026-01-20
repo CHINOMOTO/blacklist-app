@@ -1,80 +1,125 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --scouter-green: #00ff41;
-  --scouter-green-dim: #008f11;
-  --scouter-red: #ff0000;
-  --scouter-bg: #0d0208;
+@theme {
+  --color-scouter-green: #00ff41;
+  --color-scouter-green-dim: #008f11;
+  --color-scouter-red: #ff0000;
+  --color-scouter-bg: #0d0208;
+  --font-orbitron: "Orbitron", sans-serif;
 }
 
-@layer base {
-  body {
-    @apply bg-black text-[#00ff41];
-    font-family: 'Orbitron', 'Zen Kaku Gothic New', sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold uppercase tracking-wider;
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-  }
+/* Base styles */
+body {
+  background-color: black;
+  color: var(--color-scouter-green);
+  font-family: var(--font-orbitron), "Zen Kaku Gothic New", sans-serif;
 }
 
-@layer components {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
 
-  /* Scouter Button */
-  .btn-primary {
-    @apply relative px-6 py-3 bg-black/80 text-[#00ff41] font-bold uppercase tracking-widest transition-all duration-200 border border-[#00ff41] overflow-hidden group hover:bg-[#00ff41] hover:text-black hover:shadow-[0_0_20px_rgba(0, 255, 65, 0.6)];
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  }
+/* Components - Standard CSS to avoid @apply build issues */
+.btn-primary {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--color-scouter-green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+  border: 1px solid var(--color-scouter-green);
+  overflow: hidden;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
 
-  .btn-secondary {
-    @apply relative px-6 py-3 bg-transparent text-[#00ff41]/70 font-bold uppercase tracking-widest transition-all duration-200 border border-[#00ff41]/30 hover:text-[#00ff41] hover:border-[#00ff41] hover:bg-[#00ff41]/10;
-  }
+.btn-primary:hover {
+  background-color: var(--color-scouter-green);
+  color: black;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+}
 
-  /* Scouter Panel/Card */
-  .glass-panel {
-    @apply relative bg-black/80 border border-[#00ff41]/30 p-6 backdrop-blur-sm;
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.1), inset 0 0 20px rgba(0, 255, 65, 0.05);
-    background-image:
-      linear-gradient(45deg, transparent 48%, rgba(0, 255, 65, 0.1) 50%, transparent 52%),
-      linear-gradient(-45deg, transparent 48%, rgba(0, 255, 65, 0.1) 50%, transparent 52%);
-    background-size: 20px 20px;
-  }
+.btn-secondary {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: rgba(0, 255, 65, 0.7);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+}
 
-  /* Corner Brackets */
-  .glass-panel::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: 20px;
-    height: 20px;
-    border-top: 2px solid #00ff41;
-    border-left: 2px solid #00ff41;
-  }
+.btn-secondary:hover {
+  color: var(--color-scouter-green);
+  border-color: var(--color-scouter-green);
+  background-color: rgba(0, 255, 65, 0.1);
+}
 
-  .glass-panel::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    right: -1px;
-    width: 20px;
-    height: 20px;
-    border-bottom: 2px solid #00ff41;
-    border-right: 2px solid #00ff41;
-  }
+.glass-panel {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  padding: 1.5rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.1), inset 0 0 20px rgba(0, 255, 65, 0.05);
+  background-image:
+    linear-gradient(45deg, transparent 48%, rgba(0, 255, 65, 0.1) 50%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(0, 255, 65, 0.1) 50%, transparent 52%);
+  background-size: 20px 20px;
+}
 
-  /* Input Fields */
-  .input-field {
-    @apply w-full bg-black/50 border border-[#00ff41]/30 rounded-none px-4 py-3 text-[#00ff41] placeholder-[#00ff41]/30 focus:outline-none focus:border-[#00ff41] focus:ring-1 focus:ring-[#00ff41] transition-all font-mono;
-  }
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--color-scouter-green);
+  border-left: 2px solid var(--color-scouter-green);
+}
+
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid var(--color-scouter-green);
+  border-right: 2px solid var(--color-scouter-green);
+}
+
+.input-field {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 0;
+  padding: 0.75rem 1rem;
+  color: var(--color-scouter-green);
+  transition: all 0.2s;
+  font-family: monospace;
+}
+
+.input-field::placeholder {
+  color: rgba(0, 255, 65, 0.3);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-scouter-green);
+  box-shadow: 0 0 0 1px var(--color-scouter-green);
 }
 
 /* Animations */
@@ -98,17 +143,4 @@
   background: linear-gradient(to bottom, transparent, rgba(0, 255, 65, 0.2), transparent);
   animation: scanline 4s linear infinite;
   pointer-events: none;
-}
-
-/* Utility for dynamic colors */
-.text-scouter-green {
-  color: #00ff41;
-}
-
-.bg-scouter-green {
-  background-color: #00ff41;
-}
-
-.border-scouter-green {
-  border-color: #00ff41;
 }
