@@ -236,7 +236,7 @@ export default function SearchPage() {
                               </span>
                               {item.risk_score && item.risk_score > 0 && (
                                 <div className={`text-xs font-black italic mt-2 ${powerColor}`}>
-                                  CP: {item.risk_score.toLocaleString()}
+                                  Risk Score: {item.risk_score.toLocaleString()}
                                 </div>
                               )}
                             </div>
