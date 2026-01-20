@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
+import { getScouterColor } from "@/lib/combatPower";
 
 type CaseDetail = {
     id: string;
@@ -19,6 +20,7 @@ type CaseDetail = {
     created_at: string;
     evidence_urls?: string[];
     registered_company_id?: string;
+    risk_score?: number; // 追加
 };
 
 type EvidenceFile = {
@@ -86,7 +88,7 @@ export default function CaseDetailPage() {
             const { data, error } = await supabase
                 .from("blacklist_cases")
                 .select(
-                    "id, full_name, full_name_kana, gender, birth_date, phone_last4, occurrence_date, reason_text, status, created_at, evidence_urls, registered_company_id"
+                    "id, full_name, full_name_kana, gender, birth_date, phone_last4, occurrence_date, reason_text, status, created_at, evidence_urls, registered_company_id, risk_score"
                 )
                 .eq("id", id)
                 .maybeSingle();
@@ -172,14 +174,26 @@ export default function CaseDetailPage() {
                             <div className="space-y-8">
 
                                 {/* Header */}
-                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-700/50 pb-6">
-                                    <div>
-                                        <h1 className="text-3xl font-bold text-white mb-1">{caseDetail.full_name}</h1>
-                                        <p className="text-slate-400">{caseDetail.full_name_kana || ""}</p>
+                                {/* Header with Scouter UI */}
+                                <div className="bg-slate-900/50 p-6 md:p-8 rounded-xl border border-white/5 relative overflow-hidden mb-6">
+                                    {/* Scouter Visual Effect */}
+                                    <div className="absolute top-0 right-0 p-4 md:p-6 text-right transform rotate-[-2deg] opacity-90 z-0 pointer-events-none">
+                                        <div className="text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-1">Combat Power</div>
+                                        <div className={`text-3xl md:text-5xl font-black italic tracking-tighter drop-shadow-lg ${getScouterColor(caseDetail.risk_score || 0)} transition-all duration-1000`}>
+                                            {caseDetail.risk_score ? caseDetail.risk_score.toLocaleString() : "---"}
+                                        </div>
                                     </div>
-                                    <span className={`px-4 py-1.5 rounded-full text-sm font-bold border ${statusColor(caseDetail.status)}`}>
-                                        {statusLabel(caseDetail.status)}
-                                    </span>
+
+                                    <div className="relative z-10 max-w-[75%]">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <span className={`px-3 py-1 rounded-full text-xs font-bold border ${statusColor(caseDetail.status)}`}>
+                                                {statusLabel(caseDetail.status)}
+                                            </span>
+                                            <span className="text-slate-600 text-[10px] font-mono">ID: {caseDetail.id.substring(0, 8)}</span>
+                                        </div>
+                                        <h1 className="text-2xl md:text-4xl font-bold text-white mb-1 leading-tight">{caseDetail.full_name}</h1>
+                                        <p className="text-slate-400 font-medium">{caseDetail.full_name_kana || ""}</p>
+                                    </div>
                                 </div>
 
                                 {/* Info Grid */}

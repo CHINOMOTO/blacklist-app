@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
+import { recognizeText } from "@/lib/ocr";
+import { calculateCombatPower } from "@/lib/combatPower";
 
 export default function NewCasePage() {
   const router = useRouter();
@@ -22,6 +24,7 @@ export default function NewCasePage() {
 
   // File upload state
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -32,6 +35,28 @@ export default function NewCasePage() {
 
   const removeFile = (index: number) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleOCR = async (file: File) => {
+    if (!confirm("画像を解析してテキストを抽出しますか？\n抽出されたテキストは「登録理由/詳細」に追記されます。")) return;
+
+    setIsAnalyzing(true);
+    try {
+      const text = await recognizeText(file);
+      if (text) {
+        // 余分な空白を除去して追記
+        const cleanedText = text.replace(/\s+/g, ' ').trim();
+        setReason((prev) => prev + (prev ? "\n\n" : "") + "[画像解析結果]\n" + cleanedText);
+        alert("テキストを抽出しました！");
+      } else {
+        alert("テキストが見つかりませんでした。");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("解析に失敗しました。");
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,6 +103,9 @@ export default function NewCasePage() {
         }
       }
 
+      // 戦闘力(リスクスコア)計算
+      const riskScore = calculateCombatPower(reason);
+
       const { error } = await supabase.from("blacklist_cases").insert([
         {
           registered_company_id: appUser.company_id,
@@ -91,6 +119,7 @@ export default function NewCasePage() {
           evidence_urls: uploadedUrls, // アップロードしたファイルのパス配列
           status: "pending", // 初期状態は未承認
           registered_by_user_id: user.id,
+          risk_score: riskScore, // 戦闘力
         },
       ]);
 
@@ -111,7 +140,7 @@ export default function NewCasePage() {
 
           <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-3xl font-bold text-white mb-2">New Registration</h1>
-            <p className="text-slate-400">新規ブラックリスト登録申請</p>
+            <p className="text-slate-400">新規登録申請</p>
           </div>
 
           <div className="glass-panel rounded-2xl p-6 md:p-10 animate-fade-in delay-100">
@@ -223,14 +252,26 @@ export default function NewCasePage() {
                     <ul className="mt-4 space-y-2">
                       {selectedFiles.map((file, index) => (
                         <li key={index} className="flex items-center justify-between bg-slate-800/50 p-3 rounded-lg border border-slate-700 text-sm">
-                          <span className="truncate max-w-[80%] text-slate-300">{file.name} ({(file.size / 1024).toFixed(0)}KB)</span>
-                          <button
-                            type="button"
-                            onClick={() => removeFile(index)}
-                            className="text-red-400 hover:text-red-300 hover:bg-red-500/10 p-1 rounded transition-colors"
-                          >
-                            ✕
-                          </button>
+                          <span className="truncate max-w-[60%] text-slate-300">{file.name} ({(file.size / 1024).toFixed(0)}KB)</span>
+                          <div className="flex items-center gap-3">
+                            {file.type.startsWith('image/') && (
+                              <button
+                                type="button"
+                                onClick={() => handleOCR(file)}
+                                disabled={isAnalyzing}
+                                className="text-xs text-emerald-400 hover:text-emerald-300 border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 rounded transition-colors"
+                              >
+                                {isAnalyzing ? "解析中..." : "文字認識(OCR)"}
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => removeFile(index)}
+                              className="text-red-400 hover:text-red-300 hover:bg-red-500/10 p-1 rounded transition-colors"
+                            >
+                              ✕
+                            </button>
+                          </div>
                         </li>
                       ))}
                     </ul>

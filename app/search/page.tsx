@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
+import { getScouterColor } from "@/lib/combatPower";
 
 type BlacklistCase = {
   id: string;
@@ -15,6 +16,7 @@ type BlacklistCase = {
   occurrence_date: string | null;
   reason_text: string;
   status: string;
+  risk_score: number | null; // 追加
 };
 
 export default function SearchPage() {
@@ -82,6 +84,9 @@ export default function SearchPage() {
 
         return matchName && matchDate;
       });
+
+      // 戦闘力順にソート (降順)
+      filtered.sort((a, b) => (b.risk_score || 0) - (a.risk_score || 0));
 
       setResults(filtered);
       setHasSearched(true);
@@ -209,6 +214,7 @@ export default function SearchPage() {
                 <div className="grid gap-5">
                   {results.map((item) => {
                     const badge = getStatusBadge(item.status);
+                    const powerColor = getScouterColor(item.risk_score || 0);
                     return (
                       <div
                         key={item.id}
@@ -216,7 +222,7 @@ export default function SearchPage() {
                       >
                         <div className="flex-1">
                           <div className="flex items-start gap-4 mb-3">
-                            <div>
+                            <div className="flex-1">
                               <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
                                 {item.full_name}
                               </h3>
@@ -224,14 +230,21 @@ export default function SearchPage() {
                                 {item.full_name_kana}
                               </p>
                             </div>
-                            <span className={`px-3 py-1 text-[10px] font-bold rounded-full border uppercase tracking-widest mt-1 ${badge.className}`}>
-                              {badge.label}
-                            </span>
+                            <div className="text-right">
+                              <span className={`px-3 py-1 text-[10px] font-bold rounded-full border uppercase tracking-widest ${badge.className}`}>
+                                {badge.label}
+                              </span>
+                              {item.risk_score && item.risk_score > 0 && (
+                                <div className={`text-xs font-black italic mt-2 ${powerColor}`}>
+                                  CP: {item.risk_score.toLocaleString()}
+                                </div>
+                              )}
+                            </div>
                           </div>
 
                           <div className="bg-slate-900/40 rounded-xl p-4 border border-white/5">
                             <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">登録理由</h4>
-                            <p className="text-sm text-slate-300 leading-relaxed font-medium">
+                            <p className="text-sm text-slate-300 leading-relaxed font-medium line-clamp-3">
                               {item.reason_text}
                             </p>
                           </div>
