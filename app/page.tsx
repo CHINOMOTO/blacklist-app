@@ -61,7 +61,7 @@ export default function Home() {
 
       <footer className="w-full py-8 border-t border-slate-800/50 bg-slate-900/50 backdrop-blur-sm mt-auto">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Construction Blacklist App. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SCOUTER. All rights reserved.</p>
         </div>
       </footer>
     </div>

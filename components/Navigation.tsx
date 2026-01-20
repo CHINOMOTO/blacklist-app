@@ -88,7 +88,7 @@ export default function Navigation() {
                     <div className="flex items-center">
                         <Link href={session ? "/dashboard" : "/"} className="flex-shrink-0 flex items-center gap-2 font-bold text-xl text-emerald-400 group">
                             <span className="text-2xl group-hover:rotate-12 transition-transform">🛡️</span>
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">Blacklist App</span>
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">SCOUTER</span>
                         </Link>
                         {session && (
                             <div className="hidden md:block">

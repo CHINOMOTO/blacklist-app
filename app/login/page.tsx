@@ -68,7 +68,7 @@ export default function LoginPage() {
               Welcome Back
             </h1>
             <p className="text-slate-400 text-sm font-medium">
-              Blacklist App へログイン
+              SCOUTER へログイン
             </p>
           </div>
 

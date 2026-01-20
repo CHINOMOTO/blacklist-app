@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "建設業ブラックリスト管理",
-  description: "Construction Industry Blacklist Management System",
+  title: "SCOUTER - 建設業要注意人物共有システム",
+  description: "Construction Industry Scouter System",
 };
 
 export default function RootLayout({
