@@ -55,94 +55,127 @@ export default function AdminDashboardPage() {
                         {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
+                            <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                        📋
+                                    </div>
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                        Action Required
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
                                     承認待ちリスト
                                 </h2>
-                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
-                                    要対応
-                                </span>
-                            </div>
-                            <p className="text-slate-400 text-sm mb-6">
-                                新規登録されたブラックリスト候補の審査を行います。
-                            </p>
-                            <div className="text-4xl font-bold text-white">
-                                {loading ? (
-                                    <span className="text-2xl text-slate-600">...</span>
-                                ) : (
-                                    <>
-                                        {pendingCount}
-                                        <span className="text-lg text-slate-500 font-normal ml-2">
-                                            件
-                                        </span>
-                                    </>
-                                )}
+                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                    新規登録されたブラックリスト候補の審査を行います。
+                                </p>
+                                
+                                <div className="mt-auto">
+                                    <div className="text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]">
+                                        {loading ? (
+                                            <span className="text-2xl text-slate-600 animate-pulse">...</span>
+                                        ) : (
+                                            <>
+                                                {pendingCount}
+                                                <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
+                                                    CASE
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
                         </Link>
 
                         {/* ユーザー承認タイル */}
                         <Link
                             href="/admin/users"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
+                            <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                        👤
+                                    </div>
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                        Review
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
                                     新規ユーザー承認
                                 </h2>
-                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
-                                    Review
-                                </span>
-                            </div>
-                            <p className="text-slate-400 text-sm mb-6">
-                                アカウント利用申請を確認し、利用を許可します。
-                            </p>
-                            <div className="text-4xl font-bold text-slate-500">
-                                {loading ? (
-                                    <span className="text-2xl text-slate-600">...</span>
-                                ) : (
-                                    <>
-                                        <span className={pendingUserCount && pendingUserCount > 0 ? "text-white" : ""}>
-                                            {pendingUserCount ?? 0}
-                                        </span>
-                                        <span className="text-lg text-slate-500 font-normal ml-2">
-                                            件
-                                        </span>
-                                    </>
-                                )}
+                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                    アカウント利用申請を確認し、利用を許可します。
+                                </p>
+
+                                <div className="mt-auto">
+                                    <div className="text-5xl font-bold text-slate-500 group-hover:text-white transition-colors duration-300">
+                                        {loading ? (
+                                            <span className="text-2xl text-slate-600 animate-pulse">...</span>
+                                        ) : (
+                                            <>
+                                                <span className={pendingUserCount && pendingUserCount > 0 ? "text-[#00e5ff] drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]" : ""}>
+                                                    {pendingUserCount ?? 0}
+                                                </span>
+                                                <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
+                                                    USER
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
                         </Link>
 
                         {/* 会社管理タイル */}
                         <Link
                             href="/admin/companies"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
+                            <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                        🏢
+                                    </div>
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                        System
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
                                     会社管理
                                 </h2>
-                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
-                                    System
-                                </span>
-                            </div>
-                            <p className="text-slate-400 text-sm mb-6">
-                                利用会社（グループ会社）の追加・編集を行います。
-                            </p>
-                            <div className="text-4xl font-bold text-slate-500">
-                                {loading ? (
-                                    <span className="text-2xl text-slate-600">...</span>
-                                ) : (
-                                    <>
-                                        <span className="text-slate-300">
-                                            {companyCount ?? 0}
-                                        </span>
-                                        <span className="text-lg text-slate-500 font-normal ml-2">
-                                            社
-                                        </span>
-                                    </>
-                                )}
+                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                    利用会社（グループ会社）の追加・編集を行います。
+                                </p>
+
+                                <div className="mt-auto">
+                                    <div className="text-5xl font-bold text-slate-500 group-hover:text-white transition-colors duration-300">
+                                        {loading ? (
+                                            <span className="text-2xl text-slate-600 animate-pulse">...</span>
+                                        ) : (
+                                            <>
+                                                <span className="group-hover:text-[#00e5ff] transition-colors">
+                                                    {companyCount ?? 0}
+                                                </span>
+                                                <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
+                                                    CORP
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
                         </Link>
                     </div>
