@@ -115,6 +115,15 @@ export default function RegisteredUsersPage() {
                                                         </span>
                                                         <button
                                                             onClick={async () => {
+                                                                // 管理者が自分一人しかいない場合、自分を降格させると誰も管理画面に入れなくなる
+                                                                if (user.role === 'admin') {
+                                                                    const adminCount = users.filter(u => u.role === 'admin').length;
+                                                                    if (adminCount <= 1) {
+                                                                        alert("エラー: 最後の管理者は降格できません。\n少なくとも1人の管理者が存在する必要があります。");
+                                                                        return;
+                                                                    }
+                                                                }
+
                                                                 const newRole = user.role === 'admin' ? 'viewer' : 'admin';
                                                                 if (!confirm(`「${user.display_name}」の権限を【${newRole.toUpperCase()}】に変更しますか？`)) return;
 
