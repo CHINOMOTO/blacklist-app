@@ -14,28 +14,31 @@ export default function Navigation() {
     const [notificationCount, setNotificationCount] = useState(0);
 
     useEffect(() => {
+        const fetchNotifications = async (userId: string) => {
+            const { count: userCount } = await supabase
+                .from("app_users")
+                .select("*", { count: "exact", head: true })
+                .eq("is_approved", false);
+            const { count: caseCount } = await supabase
+                .from("blacklist_cases")
+                .select("*", { count: "exact", head: true })
+                .eq("status", "pending");
+            setNotificationCount((userCount || 0) + (caseCount || 0));
+        };
+
         const checkUser = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             setSession(session);
 
             if (session?.user) {
                 const role = session.user.app_metadata?.role;
-                setIsAdmin(role === 'admin');
-
-                if (role === 'admin') {
-                    const { count: userCount } = await supabase
-                        .from("app_users")
-                        .select("*", { count: "exact", head: true })
-                        .eq("is_approved", false);
-                    const { count: caseCount } = await supabase
-                        .from("blacklist_cases")
-                        .select("*", { count: "exact", head: true })
-                        .eq("status", "pending");
-                    setNotificationCount((userCount || 0) + (caseCount || 0));
-                }
-
-                // 表示名は user_metadata から取得（app_usersテーブルは見ない）
+                const isUserAdmin = role === 'admin';
+                setIsAdmin(isUserAdmin);
                 setUserName(session.user.user_metadata?.display_name || "User");
+
+                if (isUserAdmin) {
+                    fetchNotifications(session.user.id);
+                }
             } else {
                 setIsAdmin(false);
                 setUserName(null);
@@ -45,31 +48,34 @@ export default function Navigation() {
 
         checkUser();
 
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange(async (event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
             setSession(session);
-            // ログアウト時はここで検知してリダイレクトすることも可能だが、
-            // handleLogoutで明示的に行うので、ここは主にステート更新用
             if (event === 'SIGNED_OUT') {
                 setIsAdmin(false);
                 setUserName(null);
                 setSession(null);
+                setNotificationCount(0);
                 return;
             }
 
             if (session?.user) {
                 const role = session.user.app_metadata?.role;
-                setIsAdmin(role === 'admin');
+                const isUserAdmin = role === 'admin';
+                setIsAdmin(isUserAdmin);
                 setUserName(session.user.user_metadata?.display_name || "User");
+
+                if (isUserAdmin) {
+                    fetchNotifications(session.user.id);
+                }
             } else {
                 setIsAdmin(false);
                 setUserName(null);
+                setNotificationCount(0);
             }
         });
 
         return () => subscription.unsubscribe();
-    }, []);
+    }, [pathname]); // pathnameが変わるたびにも再チェック（通知数更新のため）
 
     const handleLogout = async () => {
         try {
