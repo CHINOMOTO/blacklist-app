@@ -94,16 +94,16 @@ export default function Navigation() {
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-2">
                                     <NavLink href="/dashboard" active={pathname === "/dashboard"}>
-                                        DASHBOARD
+                                        ダッシュボード
                                     </NavLink>
                                     <NavLink href="/search" active={pathname === "/search"}>
-                                        SEARCH
+                                        検索
                                     </NavLink>
                                     <NavLink href="/cases" active={pathname.startsWith("/cases") && pathname !== "/cases/new"}>
-                                        LIST
+                                        一覧
                                     </NavLink>
                                     <NavLink href="/cases/new" active={pathname === "/cases/new"}>
-                                        NEW ENTRY
+                                        新規登録
                                     </NavLink>
                                     {isAdmin && (
                                         <Link
@@ -113,7 +113,7 @@ export default function Navigation() {
                                                 : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
                                                 }`}
                                         >
-                                            ADMIN
+                                            管理メニュー
                                         </Link>
                                     )}
                                 </div>
@@ -124,7 +124,7 @@ export default function Navigation() {
                         <div className="ml-4 flex items-center md:ml-6 gap-4">
                             {session && userName && (
                                 <div className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider">
-                                    <span className="mr-1 opacity-50">OP:</span>
+                                    <span className="mr-1 opacity-50">担当:</span>
                                     <span className="font-bold">{userName}</span>
                                 </div>
                             )}
@@ -133,14 +133,14 @@ export default function Navigation() {
                                     onClick={handleLogout}
                                     className="text-[#00e5ff]/70 hover:text-[#00e5ff] text-xs px-3 py-1.5 border border-transparent hover:border-[#00e5ff]/30 hover:bg-[#00e5ff]/10 transition-all tracking-wider uppercase"
                                 >
-                                    LOGOUT
+                                    ログアウト
                                 </button>
                             ) : (
                                 <Link
                                     href="/login"
                                     className="btn-primary text-xs px-4 py-2"
                                 >
-                                    LOGIN
+                                    ログイン
                                 </Link>
                             )}
                         </div>
