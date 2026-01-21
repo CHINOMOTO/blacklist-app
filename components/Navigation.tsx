@@ -11,6 +11,7 @@ export default function Navigation() {
     const [session, setSession] = useState<any>(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [userName, setUserName] = useState<string | null>(null);
+    const [notificationCount, setNotificationCount] = useState(0);
 
     useEffect(() => {
         const checkUser = async () => {
@@ -18,15 +19,27 @@ export default function Navigation() {
             setSession(session);
 
             if (session?.user) {
-                // Tokenベースの判定（DBアクセスなし）
                 const role = session.user.app_metadata?.role;
                 setIsAdmin(role === 'admin');
+
+                if (role === 'admin') {
+                    const { count: userCount } = await supabase
+                        .from("app_users")
+                        .select("*", { count: "exact", head: true })
+                        .eq("is_approved", false);
+                    const { count: caseCount } = await supabase
+                        .from("blacklist_cases")
+                        .select("*", { count: "exact", head: true })
+                        .eq("status", "pending");
+                    setNotificationCount((userCount || 0) + (caseCount || 0));
+                }
 
                 // 表示名は user_metadata から取得（app_usersテーブルは見ない）
                 setUserName(session.user.user_metadata?.display_name || "User");
             } else {
                 setIsAdmin(false);
                 setUserName(null);
+                setNotificationCount(0);
             }
         };
 
@@ -106,15 +119,22 @@ export default function Navigation() {
                                         新規登録
                                     </NavLink>
                                     {isAdmin && (
-                                        <Link
-                                            href="/admin"
-                                            className={`ml-2 px-3 py-1.5 rounded-none text-sm font-bold border transition-all uppercase tracking-wider ${pathname.startsWith("/admin")
-                                                ? "bg-[#00e5ff]/20 border-[#00e5ff] text-[#00e5ff] shadow-[0_0_10px_rgba(0,255,65,0.3)]"
-                                                : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
-                                                }`}
-                                        >
-                                            管理メニュー
-                                        </Link>
+                                        <div className="relative inline-block">
+                                            <Link
+                                                href="/admin"
+                                                className={`ml-2 px-3 py-1.5 rounded-none text-sm font-bold border transition-all uppercase tracking-wider ${pathname.startsWith("/admin")
+                                                    ? "bg-[#00e5ff]/20 border-[#00e5ff] text-[#00e5ff] shadow-[0_0_10px_rgba(0,255,65,0.3)]"
+                                                    : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
+                                                    }`}
+                                            >
+                                                管理メニュー
+                                            </Link>
+                                            {notificationCount > 0 && (
+                                                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg animate-pulse ring-2 ring-black">
+                                                    {notificationCount}
+                                                </span>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
                             </div>
