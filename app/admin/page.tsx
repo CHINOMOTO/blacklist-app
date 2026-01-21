@@ -8,6 +8,7 @@ import { RequireAdmin } from "@/components/RequireAdmin";
 export default function AdminDashboardPage() {
     const [pendingCount, setPendingCount] = useState<number | null>(null);
     const [pendingUserCount, setPendingUserCount] = useState<number | null>(null);
+    const [approvedUserCount, setApprovedUserCount] = useState<number | null>(null);
     const [companyCount, setCompanyCount] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -27,15 +28,27 @@ export default function AdminDashboardPage() {
                 .select("*", { count: "exact", head: true })
                 .eq("is_approved", false);
 
+            // 登録済み（承認済み）ユーザー件数
+            const approvedUsersQuery = supabase
+                .from("app_users")
+                .select("*", { count: "exact", head: true })
+                .eq("is_approved", true);
+
             // 会社の総数
             const companiesQuery = supabase
                 .from("companies")
                 .select("*", { count: "exact", head: true });
 
-            const [casesResult, usersResult, companiesResult] = await Promise.all([casesQuery, usersQuery, companiesQuery]);
+            const [casesResult, usersResult, approvedUsersResult, companiesResult] = await Promise.all([
+                casesQuery,
+                usersQuery,
+                approvedUsersQuery,
+                companiesQuery
+            ]);
 
             if (!casesResult.error) setPendingCount(casesResult.count);
             if (!usersResult.error) setPendingUserCount(usersResult.count);
+            if (!approvedUsersResult.error) setApprovedUserCount(approvedUsersResult.count);
             if (!companiesResult.error) setCompanyCount(companiesResult.count);
             setLoading(false);
         };
@@ -128,6 +141,49 @@ export default function AdminDashboardPage() {
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
                                                     USER
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+
+                        {/* 登録済みユーザー一覧タイル */}
+                        <Link
+                            href="/admin/registered-users"
+                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                        👥
+                                    </div>
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                        Member
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
+                                    登録ユーザー一覧
+                                </h2>
+                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                    現在承認されている全ユーザーを確認します。
+                                </p>
+
+                                <div className="mt-auto">
+                                    <div className="text-5xl font-bold text-slate-500 group-hover:text-white transition-colors duration-300">
+                                        {loading ? (
+                                            <span className="text-2xl text-slate-600 animate-pulse">...</span>
+                                        ) : (
+                                            <>
+                                                <span className="group-hover:text-[#00e5ff] transition-colors">
+                                                    {approvedUserCount ?? 0}
+                                                </span>
+                                                <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
+                                                    ACTIVE
                                                 </span>
                                             </>
                                         )}
