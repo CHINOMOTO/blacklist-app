@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function Navigation() {
-    const pathname = usePathname();
+    const pathname = usePathname() || "";
     const router = useRouter();
     const [session, setSession] = useState<any>(null);
     const [isAdmin, setIsAdmin] = useState(false);
