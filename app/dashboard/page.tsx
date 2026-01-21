@@ -33,9 +33,7 @@ export default function DashboardPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
               ダッシュボード
             </h1>
-            <p className="text-slate-300 text-lg font-medium">
-              業務メニューを選択してください
-            </p>
+
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

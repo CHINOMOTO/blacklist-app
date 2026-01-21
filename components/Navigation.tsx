@@ -100,7 +100,7 @@ export default function Navigation() {
                                         検索
                                     </NavLink>
                                     <NavLink href="/cases" active={pathname.startsWith("/cases") && pathname !== "/cases/new"}>
-                                        一覧
+                                        登録データ一覧
                                     </NavLink>
                                     <NavLink href="/cases/new" active={pathname === "/cases/new"}>
                                         新規登録

@@ -83,8 +83,8 @@ export default function CasesPage() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">Case List</h1>
-              <p className="text-slate-300 font-medium">登録データ一覧</p>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">登録データ一覧</h1>
+              <p className="text-slate-300 font-medium">Case List</p>
             </div>
             <div className="flex items-center gap-3">
               <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
