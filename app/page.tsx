@@ -66,9 +66,12 @@ export default function Home() {
             </h1>
             <div className="absolute -inset-2 bg-[#00e5ff]/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 -z-10"></div>
           </div>
-          <p className="text-slate-300 text-lg font-medium tracking-wider leading-relaxed">
-            リスクを未然に防ぐ、<br />
-            人材管理システム
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-wider drop-shadow-md">
+            リスクを未然に防ぐ、人材管理システム
+          </h2>
+          <p className="text-slate-400 text-sm md:text-base font-medium leading-relaxed max-w-md mx-auto">
+            過去のトラブルや注意情報を一元管理し、<br className="hidden sm:block" />
+            同じリスクを繰り返さない
           </p>
         </div>
 
