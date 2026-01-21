@@ -269,7 +269,12 @@ export default function NewCasePage() {
                       type="text"
                       maxLength={4}
                       value={phoneLast4}
-                      onChange={(e) => setPhoneLast4(e.target.value)}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (/^\d*$/.test(val)) {
+                          setPhoneLast4(val);
+                        }
+                      }}
                       className="input-field"
                       placeholder="1234"
                     />
