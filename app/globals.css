@@ -84,27 +84,7 @@ h6 {
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05);
 }
 
-.glass-panel::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 20px;
-  height: 20px;
-  border-top: 2px solid var(--color-scouter-green);
-  border-left: 2px solid var(--color-scouter-green);
-}
 
-.glass-panel::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 20px;
-  height: 20px;
-  border-bottom: 2px solid var(--color-scouter-green);
-  border-right: 2px solid var(--color-scouter-green);
-}
 
 .input-field {
   width: 100%;
