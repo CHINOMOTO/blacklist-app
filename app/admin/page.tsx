@@ -85,13 +85,13 @@ export default function AdminDashboardPage() {
                         {/* ユーザー承認タイル */}
                         <Link
                             href="/admin/users"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-blue-500/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-blue-400 transition-colors">
+                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
                                     新規ユーザー承認
                                 </h2>
-                                <span className="bg-blue-500/10 text-blue-400 text-xs px-2 py-1 rounded border border-blue-500/30">
+                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
                                     Review
                                 </span>
                             </div>
@@ -117,13 +117,13 @@ export default function AdminDashboardPage() {
                         {/* 会社管理タイル */}
                         <Link
                             href="/admin/companies"
-                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-purple-500/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
+                            className="block group bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl hover:border-[#00e5ff]/50 hover:bg-slate-800 transition-all transform hover:-translate-y-1"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-purple-400 transition-colors">
+                                <h2 className="text-xl font-semibold text-slate-200 group-hover:text-[#00e5ff] transition-colors">
                                     会社管理
                                 </h2>
-                                <span className="bg-purple-500/10 text-purple-400 text-xs px-2 py-1 rounded border border-purple-500/30">
+                                <span className="bg-[#00e5ff]/10 text-[#00e5ff] text-xs px-2 py-1 rounded border border-[#00e5ff]/30">
                                     System
                                 </span>
                             </div>
