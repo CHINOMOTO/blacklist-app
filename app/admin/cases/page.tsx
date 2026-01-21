@@ -8,7 +8,7 @@ import { RequireAdmin } from "@/components/RequireAdmin";
 type CaseRow = {
   id: string;
   full_name: string;
-  birth_date: string;
+  birth_date: string | null;
   created_at: string;
 };
 
@@ -95,7 +95,7 @@ export default function AdminCaseList() {
                         {c.full_name}
                       </h3>
                       <div className="flex gap-4 text-sm text-slate-400 mt-1">
-                        <span className="font-mono">生年月日: {c.birth_date.replace(/-/g, "/")}</span>
+                        <span className="font-mono">生年月日: {c.birth_date ? c.birth_date.replace(/-/g, "/") : "不明"}</span>
                       </div>
                     </div>
                   </div>
@@ -115,6 +115,6 @@ export default function AdminCaseList() {
           )}
         </div>
       </div>
-    </RequireAdmin>
+    </RequireAdmin >
   );
 }
