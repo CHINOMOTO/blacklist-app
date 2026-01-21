@@ -106,12 +106,36 @@ export default function RegisteredUsersPage() {
                                                     {user.companies?.name || "未所属"}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${user.role === 'admin'
-                                                        ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                                                        : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                                                        }`}>
-                                                        {user.role}
-                                                    </span>
+                                                    <div className="flex items-center gap-3">
+                                                        <span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${user.role === 'admin'
+                                                            ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                                                            : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                                                            }`}>
+                                                            {user.role}
+                                                        </span>
+                                                        <button
+                                                            onClick={async () => {
+                                                                const newRole = user.role === 'admin' ? 'viewer' : 'admin';
+                                                                if (!confirm(`「${user.display_name}」の権限を【${newRole.toUpperCase()}】に変更しますか？`)) return;
+
+                                                                const { error } = await supabase
+                                                                    .from('app_users')
+                                                                    .update({ role: newRole })
+                                                                    .eq('id', user.id);
+
+                                                                if (error) {
+                                                                    alert("更新に失敗しました: " + error.message);
+                                                                } else {
+                                                                    setUsers(prev => prev.map(u => u.id === user.id ? { ...u, role: newRole } : u));
+                                                                    alert("権限を変更しました。");
+                                                                }
+                                                            }}
+                                                            className="text-[10px] text-slate-400 hover:text-white border border-slate-600 hover:bg-slate-700 px-2 py-1 rounded transition-colors"
+                                                            title={user.role === 'admin' ? "一般ユーザーに降格" : "管理者に昇格"}
+                                                        >
+                                                            ⇄ 変更
+                                                        </button>
+                                                    </div>
                                                 </td>
                                                 <td className="px-6 py-4 text-right font-mono text-xs text-slate-500">
                                                     {user.id}
