@@ -66,17 +66,23 @@ h6 {
   background-color: rgba(0, 229, 255, 0.1);
 }
 
+/* Mesh Background Pattern */
+.scouter-mesh-bg {
+  background-color: black;
+  background-image:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(45deg, transparent 48%, rgba(0, 229, 255, 0.08) 50%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(0, 229, 255, 0.08) 50%, transparent 52%);
+  background-size: 100% 4px, 30px 30px, 30px 30px;
+}
+
 .glass-panel {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(6, 11, 13, 0.9);
   border: 1px solid rgba(0, 229, 255, 0.3);
   padding: 1.5rem;
   backdrop-filter: blur(4px);
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05);
-  background-image:
-    linear-gradient(45deg, transparent 48%, rgba(0, 229, 255, 0.1) 50%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(0, 229, 255, 0.1) 50%, transparent 52%);
-  background-size: 20px 20px;
 }
 
 .glass-panel::before {
