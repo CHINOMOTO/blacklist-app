@@ -70,7 +70,7 @@ export default function Home() {
             リスクを未然に防ぐ、人材管理システム
           </h2>
           <p className="text-slate-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto">
-            過去のトラブルや注意情報を一元管理し、<br className="hidden sm:block" />
+            過去のトラブルや注意情報を一元管理し、<br />
             同じリスクを繰り返さない
           </p>
         </div>
