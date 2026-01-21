@@ -40,7 +40,7 @@ export function RequireAuth({ children }: RequireAuthProps) {
             if (event === 'SIGNED_OUT' || !session) {
                 setStatusMessage("セッションなし。ログインへ遷移します...");
                 clearTimeout(timer);
-                router.replace("/login");
+                router.replace("/");
                 return;
             }
 
@@ -119,7 +119,7 @@ export function RequireAuth({ children }: RequireAuthProps) {
                         <button
                             onClick={async () => {
                                 await supabase.auth.signOut();
-                                window.location.href = "/login";
+                                window.location.href = "/";
                             }}
                             className="btn-primary px-6 py-2 w-full"
                         >

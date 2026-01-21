@@ -221,7 +221,7 @@ export default function SignUpPage() {
 
                     <p className="mt-8 text-xs text-slate-500 text-center leading-relaxed">
                         登録申請後、管理者による承認が必要です。<br />
-                        <Link href="/login" className="text-[#00e5ff] hover:text-[#00e5ff] underline underline-offset-2 ml-1">
+                        <Link href="/" className="text-[#00e5ff] hover:text-[#00e5ff] underline underline-offset-2 ml-1">
                             すでにアカウントをお持ちの方はこちら
                         </Link>
                     </p>
