@@ -56,7 +56,7 @@ export default function Home() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#00e5ff]/5 rounded-full blur-[100px]"></div>
       </div>
 
-      <main className="w-full max-w-md flex flex-col items-center justify-center relative z-10 animate-fade-in">
+      <main className="w-full max-w-2xl flex flex-col items-center justify-center relative z-10 animate-fade-in">
 
         {/* Logo & Tagline */}
         <div className="text-center mb-10">
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
 
         {/* Login Form Container */}
-        <div className="w-full glass-panel rounded-3xl p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
+        <div className="w-full max-w-md glass-panel rounded-3xl p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
           {/* Decorative decorative line */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
