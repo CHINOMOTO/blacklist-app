@@ -32,7 +32,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-sans antialiased bg-white text-scouter-green overflow-x-hidden min-h-screen selection:bg-scouter-green selection:text-slate-900">
+      <body className="font-sans antialiased bg-slate-900 text-scouter-green overflow-x-hidden min-h-screen selection:bg-scouter-green selection:text-slate-900">
         <div className="fixed inset-0 pointer-events-none z-[100] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,229,255,0.05)_100%)]"></div>
         <Navigation />
         <main className="relative z-10">{children}</main>
