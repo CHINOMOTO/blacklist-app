@@ -13,12 +13,6 @@ export default function PendingApprovalPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-4">
-            {/* 背景装飾 */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-20 left-20 w-64 h-64 bg-[#00e5ff]/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#00e5ff]/10 rounded-full blur-3xl"></div>
-            </div>
-
             <div className="relative w-full max-w-lg glass-panel rounded-2xl p-10 text-center animate-fade-in border-t border-slate-600/50">
 
                 <div className="w-20 h-20 bg-[#00e5ff]/10 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-[#00e5ff]/30">

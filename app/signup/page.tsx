@@ -107,11 +107,7 @@ export default function SignUpPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 aurora-bg relative overflow-hidden">
-            {/* Decorative background elements */}
-            <div className="absolute bottom-[0%] left-[0%] w-[50%] h-[50%] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-[0%] right-[0%] w-[50%] h-[50%] bg-[#00e5ff]/10 rounded-full blur-[120px] pointer-events-none" />
-
+        <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
             <div className="w-full max-w-lg relative z-10 my-8">
                 <div className="glass-panel rounded-3xl p-8 md:p-10 shadow-2xl border border-white/5 animate-fade-in backdrop-blur-xl">
 

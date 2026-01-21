@@ -52,11 +52,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 aurora-bg relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#00e5ff]/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#00e5ff]/10 rounded-full blur-[100px] pointer-events-none" />
-
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       <div className="w-full max-w-md relative z-10">
         <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl border border-white/5 animate-fade-in backdrop-blur-xl">
 
