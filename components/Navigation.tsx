@@ -128,14 +128,13 @@ export default function Navigation() {
                                     <span className="font-bold">{userName}</span>
                                 </div>
                             )}
-                            {session ? (
+                            {session && (
                                 <button
                                     onClick={handleLogout}
                                     className="text-[#00e5ff]/70 hover:text-[#00e5ff] text-xs px-3 py-1.5 border border-transparent hover:border-[#00e5ff]/30 hover:bg-[#00e5ff]/10 transition-all tracking-wider uppercase"
                                 >
                                     ログアウト
                                 </button>
-                                null
                             )}
                         </div>
                     </div>
