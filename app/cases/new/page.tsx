@@ -12,8 +12,68 @@ export default function NewCasePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // ... (keep handleFileChange/removeFile/handleOCR) ...
+  // Form states
+  const [name, setName] = useState("");
+  const [nameKana, setNameKana] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [phoneLast4, setPhoneLast4] = useState("");
+  const [occurrenceDate, setOccurrenceDate] = useState("");
+  const [reason, setReason] = useState("");
+
+  // File upload state
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  // File upload handling
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB default limit for Supabase
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const newFiles = Array.from(e.target.files);
+      const validFiles: File[] = [];
+
+      newFiles.forEach(file => {
+        if (file.size > MAX_FILE_SIZE) {
+          alert(`ファイル「${file.name}」はサイズが大きすぎます (最大50MB)`);
+        } else {
+          validFiles.push(file);
+        }
+      });
+
+      if (validFiles.length > 0) {
+        setSelectedFiles((prev) => [...prev, ...validFiles]);
+      }
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleOCR = async (file: File) => {
+    if (!confirm("画像を解析してテキストを抽出しますか？\\n抽出されたテキストは「登録理由/詳細」に追記されます。")) return;
+
+    setIsAnalyzing(true);
+    try {
+      const text = await recognizeText(file);
+      if (text) {
+        // 余分な空白を除去して追記
+        const cleanedText = text.replace(/\\s+/g, ' ').trim();
+        setReason((prev) => prev + (prev ? "\\n\\n" : "") + "[画像解析結果]\\n" + cleanedText);
+        alert("テキストを抽出しました！");
+      } else {
+        alert("テキストが見つかりませんでした。");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("解析に失敗しました。");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
