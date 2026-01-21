@@ -140,7 +140,6 @@ export default function AdminCompaniesPage() {
                     </div>
                 )}
             </div>
-        </div>
-        </RequireAdmin >
+        </RequireAdmin>
     );
 }
