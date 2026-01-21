@@ -59,29 +59,29 @@ export default function Home() {
       <main className="w-full max-w-2xl flex flex-col items-center justify-center relative z-10 animate-fade-in">
 
         {/* Logo & Tagline */}
-        <div className="text-center mb-10">
-          <div className="mb-4 inline-block relative group">
-            <h1 className="text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] drop-shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+        <div className="text-center mb-6 md:mb-10">
+          <div className="mb-2 md:mb-4 inline-block relative group">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] drop-shadow-[0_0_25px_rgba(0,229,255,0.6)]">
               SCOUTER
             </h1>
             <div className="absolute -inset-2 bg-[#00e5ff]/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 -z-10"></div>
           </div>
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-wider drop-shadow-md">
+          <h2 className="text-base md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-wider drop-shadow-md">
             リスクを未然に防ぐ、人材管理システム
           </h2>
-          <p className="text-slate-400 text-sm md:text-base font-medium leading-relaxed max-w-md mx-auto">
+          <p className="text-slate-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto">
             過去のトラブルや注意情報を一元管理し、<br className="hidden sm:block" />
             同じリスクを繰り返さない
           </p>
         </div>
 
         {/* Login Form Container */}
-        <div className="w-full max-w-md glass-panel rounded-3xl p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
+        <div className="w-full max-w-md glass-panel rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
           {/* Decorative decorative line */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
-          <div className="mb-8 text-center">
-            <h2 className="text-sm font-bold text-[#00e5ff] tracking-[0.2em] uppercase mb-1">
+          <div className="mb-6 md:mb-8 text-center">
+            <h2 className="text-xs md:text-sm font-bold text-[#00e5ff] tracking-[0.2em] uppercase mb-1">
               System Login
             </h2>
             <p className="text-xs text-slate-500">アカウント情報を入力してください</p>
