@@ -10,7 +10,6 @@
 
 /* Base styles */
 body {
-  background-color: black;
   color: var(--color-scouter-green);
   font-family: var(--font-orbitron), "Zen Kaku Gothic New", sans-serif;
 }
