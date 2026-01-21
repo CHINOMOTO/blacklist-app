@@ -44,12 +44,6 @@ export default function PendingApprovalPage() {
                     一度ログアウトして待機する
                 </button>
             </div>
-            onClick={handleLogout}
-            className="btn-secondary w-full"
-            >
-            一度ログアウトして待機する
-        </button>
-        </div >
-        </div >
+        </div>
     );
 }
