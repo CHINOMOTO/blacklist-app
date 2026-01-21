@@ -30,19 +30,26 @@ export default function PendingApprovalPage() {
 
                 <div className="bg-slate-900/40 rounded-xl p-6 text-left mb-8 border border-slate-700/50">
                     <h3 className="text-xs font-bold text-[#00e5ff] mb-2 uppercase tracking-widest">Next Steps</h3>
-                    <li>管理者があなたの所属情報を確認します</li>
-                    <li>確認メールが送られましたので、認証リンクをクリックしてください</li>
-                    <li>承認後、本システムを利用可能になります</li>
-                </ul>
-            </div>
+                    <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>管理者があなたの所属情報を確認します</li>
+                        <li>確認メールが送られましたので、認証リンクをクリックしてください</li>
+                        <li>承認後、本システムを利用可能になります</li>
+                    </ul>
+                </div>
 
-            <button
-                onClick={handleLogout}
-                className="btn-secondary w-full"
+                <button
+                    onClick={handleLogout}
+                    className="btn-secondary w-full"
+                >
+                    一度ログアウトして待機する
+                </button>
+            </div>
+            onClick={handleLogout}
+            className="btn-secondary w-full"
             >
-                一度ログアウトして待機する
-            </button>
-        </div>
+            一度ログアウトして待機する
+        </button>
+        </div >
         </div >
     );
 }
