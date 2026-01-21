@@ -62,20 +62,21 @@ export default function AdminCompaniesPage() {
                 <div className="max-w-4xl w-full relative z-10">
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">Company List</h1>
-                            <p className="text-slate-300 font-medium">利用会社（グループ会社）の管理</p>
+                            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">会社管理</h1>
+                            <p className="text-slate-300 font-medium">Company List</p>
                         </div>
-                        <Link href="/admin/companies/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-[#00e5ff]/20 hover:shadow-[#00e5ff]/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
-                            <span>+</span> 新規会社追加
-                        </Link>
+                        <div className="flex gap-3 items-center">
+                            <Link href="/dashboard" className="btn-secondary text-xs h-10 px-4 flex items-center">
+                                戻る
+                            </Link>
+                            <Link href="/admin/companies/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-[#00e5ff]/20 hover:shadow-[#00e5ff]/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
+                                <span>+</span> 新規会社追加
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                <div className="mb-6 animate-fade-in delay-100">
-                    <Link href="/dashboard" className="text-slate-500 hover:text-slate-300 text-sm flex items-center gap-1 transition-colors w-fit">
-                        戻る
-                    </Link>
-                </div>
+
 
                 {loading ? (
                     <div className="flex justify-center py-24">
