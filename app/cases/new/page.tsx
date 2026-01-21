@@ -11,72 +11,9 @@ import { calculateCombatPower } from "@/lib/combatPower";
 export default function NewCasePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Form states
-  const [name, setName] = useState("");
-  const [nameKana, setNameKana] = useState("");
-  const [gender, setGender] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [phoneLast4, setPhoneLast4] = useState("");
-  const [occurrenceDate, setOccurrenceDate] = useState("");
-  const [reason, setReason] = useState("");
-
-  // File upload state
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-
-  // File upload handling
-  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB default limit for Supabase
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files);
-      const validFiles: File[] = [];
-
-      newFiles.forEach(file => {
-        if (file.size > MAX_FILE_SIZE) {
-          alert(`ファイル「${file.name}」はサイズが大きすぎます (最大50MB)`);
-        } else {
-          validFiles.push(file);
-        }
-      });
-
-      if (validFiles.length > 0) {
-        setSelectedFiles((prev) => [...prev, ...validFiles]);
-      }
-    }
-  };
-
-  const removeFile = (index: number) => {
-    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  // ... (OCR function remains similar, skipping for brevity in this tool call replacement if not needed, but here we need to keep context) ...
-  // Wait, I should not replace the whole block if I can just replace the function.
-  // Let's target handleFileChange specifically.
-
-  const handleOCR = async (file: File) => {
-    if (!confirm("画像を解析してテキストを抽出しますか？\n抽出されたテキストは「登録理由/詳細」に追記されます。")) return;
-
-    setIsAnalyzing(true);
-    try {
-      const text = await recognizeText(file);
-      if (text) {
-        // 余分な空白を除去して追記
-        const cleanedText = text.replace(/\s+/g, ' ').trim();
-        setReason((prev) => prev + (prev ? "\n\n" : "") + "[画像解析結果]\n" + cleanedText);
-        alert("テキストを抽出しました！");
-      } else {
-        alert("テキストが見つかりませんでした。");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("解析に失敗しました。");
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
+  // ... (keep handleFileChange/removeFile/handleOCR) ...
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,13 +81,62 @@ export default function NewCasePage() {
 
       if (error) throw error;
 
-      router.push("/cases");
+      setLoading(false);
+      setIsSubmitted(true);
     } catch (err: any) {
       console.error(err);
       setErrorMsg("登録処理中にエラーが発生しました: " + (err.message || "詳細不明"));
       setLoading(false);
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <RequireAuth>
+        <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center justify-center">
+          <div className="max-w-xl w-full text-center glass-panel p-10 rounded-3xl animate-fade-in border-t-4 border-t-[#00e5ff] relative overflow-hidden">
+
+            {/* Background Effect */}
+            <div className="absolute inset-0 bg-[#00e5ff]/5 pointer-events-none"></div>
+
+            <div className="text-6xl mb-6 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">
+              🚀
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-4 tracking-wider">
+              TRANSMISSION COMPLETE
+            </h2>
+            <p className="text-slate-300 mb-8 leading-relaxed">
+              登録申請が完了しました。<br />
+              管理者の承認をお待ちください。
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+              <button
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setName("");
+                  setNameKana("");
+                  setGender("");
+                  setBirthDate("");
+                  setPhoneLast4("");
+                  setOccurrenceDate("");
+                  setReason("");
+                  setSelectedFiles([]);
+                  window.scrollTo(0, 0);
+                }}
+                className="btn-secondary py-3 px-6"
+              >
+                続けて登録する
+              </button>
+              <Link href="/dashboard" className="btn-primary py-3 px-6 shadow-lg shadow-[#00e5ff]/20">
+                ダッシュボードへ戻る
+              </Link>
+            </div>
+          </div>
+        </div>
+      </RequireAuth>
+    );
+  }
 
   return (
     <RequireAuth>
