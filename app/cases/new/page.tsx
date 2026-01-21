@@ -26,16 +26,35 @@ export default function NewCasePage() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
+  // File upload handling
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB default limit for Supabase
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
-      setSelectedFiles((prev) => [...prev, ...newFiles]);
+      const validFiles: File[] = [];
+
+      newFiles.forEach(file => {
+        if (file.size > MAX_FILE_SIZE) {
+          alert(`ファイル「${file.name}」はサイズが大きすぎます (最大50MB)`);
+        } else {
+          validFiles.push(file);
+        }
+      });
+
+      if (validFiles.length > 0) {
+        setSelectedFiles((prev) => [...prev, ...validFiles]);
+      }
     }
   };
 
   const removeFile = (index: number) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
+
+  // ... (OCR function remains similar, skipping for brevity in this tool call replacement if not needed, but here we need to keep context) ...
+  // Wait, I should not replace the whole block if I can just replace the function.
+  // Let's target handleFileChange specifically.
 
   const handleOCR = async (file: File) => {
     if (!confirm("画像を解析してテキストを抽出しますか？\n抽出されたテキストは「登録理由/詳細」に追記されます。")) return;
@@ -94,7 +113,7 @@ export default function NewCasePage() {
 
           if (uploadError) {
             console.error("Upload failed:", uploadError);
-            throw new Error(`ファイルのアップロードに失敗しました: ${file.name}`);
+            throw new Error(`ファイルのアップロードに失敗しました (${file.name}): ${uploadError.message}`);
           }
 
           if (uploadData?.path) {
@@ -111,7 +130,7 @@ export default function NewCasePage() {
           registered_company_id: appUser.company_id,
           full_name: name,
           full_name_kana: nameKana,
-          gender, // "male", "female", "other"
+          gender: gender || null, // "male", "female", "other" or null
           birth_date: birthDate || null,
           phone_last4: phoneLast4 || null,
           occurrence_date: occurrenceDate || null,
