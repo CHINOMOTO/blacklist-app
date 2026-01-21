@@ -117,7 +117,25 @@ export default function AdminUsersPage() {
                                         >
                                             承認する
                                         </button>
-                                        {/* 却下機能は未実装だがボタンだけ置くならここ。今回は承認のみ */}
+                                        <button
+                                            onClick={async () => {
+                                                if (confirm("本当にこの申請を却下（削除）しますか？\n※この操作は取り消せません。")) {
+                                                    const { error } = await supabase
+                                                        .from("app_users")
+                                                        .delete()
+                                                        .eq("id", user.id);
+
+                                                    if (!error) {
+                                                        setPendingUsers((prev) => prev.filter((u) => u.id !== user.id));
+                                                    } else {
+                                                        alert("却下に失敗しました: " + error.message);
+                                                    }
+                                                }
+                                            }}
+                                            className="px-4 py-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all text-sm font-bold whitespace-nowrap"
+                                        >
+                                            却下
+                                        </button>
                                     </div>
                                 </div>
                             ))}
