@@ -64,66 +64,67 @@ export default function AdminUsersPage() {
         }
     };
 
-    <RequireAdmin>
-        <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
-            <div className="max-w-5xl w-full">
+    return (
+        <RequireAdmin>
+            <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
+                <div className="max-w-5xl w-full">
 
-                <div className="flex items-center justify-between mb-8 animate-fade-in">
-                    <div>
-                        <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承認</h1>
-                        <p className="text-slate-400">User Approval</p>
+                    <div className="flex items-center justify-between mb-8 animate-fade-in">
+                        <div>
+                            <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承認</h1>
+                            <p className="text-slate-400">User Approval</p>
+                        </div>
+                        <Link href="/dashboard" className="btn-secondary text-xs">
+                            ダッシュボードへ戻る
+                        </Link>
                     </div>
-                    <Link href="/dashboard" className="btn-secondary text-xs">
-                        ダッシュボードへ戻る
-                    </Link>
+
+                    {loading ? (
+                        <div className="flex justify-center py-20">
+                            <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
+                        </div>
+                    ) : pendingUsers.length === 0 ? (
+                        <div className="glass-panel p-10 text-center rounded-2xl animate-fade-in">
+                            <span className="text-4xl mb-4 block">👍</span>
+                            <p className="text-slate-300">現在、未承認のユーザーはいません。</p>
+                        </div>
+                    ) : (
+                        <div className="grid gap-4 animate-fade-in delay-100">
+                            {pendingUsers.map((user) => (
+                                <div key={user.id} className="glass-panel p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 card-hover">
+                                    <div className="flex-grow">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <h3 className="text-xl font-bold text-white">{user.display_name || "名無し"}</h3>
+                                            <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded border border-yellow-500/30">
+                                                PENDING
+                                            </span>
+                                        </div>
+                                        <div className="text-slate-400 text-sm flex items-center gap-2">
+                                            <span className="text-slate-500">Company:</span>
+                                            {user.companies?.name || "未所属"}
+                                        </div>
+                                        <div className="text-slate-500 text-xs mt-1">
+                                            User ID: {user.id}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-3 w-full md:w-auto">
+                                        <button
+                                            onClick={() => {
+                                                if (confirm("このユーザーを承認しますか？")) handleApprove(user.id);
+                                            }}
+                                            className="btn-primary flex-grow md:flex-grow-0 whitespace-nowrap"
+                                        >
+                                            承認する
+                                        </button>
+                                        {/* 却下機能は未実装だがボタンだけ置くならここ。今回は承認のみ */}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-
-                {loading ? (
-                    <div className="flex justify-center py-20">
-                        <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
-                    </div>
-                ) : pendingUsers.length === 0 ? (
-                    <div className="glass-panel p-10 text-center rounded-2xl animate-fade-in">
-                        <span className="text-4xl mb-4 block">👍</span>
-                        <p className="text-slate-300">現在、未承認のユーザーはいません。</p>
-                    </div>
-                ) : (
-                    <div className="grid gap-4 animate-fade-in delay-100">
-                        {pendingUsers.map((user) => (
-                            <div key={user.id} className="glass-panel p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 card-hover">
-                                <div className="flex-grow">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <h3 className="text-xl font-bold text-white">{user.display_name || "名無し"}</h3>
-                                        <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded border border-yellow-500/30">
-                                            PENDING
-                                        </span>
-                                    </div>
-                                    <div className="text-slate-400 text-sm flex items-center gap-2">
-                                        <span className="text-slate-500">Company:</span>
-                                        {user.companies?.name || "未所属"}
-                                    </div>
-                                    <div className="text-slate-500 text-xs mt-1">
-                                        User ID: {user.id}
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-3 w-full md:w-auto">
-                                    <button
-                                        onClick={() => {
-                                            if (confirm("このユーザーを承認しますか？")) handleApprove(user.id);
-                                        }}
-                                        className="btn-primary flex-grow md:flex-grow-0 whitespace-nowrap"
-                                    >
-                                        承認する
-                                    </button>
-                                    {/* 却下機能は未実装だがボタンだけ置くならここ。今回は承認のみ */}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
             </div>
-        </div>
-    </RequireAdmin>
+        </RequireAdmin>
     );
 }
