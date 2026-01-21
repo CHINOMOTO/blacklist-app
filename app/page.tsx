@@ -56,82 +56,78 @@ export default function Home() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#00e5ff]/5 rounded-full blur-[100px]"></div>
       </div>
 
-      <main className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative z-10 animate-fade-in">
+      <main className="w-full max-w-md flex flex-col items-center justify-center relative z-10 animate-fade-in">
 
-        {/* Left Side: Hero Text */}
-        <div className="text-center md:text-left max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00e5ff]/10 border border-[#00e5ff]/20 text-[#00e5ff] text-xs font-medium mb-6 mx-auto md:mx-0">
-            <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse"></span>
-            Secure & Reliable Platform
+        {/* Logo & Tagline */}
+        <div className="text-center mb-10">
+          <div className="mb-4 inline-block relative group">
+            <h1 className="text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] drop-shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+              SCOUTER
+            </h1>
+            <div className="absolute -inset-2 bg-[#00e5ff]/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 -z-10"></div>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg mb-6 leading-tight">
-            建設業の信頼を、<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00e5ff] to-cyan-400 text-glow">
-              未来へつなぐ。
-            </span>
-          </h1>
-
-          <p className="text-lg text-slate-300 leading-relaxed mb-8 md:mb-0">
-            業界全体で共有する、安全なブラックリスト管理システム。<br className="hidden md:block" />
-            リスクを未然に防ぎ、健全な取引環境を構築します。
+          <p className="text-slate-300 text-lg font-medium tracking-wider leading-relaxed">
+            リスクを未然に防ぐ、<br />
+            次世代<span className="text-[#00e5ff] font-bold mx-1">ジンザイ</span>管理システム
           </p>
         </div>
 
-        {/* Right Side: Login Form */}
-        <div className="w-full max-w-md">
-          <div className="glass-panel rounded-3xl p-8 shadow-2xl border border-white/5 backdrop-blur-xl">
-            <div className="mb-8 pl-1">
-              <h2 className="text-xl font-bold text-white tracking-widest uppercase flex items-center gap-2">
-                <span className="text-[#00e5ff]">Login</span>
-              </h2>
-            </div>
+        {/* Login Form Container */}
+        <div className="w-full glass-panel rounded-3xl p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
+          {/* Decorative decorative line */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-4">
-                <div className="input-group">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/70 focus:ring-1 focus:ring-[#00e5ff]/30 transition-all"
-                    placeholder="メールアドレス"
-                  />
-                </div>
-                <div className="input-group">
-                  <input
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/70 focus:ring-1 focus:ring-[#00e5ff]/30 transition-all"
-                    placeholder="パスワード"
-                  />
-                </div>
+          <div className="mb-8 text-center">
+            <h2 className="text-sm font-bold text-[#00e5ff] tracking-[0.2em] uppercase mb-1">
+              System Login
+            </h2>
+            <p className="text-xs text-slate-500">アカウント情報を入力してください</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              <div className="input-group">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                  placeholder="メールアドレス"
+                />
               </div>
-
-              {errorMsg && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex items-start gap-2">
-                  <span className="text-red-400 text-sm">⚠️</span>
-                  <p className="text-xs text-red-200 pt-0.5">{errorMsg}</p>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-3.5 px-4 rounded-xl text-white font-bold bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] shadow-lg shadow-[#00e5ff]/20 transition-all hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {isLoading ? "処理中..." : "ログイン"}
-              </button>
-            </form>
-
-            <div className="text-center mt-6 border-t border-white/5 pt-4">
-              <Link href="/signup" className="text-xs text-[#00e5ff] hover:underline opacity-80 hover:opacity-100">
-                新規アカウント作成はこちら
-              </Link>
+              <div className="input-group">
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                  placeholder="パスワード"
+                />
+              </div>
             </div>
+
+            {errorMsg && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex items-start gap-2 animate-fade-in">
+                <span className="text-red-400 text-sm">⚠️</span>
+                <p className="text-xs text-red-200 pt-0.5">{errorMsg}</p>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-4 px-4 rounded-xl text-white font-bold bg-gradient-to-r from-[#008299] to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed hover:text-black tracking-widest uppercase text-sm"
+            >
+              {isLoading ? "AUTHENTICATING..." : "LOGIN"}
+            </button>
+          </form>
+
+          <div className="text-center mt-8 border-t border-white/5 pt-4">
+            <Link href="/signup" className="text-xs text-slate-500 hover:text-[#00e5ff] transition-colors">
+              &gt;&gt; 新規アカウント作成はこちら
+            </Link>
           </div>
         </div>
       </main>

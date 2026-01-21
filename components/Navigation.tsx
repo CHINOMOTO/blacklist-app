@@ -135,13 +135,7 @@ export default function Navigation() {
                                 >
                                     ログアウト
                                 </button>
-                            ) : (
-                                <Link
-                                    href="/login"
-                                    className="btn-primary text-xs px-4 py-2"
-                                >
-                                    ログイン
-                                </Link>
+                                null
                             )}
                         </div>
                     </div>
