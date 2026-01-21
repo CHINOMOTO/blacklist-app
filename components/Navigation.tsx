@@ -71,7 +71,7 @@ export default function Navigation() {
 
             // 確実にログイン画面へ遷移させる（ハードリダイレクト推奨）
             // Router.pushだとステート残存の可能性があるため
-            window.location.href = "/login";
+            window.location.href = "/";
         }
     };
 
@@ -124,7 +124,7 @@ export default function Navigation() {
                         <div className="ml-4 flex items-center md:ml-6 gap-4">
                             {session && userName && (
                                 <div className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider">
-                                    <span className="mr-1 opacity-50">担当:</span>
+                                    <span className="mr-1 opacity-50">ユーザー:</span>
                                     <span className="font-bold">{userName}</span>
                                 </div>
                             )}

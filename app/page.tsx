@@ -68,7 +68,7 @@ export default function Home() {
           </div>
           <p className="text-slate-300 text-lg font-medium tracking-wider leading-relaxed">
             リスクを未然に防ぐ、<br />
-            次世代<span className="text-[#00e5ff] font-bold mx-1">ジンザイ</span>管理システム
+            人材管理システム
           </p>
         </div>
 
