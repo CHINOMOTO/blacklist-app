@@ -78,7 +78,7 @@ export default function DashboardPage() {
                 description="新規登録申請やユーザーアカウントの承認・管理を行います。"
                 icon="⚡"
                 isAdmin
-                onClick={() => router.push("/admin/cases")}
+                onClick={() => router.push("/admin")}
               />
             )}
           </div>
