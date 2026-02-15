@@ -86,7 +86,7 @@ export default function AdminDashboardPage() {
                                     承認待ちリスト
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    新規登録されたブラックリスト候補の審査を行います。
+                                    新規登録された応募者属性リストの審査を行います。
                                 </p>
 
                                 <div className="mt-auto">

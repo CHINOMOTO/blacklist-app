@@ -118,7 +118,7 @@ export default function SearchPage() {
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">検索</h1>
-              <p className="text-slate-300 font-medium">要注意人物の検索・照会</p>
+              <p className="text-slate-300 font-medium">応募者属性リストの検索・照会</p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
               戻る

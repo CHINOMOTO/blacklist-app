@@ -63,7 +63,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="新規登録"
               subtitle="REGISTER"
-              description="新たな対象者をブラックリストに追加登録します。"
+              description="新たな対象者を応募者属性リストに追加登録します。"
               icon="✍️"
               colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
               bgGradient="group-hover:bg-[#00e5ff]/10"
