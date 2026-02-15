@@ -52,7 +52,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="登録データ一覧"
               subtitle="LIST"
-              description="現在登録されているブラックリストの全データを確認します。"
+              description="現在登録されている応募者属性の全データを確認します。"
               icon="📋"
               colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
               bgGradient="group-hover:bg-[#00e5ff]/10"
