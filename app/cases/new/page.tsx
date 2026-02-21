@@ -18,7 +18,9 @@ export default function NewCasePage() {
   const [name, setName] = useState("");
   const [nameKana, setNameKana] = useState("");
   const [gender, setGender] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthYear, setBirthYear] = useState("");
+  const [birthMonth, setBirthMonth] = useState("");
+  const [birthDay, setBirthDay] = useState("");
   const [phoneLast4, setPhoneLast4] = useState("");
   const [occurrenceDate, setOccurrenceDate] = useState("");
   const [reason, setReason] = useState("");
@@ -128,7 +130,9 @@ export default function NewCasePage() {
           full_name: name,
           full_name_kana: nameKana,
           gender: gender || null, // "male", "female", "other" or null
-          birth_date: birthDate || null,
+          birth_date: (birthYear && birthMonth && birthDay)
+            ? `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`
+            : null,
           phone_last4: phoneLast4 || null,
           occurrence_date: occurrenceDate || null,
           reason_text: reason,
@@ -177,7 +181,9 @@ export default function NewCasePage() {
                   setName("");
                   setNameKana("");
                   setGender("");
-                  setBirthDate("");
+                  setBirthYear("");
+                  setBirthMonth("");
+                  setBirthDay("");
                   setPhoneLast4("");
                   setOccurrenceDate("");
                   setReason("");
@@ -237,12 +243,38 @@ export default function NewCasePage() {
                   </div>
                   <div className="space-y-2">
                     <Label>生年月日</Label>
-                    <input
-                      type="date"
-                      value={birthDate}
-                      onChange={(e) => setBirthDate(e.target.value)}
-                      className="input-field"
-                    />
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={4}
+                        value={birthYear}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthYear(e.target.value); }}
+                        className="input-field w-24 text-center"
+                        placeholder="1984"
+                      />
+                      <span className="text-slate-400">年</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={2}
+                        value={birthMonth}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthMonth(e.target.value); }}
+                        className="input-field w-16 text-center"
+                        placeholder="11"
+                      />
+                      <span className="text-slate-400">月</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={2}
+                        value={birthDay}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthDay(e.target.value); }}
+                        className="input-field w-16 text-center"
+                        placeholder="04"
+                      />
+                      <span className="text-slate-400">日</span>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Label>性別</Label>
