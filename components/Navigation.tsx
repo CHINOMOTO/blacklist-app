@@ -129,11 +129,11 @@ export default function Navigation() {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // ログインページではナビゲーションバーを表示しない
-    if (pathname === "/login") return null;
+    // ログイン・サインアップページではナビゲーションバーを表示しない（セッションがあっても非表示）
+    if (pathname === "/" || pathname === "/signup" || pathname === "/login") return null;
 
-    // セッションがない場合、トップページ以外では表示しない（必要に応じて調整）
-    if (!session && pathname !== "/" && pathname !== "/signup") return null;
+    // セッションがない場合は表示しない
+    if (!session) return null;
 
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-[#00e5ff]/20 bg-black/90 backdrop-blur-sm">
