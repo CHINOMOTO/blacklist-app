@@ -251,7 +251,7 @@ export default function NewCasePage() {
                         value={birthYear}
                         onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthYear(e.target.value); }}
                         className="input-field w-24 text-center"
-                        placeholder="1984"
+                        placeholder="0000"
                       />
                       <span className="text-slate-400">年</span>
                       <input
@@ -261,7 +261,7 @@ export default function NewCasePage() {
                         value={birthMonth}
                         onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthMonth(e.target.value); }}
                         className="input-field w-16 text-center"
-                        placeholder="11"
+                        placeholder="00"
                       />
                       <span className="text-slate-400">月</span>
                       <input
@@ -271,7 +271,7 @@ export default function NewCasePage() {
                         value={birthDay}
                         onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthDay(e.target.value); }}
                         className="input-field w-16 text-center"
-                        placeholder="04"
+                        placeholder="00"
                       />
                       <span className="text-slate-400">日</span>
                     </div>
