@@ -26,6 +26,20 @@ export default function Navigation() {
             setNotificationCount((userCount || 0) + (caseCount || 0));
         };
 
+        const fetchUserName = async (userId: string): Promise<string> => {
+            const { data } = await supabase
+                .from("app_users")
+                .select("display_name, companies(name)")
+                .eq("id", userId)
+                .maybeSingle();
+            if (data) {
+                const company = Array.isArray(data.companies) ? data.companies[0]?.name : (data.companies as { name: string } | null)?.name;
+                const displayName = data.display_name || "User";
+                return company ? `${company} ${displayName}` : displayName;
+            }
+            return "User";
+        };
+
         const checkUser = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             setSession(session);
@@ -34,7 +48,8 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                setUserName(session.user.user_metadata?.display_name || "User");
+                const name = await fetchUserName(session.user.id);
+                setUserName(name);
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
@@ -62,7 +77,8 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                setUserName(session.user.user_metadata?.display_name || "User");
+                const name = await fetchUserName(session.user.id);
+                setUserName(name);
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
