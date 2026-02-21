@@ -26,28 +26,6 @@ export default function Navigation() {
             setNotificationCount((userCount || 0) + (caseCount || 0));
         };
 
-        const fetchUserName = async (userId: string): Promise<string> => {
-            try {
-                const { data: appUser } = await supabase
-                    .from("app_users")
-                    .select("display_name, company_id")
-                    .eq("id", userId)
-                    .maybeSingle();
-                if (!appUser) return "User";
-                const displayName = (appUser.display_name as string) || "User";
-                if (!appUser.company_id) return displayName;
-                const { data: company } = await supabase
-                    .from("companies")
-                    .select("name")
-                    .eq("id", appUser.company_id)
-                    .maybeSingle();
-                const companyName = (company as { name: string } | null)?.name;
-                return companyName ? `${companyName} ${displayName}` : displayName;
-            } catch {
-                return "User";
-            }
-        };
-
         const checkUser = async () => {
             const { data: { session } } = await supabase.auth.getSession();
             setSession(session);
@@ -56,8 +34,7 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                const name = await fetchUserName(session.user.id);
-                setUserName(name);
+                setUserName(session.user.user_metadata?.display_name || "User");
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
@@ -85,8 +62,7 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                const name = await fetchUserName(session.user.id);
-                setUserName(name);
+                setUserName(session.user.user_metadata?.display_name || "User");
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
