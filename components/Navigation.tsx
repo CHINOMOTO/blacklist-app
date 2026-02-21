@@ -27,17 +27,25 @@ export default function Navigation() {
         };
 
         const fetchUserName = async (userId: string): Promise<string> => {
-            const { data } = await supabase
-                .from("app_users")
-                .select("display_name, companies(name)")
-                .eq("id", userId)
-                .maybeSingle();
-            if (data) {
-                const company = Array.isArray(data.companies) ? data.companies[0]?.name : (data.companies as { name: string } | null)?.name;
-                const displayName = data.display_name || "User";
-                return company ? `${company} ${displayName}` : displayName;
+            try {
+                const { data: appUser } = await supabase
+                    .from("app_users")
+                    .select("display_name, company_id")
+                    .eq("id", userId)
+                    .maybeSingle();
+                if (!appUser) return "User";
+                const displayName = (appUser.display_name as string) || "User";
+                if (!appUser.company_id) return displayName;
+                const { data: company } = await supabase
+                    .from("companies")
+                    .select("name")
+                    .eq("id", appUser.company_id)
+                    .maybeSingle();
+                const companyName = (company as { name: string } | null)?.name;
+                return companyName ? `${companyName} ${displayName}` : displayName;
+            } catch {
+                return "User";
             }
-            return "User";
         };
 
         const checkUser = async () => {
