@@ -20,7 +20,8 @@ type CaseDetail = {
     created_at: string;
     evidence_urls?: string[];
     registered_company_id?: string;
-    risk_score?: number; // 追加
+    registered_by_user_id?: string;
+    risk_score?: number;
 };
 
 type EvidenceFile = {
@@ -74,6 +75,7 @@ export default function CaseDetailPage() {
     const [loading, setLoading] = useState(true);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [companyName, setCompanyName] = useState<string | null>(null);
+    const [registrantName, setRegistrantName] = useState<string | null>(null);
 
     // Storage files
     const [evidenceFiles, setEvidenceFiles] = useState<EvidenceFile[]>([]);
@@ -88,7 +90,7 @@ export default function CaseDetailPage() {
             const { data, error } = await supabase
                 .from("blacklist_cases")
                 .select(
-                    "id, full_name, full_name_kana, gender, birth_date, phone_last4, occurrence_date, reason_text, status, created_at, evidence_urls, registered_company_id, risk_score"
+                    "id, full_name, full_name_kana, gender, birth_date, phone_last4, occurrence_date, reason_text, status, created_at, evidence_urls, registered_company_id, registered_by_user_id, risk_score"
                 )
                 .eq("id", id)
                 .maybeSingle();
@@ -116,6 +118,18 @@ export default function CaseDetailPage() {
                     .single();
                 if (comp) {
                     setCompanyName(comp.name);
+                }
+            }
+
+            // Fetch Registrant Name if exists
+            if (data.registered_by_user_id) {
+                const { data: appUser } = await supabase
+                    .from("app_users")
+                    .select("display_name")
+                    .eq("id", data.registered_by_user_id)
+                    .single();
+                if (appUser) {
+                    setRegistrantName(appUser.display_name);
                 }
             }
 
@@ -227,6 +241,12 @@ export default function CaseDetailPage() {
                                                 <dt className="text-slate-400">登録元</dt>
                                                 <dd className="text-slate-100 font-medium">
                                                     {companyName || "-"}
+                                                </dd>
+                                            </div>
+                                            <div className="grid grid-cols-[120px_1fr]">
+                                                <dt className="text-slate-400">登録者</dt>
+                                                <dd className="text-slate-100 font-medium">
+                                                    {registrantName || "-"}
                                                 </dd>
                                             </div>
                                         </dl>
