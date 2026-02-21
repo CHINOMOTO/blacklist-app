@@ -77,6 +77,41 @@ export default function Navigation() {
         return () => subscription.unsubscribe();
     }, [pathname]); // pathnameが変わるたびにも再チェック（通知数更新のため）
 
+    // 会社名+登録名を取得する（認証フローとは独立、ユーザーIDが変わった時だけ実行）
+    useEffect(() => {
+        if (!session?.user?.id) return;
+        let cancelled = false;
+
+        const fetchDisplayName = async () => {
+            try {
+                const { data: appUser } = await supabase
+                    .from("app_users")
+                    .select("display_name, company_id")
+                    .eq("id", session.user.id)
+                    .maybeSingle();
+                if (cancelled || !appUser) return;
+                const displayName = (appUser.display_name as string) || "User";
+                if (!appUser.company_id) {
+                    setUserName(displayName);
+                    return;
+                }
+                const { data: company } = await supabase
+                    .from("companies")
+                    .select("name")
+                    .eq("id", appUser.company_id)
+                    .maybeSingle();
+                if (cancelled) return;
+                const companyName = (company as { name: string } | null)?.name;
+                setUserName(companyName ? `${companyName} ${displayName}` : displayName);
+            } catch {
+                // エラーが起きても何もしない（既存のdisplay_nameが表示される）
+            }
+        };
+
+        fetchDisplayName();
+        return () => { cancelled = true; };
+    }, [session?.user?.id]); // ユーザーIDが変わった時のみ実行
+
     const handleLogout = async () => {
         try {
             await supabase.auth.signOut();
