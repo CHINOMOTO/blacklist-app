@@ -34,7 +34,6 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                setUserName(session.user.user_metadata?.display_name || "User");
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
@@ -62,7 +61,6 @@ export default function Navigation() {
                 const role = session.user.app_metadata?.role;
                 const isUserAdmin = role === 'admin';
                 setIsAdmin(isUserAdmin);
-                setUserName(session.user.user_metadata?.display_name || "User");
 
                 if (isUserAdmin) {
                     fetchNotifications(session.user.id);
