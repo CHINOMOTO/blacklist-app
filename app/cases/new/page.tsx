@@ -22,7 +22,9 @@ export default function NewCasePage() {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [phoneLast4, setPhoneLast4] = useState("");
-  const [occurrenceDate, setOccurrenceDate] = useState("");
+  const [occurrenceYear, setOccurrenceYear] = useState("");
+  const [occurrenceMonth, setOccurrenceMonth] = useState("");
+  const [occurrenceDay, setOccurrenceDay] = useState("");
   const [reason, setReason] = useState("");
 
   // File upload state
@@ -134,7 +136,9 @@ export default function NewCasePage() {
             ? `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`
             : null,
           phone_last4: phoneLast4 || null,
-          occurrence_date: occurrenceDate || null,
+          occurrence_date: (occurrenceYear && occurrenceMonth && occurrenceDay)
+            ? `${occurrenceYear}-${occurrenceMonth.padStart(2, '0')}-${occurrenceDay.padStart(2, '0')}`
+            : null,
           reason_text: reason,
           evidence_urls: uploadedUrls, // アップロードしたファイルのパス配列
           status: "pending", // 初期状態は未承認
@@ -185,7 +189,9 @@ export default function NewCasePage() {
                   setBirthMonth("");
                   setBirthDay("");
                   setPhoneLast4("");
-                  setOccurrenceDate("");
+                  setOccurrenceYear("");
+                  setOccurrenceMonth("");
+                  setOccurrenceDay("");
                   setReason("");
                   setSelectedFiles([]);
                   window.scrollTo(0, 0);
@@ -313,12 +319,38 @@ export default function NewCasePage() {
                   </div>
                   <div className="space-y-2">
                     <Label>発生日</Label>
-                    <input
-                      type="date"
-                      value={occurrenceDate}
-                      onChange={(e) => setOccurrenceDate(e.target.value)}
-                      className="input-field"
-                    />
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={4}
+                        value={occurrenceYear}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceYear(e.target.value); }}
+                        className="input-field w-24 text-center"
+                        placeholder="0000"
+                      />
+                      <span className="text-slate-400">年</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={2}
+                        value={occurrenceMonth}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceMonth(e.target.value); }}
+                        className="input-field w-16 text-center"
+                        placeholder="00"
+                      />
+                      <span className="text-slate-400">月</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={2}
+                        value={occurrenceDay}
+                        onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceDay(e.target.value); }}
+                        className="input-field w-16 text-center"
+                        placeholder="00"
+                      />
+                      <span className="text-slate-400">日</span>
+                    </div>
                   </div>
                 </div>
                 <div className="space-y-2">
