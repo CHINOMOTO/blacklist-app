@@ -19,9 +19,13 @@ export default function EditCasePage() {
     const [name, setName] = useState("");
     const [nameKana, setNameKana] = useState("");
     const [gender, setGender] = useState("");
-    const [birthDate, setBirthDate] = useState("");
+    const [birthYear, setBirthYear] = useState("");
+    const [birthMonth, setBirthMonth] = useState("");
+    const [birthDay, setBirthDay] = useState("");
     const [phoneLast4, setPhoneLast4] = useState("");
-    const [occurrenceDate, setOccurrenceDate] = useState("");
+    const [occurrenceYear, setOccurrenceYear] = useState("");
+    const [occurrenceMonth, setOccurrenceMonth] = useState("");
+    const [occurrenceDay, setOccurrenceDay] = useState("");
     const [reason, setReason] = useState("");
     const [status, setStatus] = useState("pending");
 
@@ -51,9 +55,11 @@ export default function EditCasePage() {
                 setName(data.full_name);
                 setNameKana(data.full_name_kana || "");
                 setGender(data.gender || "");
-                setBirthDate(data.birth_date || "");
+                const [by, bm, bd] = (data.birth_date || "").split("-");
+                setBirthYear(by || ""); setBirthMonth(bm || ""); setBirthDay(bd || "");
                 setPhoneLast4(data.phone_last4 || "");
-                setOccurrenceDate(data.occurrence_date || "");
+                const [oy, om, od] = (data.occurrence_date || "").split("-");
+                setOccurrenceYear(oy || ""); setOccurrenceMonth(om || ""); setOccurrenceDay(od || "");
                 setReason(data.reason_text);
                 setStatus(data.status);
 
@@ -137,9 +143,13 @@ export default function EditCasePage() {
                     full_name: name,
                     full_name_kana: nameKana,
                     gender,
-                    birth_date: birthDate || null,
+                    birth_date: (birthYear && birthMonth && birthDay)
+                        ? `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`
+                        : null,
                     phone_last4: phoneLast4 || null,
-                    occurrence_date: occurrenceDate || null,
+                    occurrence_date: (occurrenceYear && occurrenceMonth && occurrenceDay)
+                        ? `${occurrenceYear}-${occurrenceMonth.padStart(2, '0')}-${occurrenceDay.padStart(2, '0')}`
+                        : null,
                     reason_text: reason,
                     status: status,
                     evidence_urls: finalEvidenceUrls
@@ -203,12 +213,20 @@ export default function EditCasePage() {
                                     </div>
                                     <div className="space-y-2">
                                         <Label>生年月日</Label>
-                                        <input
-                                            type="date"
-                                            value={birthDate}
-                                            onChange={(e) => setBirthDate(e.target.value)}
-                                            className="input-field"
-                                        />
+                                        <div className="flex items-center gap-2">
+                                            <input type="text" inputMode="numeric" maxLength={4} value={birthYear}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthYear(e.target.value); }}
+                                                className="input-field w-24 text-center" placeholder="0000" />
+                                            <span className="text-slate-400">年</span>
+                                            <input type="text" inputMode="numeric" maxLength={2} value={birthMonth}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthMonth(e.target.value); }}
+                                                className="input-field w-16 text-center" placeholder="00" />
+                                            <span className="text-slate-400">月</span>
+                                            <input type="text" inputMode="numeric" maxLength={2} value={birthDay}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthDay(e.target.value); }}
+                                                className="input-field w-16 text-center" placeholder="00" />
+                                            <span className="text-slate-400">日</span>
+                                        </div>
                                     </div>
                                     <div className="space-y-2">
                                         <Label>性別</Label>
@@ -241,12 +259,20 @@ export default function EditCasePage() {
                                     </div>
                                     <div className="space-y-2">
                                         <Label>発生日</Label>
-                                        <input
-                                            type="date"
-                                            value={occurrenceDate}
-                                            onChange={(e) => setOccurrenceDate(e.target.value)}
-                                            className="input-field"
-                                        />
+                                        <div className="flex items-center gap-2">
+                                            <input type="text" inputMode="numeric" maxLength={4} value={occurrenceYear}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceYear(e.target.value); }}
+                                                className="input-field w-24 text-center" placeholder="0000" />
+                                            <span className="text-slate-400">年</span>
+                                            <input type="text" inputMode="numeric" maxLength={2} value={occurrenceMonth}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceMonth(e.target.value); }}
+                                                className="input-field w-16 text-center" placeholder="00" />
+                                            <span className="text-slate-400">月</span>
+                                            <input type="text" inputMode="numeric" maxLength={2} value={occurrenceDay}
+                                                onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceDay(e.target.value); }}
+                                                className="input-field w-16 text-center" placeholder="00" />
+                                            <span className="text-slate-400">日</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="space-y-2">

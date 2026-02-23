@@ -21,7 +21,9 @@ type BlacklistCase = {
 
 export default function SearchPage() {
   const [nameQuery, setNameQuery] = useState("");
-  const [dateQuery, setDateQuery] = useState("");
+  const [searchYear, setSearchYear] = useState("");
+  const [searchMonth, setSearchMonth] = useState("");
+  const [searchDay, setSearchDay] = useState("");
   const [results, setResults] = useState<BlacklistCase[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +49,9 @@ export default function SearchPage() {
     setErrorMsg(null);
 
     try {
+      const dateQuery = (searchYear && searchMonth && searchDay)
+        ? `${searchYear}-${searchMonth.padStart(2, '0')}-${searchDay.padStart(2, '0')}`
+        : "";
       if (!nameQuery && !dateQuery) {
         throw new Error("検索条件を入力してください。");
       }
@@ -159,11 +164,35 @@ export default function SearchPage() {
                     </span>
                   </div>
                   <input
-                    type="date"
-                    value={dateQuery}
-                    onChange={(e) => setDateQuery(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={4}
+                    value={searchYear}
+                    onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchYear(e.target.value); }}
+                    className="w-20 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    placeholder="0000"
                   />
+                  <span className="text-slate-400">年</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={2}
+                    value={searchMonth}
+                    onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchMonth(e.target.value); }}
+                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    placeholder="00"
+                  />
+                  <span className="text-slate-400">月</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={2}
+                    value={searchDay}
+                    onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchDay(e.target.value); }}
+                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    placeholder="00"
+                  />
+                  <span className="text-slate-400">日</span>
                 </div>
               </div>
 
