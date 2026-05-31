@@ -23,6 +23,7 @@ export default function EditCasePage() {
     const [birthMonth, setBirthMonth] = useState("");
     const [birthDay, setBirthDay] = useState("");
     const [phoneLast4, setPhoneLast4] = useState("");
+    const [city, setCity] = useState("");
     const [occurrenceYear, setOccurrenceYear] = useState("");
     const [occurrenceMonth, setOccurrenceMonth] = useState("");
     const [occurrenceDay, setOccurrenceDay] = useState("");
@@ -58,6 +59,7 @@ export default function EditCasePage() {
                 const [by, bm, bd] = (data.birth_date || "").split("-");
                 setBirthYear(by || ""); setBirthMonth(bm || ""); setBirthDay(bd || "");
                 setPhoneLast4(data.phone_last4 || "");
+                setCity(data.city || "");
                 const [oy, om, od] = (data.occurrence_date || "").split("-");
                 setOccurrenceYear(oy || ""); setOccurrenceMonth(om || ""); setOccurrenceDay(od || "");
                 setReason(data.reason_text);
@@ -147,6 +149,7 @@ export default function EditCasePage() {
                         ? `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`
                         : null,
                     phone_last4: phoneLast4 || null,
+                    city: city || null,
                     occurrence_date: (occurrenceYear && occurrenceMonth && occurrenceDay)
                         ? `${occurrenceYear}-${occurrenceMonth.padStart(2, '0')}-${occurrenceDay.padStart(2, '0')}`
                         : null,
@@ -255,6 +258,16 @@ export default function EditCasePage() {
                                             value={phoneLast4}
                                             onChange={(e) => setPhoneLast4(e.target.value)}
                                             className="input-field"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label>住所（市区町村）</Label>
+                                        <input
+                                            type="text"
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
+                                            className="input-field"
+                                            placeholder="例：東京都渋谷区"
                                         />
                                     </div>
                                     <div className="space-y-2">

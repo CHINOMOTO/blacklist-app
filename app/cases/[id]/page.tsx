@@ -22,6 +22,7 @@ type CaseDetail = {
     registered_company_id?: string;
     registered_by_user_id?: string;
     risk_score?: number;
+    city?: string | null;
 };
 
 type EvidenceFile = {
@@ -226,6 +227,10 @@ export default function CaseDetailPage() {
                                             <div className="grid grid-cols-[120px_1fr]">
                                                 <dt className="text-slate-400">電話番号(下4桁)</dt>
                                                 <dd className="text-slate-100 font-medium">{caseDetail.phone_last4 || "-"}</dd>
+                                            </div>
+                                            <div className="grid grid-cols-[120px_1fr]">
+                                                <dt className="text-slate-400">住所</dt>
+                                                <dd className="text-slate-100 font-medium">{caseDetail.city || "-"}</dd>
                                             </div>
                                             <div className="grid grid-cols-[120px_1fr]">
                                                 <dt className="text-slate-400">発生日</dt>
