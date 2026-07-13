@@ -140,7 +140,7 @@ export default function Navigation() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center justify-between w-full md:w-auto">
-                        <Link href={session ? "/dashboard" : "/"} className="flex-shrink-0 flex items-center gap-2 font-bold text-xl text-[#00e5ff] group tracking-widest uppercase" onClick={() => setIsMobileMenuOpen(false)}>
+                        <Link href={session ? "/dashboard" : "/"} className="flex-shrink-0 flex items-center gap-2 font-bold text-xl text-[#00e5ff] group tracking-widest uppercase orbitron" onClick={() => setIsMobileMenuOpen(false)}>
                             <span className="text-2xl group-hover:rotate-45 transition-transform duration-300">⌖</span>
                             <span className="drop-shadow-[0_0_5px_rgba(0,255,65,0.8)]">SCOUTER</span>
                         </Link>

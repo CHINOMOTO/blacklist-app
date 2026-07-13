@@ -11,7 +11,12 @@
 /* Base styles */
 body {
   color: var(--color-scouter-green);
-  font-family: var(--font-orbitron), "Zen Kaku Gothic New", sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/* Orbitron はロゴ・ブランド要素専用 */
+.orbitron {
+  font-family: "Orbitron", sans-serif;
 }
 
 h1,
