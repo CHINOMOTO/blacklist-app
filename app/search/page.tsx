@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
-import { getScouterColor } from "@/lib/combatPower";
 
 type BlacklistCase = {
   id: string;
@@ -16,7 +15,6 @@ type BlacklistCase = {
   occurrence_date: string | null;
   reason_text: string;
   status: string;
-  risk_score: number | null; // 追加
 };
 
 export default function SearchPage() {
@@ -29,13 +27,24 @@ export default function SearchPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userCompanyId, setUserCompanyId] = useState<string | null>(null);
 
-  // Check admin role on mount
+  // Check admin role and get company_id on mount
   useEffect(() => {
     const checkRole = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user?.app_metadata?.role === "admin") {
         setIsAdmin(true);
+      }
+      if (session?.user) {
+        const { data: appUser } = await supabase
+          .from("app_users")
+          .select("company_id")
+          .eq("id", session.user.id)
+          .maybeSingle();
+        if (appUser?.company_id) {
+          setUserCompanyId(appUser.company_id);
+        }
       }
     };
     checkRole();
@@ -61,9 +70,12 @@ export default function SearchPage() {
         .from("blacklist_cases")
         .select("*");
 
-      // 管理者でない場合は承認済みのみフィルター
+      // 管理者でない場合は自社データのみ＋承認済みのみ（個人情報保護法対応）
       if (!isAdmin) {
         query = query.eq("status", "approved");
+        if (userCompanyId) {
+          query = query.eq("registered_company_id", userCompanyId);
+        }
       }
 
       const { data, error } = await query;
@@ -90,8 +102,8 @@ export default function SearchPage() {
         return matchName && matchDate;
       });
 
-      // 戦闘力順にソート (降順)
-      filtered.sort((a, b) => (b.risk_score || 0) - (a.risk_score || 0));
+      // 登録日でソート (降順)
+      filtered.sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
 
       setResults(filtered);
       setHasSearched(true);
@@ -243,7 +255,6 @@ export default function SearchPage() {
                 <div className="grid gap-5">
                   {results.map((item) => {
                     const badge = getStatusBadge(item.status);
-                    const powerColor = getScouterColor(item.risk_score || 0);
                     return (
                       <div
                         key={item.id}
@@ -263,11 +274,6 @@ export default function SearchPage() {
                               <span className={`px-3 py-1 text-[10px] font-bold rounded-full border uppercase tracking-widest ${badge.className}`}>
                                 {badge.label}
                               </span>
-                              {item.risk_score && item.risk_score > 0 && (
-                                <div className={`text-xs font-black italic mt-2 ${powerColor}`}>
-                                  Risk Score: {item.risk_score.toLocaleString()}
-                                </div>
-                              )}
                             </div>
                           </div>
 

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
 import { recognizeText } from "@/lib/ocr";
-import { calculateCombatPower } from "@/lib/combatPower";
 
 export default function NewCasePage() {
   const router = useRouter();
@@ -124,8 +123,6 @@ export default function NewCasePage() {
         }
       }
 
-      // 戦闘力(リスクスコア)計算
-      const riskScore = calculateCombatPower(reason);
 
       const { error } = await supabase.from("blacklist_cases").insert([
         {
@@ -145,7 +142,6 @@ export default function NewCasePage() {
           evidence_urls: uploadedUrls, // アップロードしたファイルのパス配列
           status: "pending", // 初期状態は未承認
           registered_by_user_id: user.id,
-          risk_score: riskScore, // 戦闘力
         },
       ]);
 

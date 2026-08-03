@@ -36,11 +36,20 @@ export default function CasesPage() {
       try {
         let query = supabase
           .from("blacklist_cases")
-          .select("id, full_name, birth_date, reason_text, status, created_at")
+          .select("id, full_name, birth_date, reason_text, status, created_at, registered_company_id")
           .order("created_at", { ascending: false });
 
-        // 一般ユーザーは承認済みデータのみ表示
-        if (!isUserAdmin) {
+        // 一般ユーザーは自社登録データのみ表示（個人情報保護法対応）
+        if (!isUserAdmin && user) {
+          const { data: appUser } = await supabase
+            .from("app_users")
+            .select("company_id")
+            .eq("id", user.id)
+            .maybeSingle();
+
+          if (appUser?.company_id) {
+            query = query.eq("registered_company_id", appUser.company_id);
+          }
           query = query.eq("status", "approved");
         }
 

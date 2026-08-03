@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
-import { getScouterColor } from "@/lib/combatPower";
 
 type CaseDetail = {
     id: string;
@@ -21,7 +20,6 @@ type CaseDetail = {
     evidence_urls?: string[];
     registered_company_id?: string;
     registered_by_user_id?: string;
-    risk_score?: number;
     city?: string | null;
 };
 
@@ -191,13 +189,6 @@ export default function CaseDetailPage() {
                                 {/* Header */}
                                 {/* Header with Scouter UI */}
                                 <div className="bg-slate-900/50 p-6 md:p-8 rounded-xl border border-white/5 relative overflow-hidden mb-6">
-                                    {/* Scouter Visual Effect */}
-                                    <div className="absolute top-0 right-0 p-4 md:p-6 text-right transform rotate-[-2deg] opacity-90 z-0 pointer-events-none">
-                                        <div className="text-[10px] text-slate-500 uppercase tracking-[0.2em] mb-1">Risk Score</div>
-                                        <div className={`text-3xl md:text-5xl font-black italic tracking-tighter drop-shadow-lg ${getScouterColor(caseDetail.risk_score || 0)} transition-all duration-1000`}>
-                                            {caseDetail.risk_score ? caseDetail.risk_score.toLocaleString() : "---"}
-                                        </div>
-                                    </div>
 
                                     <div className="relative z-10 max-w-[75%]">
                                         <div className="flex items-center gap-3 mb-3">
