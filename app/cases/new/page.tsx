@@ -101,6 +101,10 @@ export default function NewCasePage() {
         throw new Error("所属会社情報が見つかりません。");
       }
 
+      if (nameKana && !/^[ァ-ヶー\s　]*$/.test(nameKana)) {
+        throw new Error("氏名（カナ）は全角カタカナで入力してください。");
+      }
+
       // ファイルアップロード処理
       const uploadedUrls: string[] = [];
       if (selectedFiles.length > 0) {
@@ -241,6 +245,8 @@ export default function NewCasePage() {
                       onChange={(e) => setNameKana(e.target.value)}
                       className="input-field"
                       placeholder="ヤマダ タロウ"
+                      pattern="^[ァ-ヶー\s　]*$"
+                      title="全角カタカナで入力してください"
                     />
                   </div>
                   <div className="space-y-2">

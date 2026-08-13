@@ -116,6 +116,10 @@ export default function EditCasePage() {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) throw new Error("セッションが切れました。再ログインしてください。");
 
+            if (nameKana && !/^[ァ-ヶー\s　]*$/.test(nameKana)) {
+                throw new Error("氏名（カナ）は全角カタカナで入力してください。");
+            }
+
             // 1. Upload new files
             const newUploadedPaths: string[] = [];
             if (selectedFiles.length > 0) {
@@ -212,6 +216,9 @@ export default function EditCasePage() {
                                             value={nameKana}
                                             onChange={(e) => setNameKana(e.target.value)}
                                             className="input-field"
+                                            placeholder="ヤマダ タロウ"
+                                            pattern="^[ァ-ヶー\s　]*$"
+                                            title="全角カタカナで入力してください"
                                         />
                                     </div>
                                     <div className="space-y-2">
