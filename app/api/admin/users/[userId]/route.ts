@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function DELETE(
     request: Request,
     { params }: { params: Promise<{ userId: string }> | { userId: string } }
 ) {
     try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+        
+        if (!supabaseUrl || !supabaseKey) {
+            return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
+        }
+
+        const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
         // 1. リクエスト元のユーザーを認証
         const authHeader = request.headers.get('Authorization');
         if (!authHeader) {
