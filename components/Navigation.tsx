@@ -207,10 +207,13 @@ export default function Navigation() {
                     <div className="hidden md:block">
                         <div className="ml-4 flex items-center md:ml-6 gap-4">
                             {session && userName && (
-                                <div className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider">
+                                <Link
+                                    href="/profile"
+                                    className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider hover:bg-[#00e5ff]/20 hover:border-[#00e5ff]/50 transition-all cursor-pointer"
+                                >
                                     <span className="mr-1 opacity-50">ユーザー:</span>
                                     <span className="font-bold">{userName}</span>
-                                </div>
+                                </Link>
                             )}
                             {session && (
                                 <button
@@ -230,9 +233,13 @@ export default function Navigation() {
                 <div className="md:hidden border-t border-[#00e5ff]/20 bg-black/95 backdrop-blur-xl animate-fade-in">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {userName && (
-                            <div className="px-3 py-2 text-xs font-mono tracking-wider text-[#00e5ff]/60 border-b border-[#00e5ff]/10 mb-2">
+                            <Link
+                                href="/profile"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block px-3 py-2 text-xs font-mono tracking-wider text-[#00e5ff]/60 border-b border-[#00e5ff]/10 mb-2 hover:bg-[#00e5ff]/10 transition-colors"
+                            >
                                 LOGGED IN AS: <span className="text-[#00e5ff] font-bold ml-2">{userName}</span>
-                            </div>
+                            </Link>
                         )}
                         <MobileNavLink href="/dashboard" active={pathname === "/dashboard"} onClick={() => setIsMobileMenuOpen(false)}>
                             ダッシュボード
