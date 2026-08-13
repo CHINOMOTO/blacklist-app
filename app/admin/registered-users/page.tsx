@@ -52,8 +52,15 @@ export default function RegisteredUsersPage() {
         if (!confirm("本当にこのユーザーを削除しますか？\n※投稿データは保持されますが、ログインできなくなります。\nこの操作は取り消せません。")) return;
 
         try {
+            // 現在のセッショントークンを取得
+            const { data: { session } } = await supabase.auth.getSession();
+            const token = session?.access_token;
+
             const res = await fetch(`/api/admin/users/${userId}`, {
                 method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             });
             const data = await res.json();
             
