@@ -121,6 +121,24 @@ export default function SignUpPage() {
                 throw new Error(`ユーザープロフィールの保存に失敗しました: ${appUserError.message} (Code: ${appUserError.code})`);
             }
 
+            // LINE通知APIの呼び出し（失敗してもユーザーの画面遷移は止めない）
+            try {
+                await fetch('/api/notify/line', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'signup',
+                        data: {
+                            name: displayName,
+                            company: companyName,
+                            email: email
+                        }
+                    })
+                });
+            } catch (notifyErr) {
+                console.error("Notify Error:", notifyErr);
+            }
+
             router.push("/pending-approval");
 
         } catch (err: any) {

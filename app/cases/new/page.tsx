@@ -90,10 +90,10 @@ export default function NewCasePage() {
         throw new Error("ログインセッションが切れました。再ログインしてください。");
       }
 
-      // ユーザーの会社IDを取得
+      // ユーザーの会社IDと会社名を取得
       const { data: appUser } = await supabase
         .from("app_users")
-        .select("company_id")
+        .select("company_id, companies(name)")
         .eq("id", user.id)
         .single();
 
@@ -150,6 +150,23 @@ export default function NewCasePage() {
       ]);
 
       if (error) throw error;
+
+      // LINE通知APIの呼び出し（失敗しても画面遷移は止めない）
+      try {
+        await fetch('/api/notify/line', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'new_case',
+            data: {
+              targetName: name,
+              company: appUser?.companies?.name || "不明"
+            }
+          })
+        });
+      } catch (notifyErr) {
+        console.error("Notify Error:", notifyErr);
+      }
 
       setLoading(false);
       setIsSubmitted(true);
