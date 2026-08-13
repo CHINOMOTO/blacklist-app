@@ -165,11 +165,8 @@ export default function NewCasePage() {
             {/* Background Effect */}
             <div className="absolute inset-0 bg-[#00e5ff]/5 pointer-events-none"></div>
 
-            <div className="text-6xl mb-6 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">
-              🚀
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-4 tracking-wider">
-              TRANSMISSION COMPLETE
+            <h2 className="text-2xl font-bold text-white mb-6 tracking-wider">
+              登録申請完了
             </h2>
             <p className="text-slate-300 mb-8 leading-relaxed">
               登録申請が完了しました。<br />
