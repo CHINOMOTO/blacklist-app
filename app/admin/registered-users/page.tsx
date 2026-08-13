@@ -47,18 +47,24 @@ export default function RegisteredUsersPage() {
         fetchUsers();
     }, []);
 
-    // 削除機能（もし必要なら）
+    // 削除機能
     const handleDelete = async (userId: string) => {
-        if (!confirm("本当にこのユーザーを削除しますか？\n(投稿データは保持されます)")) return;
+        if (!confirm("本当にこのユーザーを削除しますか？\n※投稿データは保持されますが、ログインできなくなります。\nこの操作は取り消せません。")) return;
 
-        // Note: Edge Function等を通さずに直接Clientから削除する場合、Authユーザー削除はAdmin権限でも不可(Supabase仕様)
-        // 通常は app_users を消すとTriggerでAuthも消す、あるいはEdge Functionを呼ぶなどの実装が必要。
-        // ここではとりあえず app_users の削除を試みる実装にしておくが、
-        // 実際には前回修正したカスケード設定が効いていれば、Auth側を消す手段が必要になる。
-        // クライアントサイドからは supabase.auth.admin.deleteUser は呼べない。
-        // なので、本来は「削除」ボタンは慎重に実装すべきだが、今回はUI表示がメイン。
-        // エラーが出る可能性が高いため、今回は「削除」ボタンは実装しないでおく（リクエストは一覧表示）。
-        alert("管理画面からのユーザー削除は、Supabaseダッシュボードから行ってください。\n(今後API実装予定)");
+        try {
+            const res = await fetch(`/api/admin/users/${userId}`, {
+                method: "DELETE",
+            });
+            const data = await res.json();
+            
+            if (data.error) throw new Error(data.error);
+
+            // 成功したら一覧から削除
+            setUsers(prev => prev.filter(u => u.id !== userId));
+            alert("ユーザーを削除しました。");
+        } catch (e: any) {
+            alert("削除に失敗しました: " + e.message);
+        }
     };
 
     return (
@@ -94,6 +100,7 @@ export default function RegisteredUsersPage() {
                                             <th className="px-6 py-5 tracking-widest">会社名</th>
                                             <th className="px-6 py-5 tracking-widest">権限</th>
                                             <th className="px-6 py-5 tracking-widest text-right">ユーザーID</th>
+                                            <th className="px-6 py-5 tracking-widest text-center">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-700/50">
@@ -148,6 +155,14 @@ export default function RegisteredUsersPage() {
                                                 </td>
                                                 <td className="px-6 py-4 text-right font-mono text-xs text-slate-500">
                                                     {user.id}
+                                                </td>
+                                                <td className="px-6 py-4 text-center">
+                                                    <button
+                                                        onClick={() => handleDelete(user.id)}
+                                                        className="text-[10px] text-red-400 hover:text-white border border-red-500/30 hover:bg-red-500 px-3 py-1.5 rounded transition-colors uppercase tracking-wider font-bold"
+                                                    >
+                                                        削除
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}
