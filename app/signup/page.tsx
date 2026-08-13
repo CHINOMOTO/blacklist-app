@@ -46,20 +46,44 @@ export default function SignUpPage() {
             // 2. 会社情報の検索または作成
             let companyId: string | null = null;
 
-            // 既存の会社を検索
-            const { data: existingCompany } = await supabase
-                .from("companies")
-                .select("id")
-                .eq("name", companyName)
-                .maybeSingle();
+            // 会社名を正規化（表記ゆれ対策）
+            const normalizeCompanyName = (name: string): string => {
+                let n = name.trim();
+                // 全角スペース・半角スペースを除去
+                n = n.replace(/[\s\u3000]+/g, '');
+                // ㈱ → 株式会社
+                n = n.replace(/㈱/g, '株式会社');
+                // ㈲ → 有限会社
+                n = n.replace(/㈲/g, '有限会社');
+                // (株) → 株式会社
+                n = n.replace(/[（(]株[）)]/g, '株式会社');
+                // (有) → 有限会社
+                n = n.replace(/[（(]有[）)]/g, '有限会社');
+                // 全角英数字を半角に変換
+                n = n.replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) =>
+                    String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+                );
+                return n;
+            };
 
-            if (existingCompany) {
-                companyId = existingCompany.id;
+            const normalizedName = normalizeCompanyName(companyName);
+
+            // 既存の会社を全件取得して正規化後の名前で比較
+            const { data: allCompanies } = await supabase
+                .from("companies")
+                .select("id, name");
+
+            const matchedCompany = (allCompanies || []).find(
+                (c) => normalizeCompanyName(c.name) === normalizedName
+            );
+
+            if (matchedCompany) {
+                companyId = matchedCompany.id;
             } else {
-                // 新規作成
+                // 新規作成（ユーザーが入力したそのままの名前で保存）
                 const { data: newCompany, error: companyError } = await supabase
                     .from("companies")
-                    .insert([{ name: companyName, is_main: false }])
+                    .insert([{ name: companyName.trim(), is_main: false }])
                     .select("id")
                     .single();
 
