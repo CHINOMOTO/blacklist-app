@@ -127,7 +127,10 @@ export default function Home() {
             </button>
           </form>
 
-          <div className="text-center mt-8 border-t border-white/5 pt-4">
+          <div className="text-center mt-8 border-t border-white/5 pt-6 flex flex-col gap-3">
+            <Link href="/forgot-password" className="text-xs text-slate-400 hover:text-[#00e5ff] transition-colors">
+              パスワードをお忘れの方はこちら
+            </Link>
             <Link href="/signup" className="text-xs text-slate-500 hover:text-[#00e5ff] transition-colors">
               &gt;&gt; 新規アカウント作成はこちら
             </Link>
