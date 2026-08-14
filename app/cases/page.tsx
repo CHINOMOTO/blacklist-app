@@ -71,12 +71,18 @@ export default function CasesPage() {
     if (!confirm("本当にこのデータを削除しますか？この操作は取り消せません。")) return;
 
     try {
-      const { error } = await supabase
-        .from("blacklist_cases")
-        .delete()
-        .eq("id", id);
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
 
-      if (error) throw error;
+      const res = await fetch(`/api/cases/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      const data = await res.json();
+      
+      if (data.error) throw new Error(data.error);
 
       setCases(prev => prev.filter(c => c.id !== id));
       alert("削除しました。");

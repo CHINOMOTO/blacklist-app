@@ -86,6 +86,26 @@ export default function CaseDetailPage() {
             setLoading(true);
             setErrorMsg(null);
 
+            // 現在のログインユーザー情報を取得
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                setErrorMsg("認証エラー: ログインしてください。");
+                setLoading(false);
+                return;
+            }
+
+            const { data: currentUser } = await supabase
+                .from("app_users")
+                .select("company_id, role")
+                .eq("id", user.id)
+                .single();
+
+            if (!currentUser) {
+                setErrorMsg("ユーザー情報の取得に失敗しました。");
+                setLoading(false);
+                return;
+            }
+
             const { data, error } = await supabase
                 .from("blacklist_cases")
                 .select(
@@ -102,6 +122,13 @@ export default function CaseDetailPage() {
 
             if (!data) {
                 setErrorMsg("該当するデータが見つかりません。");
+                setLoading(false);
+                return;
+            }
+
+            // アクセス権限チェック: 管理者(admin)であるか、または自社のデータである場合のみ閲覧可能
+            if (currentUser.role !== 'admin' && data.registered_company_id !== currentUser.company_id) {
+                setErrorMsg("アクセス権限がありません。他社のデータは閲覧できません。");
                 setLoading(false);
                 return;
             }

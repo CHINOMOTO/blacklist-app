@@ -141,16 +141,26 @@ export default function RegisteredUsersPage() {
                                                                 const newRole = user.role === 'admin' ? 'viewer' : 'admin';
                                                                 if (!confirm(`「${user.display_name}」の権限を【${newRole.toUpperCase()}】に変更しますか？`)) return;
 
-                                                                const { error } = await supabase
-                                                                    .from('app_users')
-                                                                    .update({ role: newRole })
-                                                                    .eq('id', user.id);
+                                                                try {
+                                                                    const { data: { session } } = await supabase.auth.getSession();
+                                                                    const token = session?.access_token;
 
-                                                                if (error) {
-                                                                    alert("更新に失敗しました: " + error.message);
-                                                                } else {
+                                                                    const res = await fetch(`/api/admin/users/${user.id}/role`, {
+                                                                        method: "PATCH",
+                                                                        headers: {
+                                                                            "Content-Type": "application/json",
+                                                                            "Authorization": `Bearer ${token}`
+                                                                        },
+                                                                        body: JSON.stringify({ role: newRole })
+                                                                    });
+                                                                    const data = await res.json();
+                                                                    
+                                                                    if (data.error) throw new Error(data.error);
+
                                                                     setUsers(prev => prev.map(u => u.id === user.id ? { ...u, role: newRole } : u));
-                                                                    alert("権限を変更しました。");
+                                                                    alert("権限を更新しました。");
+                                                                } catch (err: any) {
+                                                                    alert("更新に失敗しました: " + err.message);
                                                                 }
                                                             }}
                                                             className="text-[10px] text-slate-400 hover:text-white border border-slate-600 hover:bg-slate-700 px-2 py-1 rounded transition-colors"
