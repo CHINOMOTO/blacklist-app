@@ -41,7 +41,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="検索・照会"
               subtitle="SEARCH"
-              description="氏名・カナ・生年月日などから要注意人物を照会します。"
+              description="氏名・カナ・生年月日などから登録データを照会します。"
               icon="🔍"
               colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
               bgGradient="group-hover:bg-[#00e5ff]/10"
