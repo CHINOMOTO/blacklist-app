@@ -11,20 +11,26 @@ export async function GET(request: Request) {
 
         const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
         const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-        const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+        const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+        // ユーザー用クライアント（トークン検証用）
         const supabaseUser = createClient(supabaseUrl, supabaseAnonKey, {
             global: { headers: { Authorization: `Bearer ${token}` } }
         });
-
-        const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
 
         const { data: { user }, error: userError } = await supabaseUser.auth.getUser();
         if (userError || !user) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const { data: appUser } = await supabaseAdmin
+        // Service Role Keyがある場合はAdmin Client経由で全データ取得
+        // ない場合はUser Client経由（RLSに従う）
+        const supabaseQuery = supabaseServiceRoleKey
+            ? createClient(supabaseUrl, supabaseServiceRoleKey)
+            : supabaseUser;
+
+        // 権限チェック
+        const { data: appUser } = await supabaseQuery
             .from("app_users")
             .select("role")
             .eq("id", user.id)
@@ -35,7 +41,7 @@ export async function GET(request: Request) {
         }
 
         // 1. Fetch from app_users
-        const { data: usersData, error: dbError } = await supabaseAdmin
+        const { data: usersData, error: dbError } = await supabaseQuery
             .from("app_users")
             .select(`
                 id,
@@ -48,23 +54,33 @@ export async function GET(request: Request) {
 
         if (dbError) throw dbError;
 
-        // 2. Fetch from auth.users (to get emails)
-        const { data: authData, error: authError } = await supabaseAdmin.auth.admin.listUsers();
-        if (authError) throw authError;
+        // 2. メールアドレスの取得を試みる（Service Role Keyがある場合のみ）
+        let emailMap: Record<string, string> = {};
+        if (supabaseServiceRoleKey) {
+            try {
+                const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+                const { data: authData, error: authError } = await supabaseAdmin.auth.admin.listUsers();
+                if (!authError && authData) {
+                    for (const au of authData.users) {
+                        emailMap[au.id] = au.email || "不明";
+                    }
+                }
+            } catch (e) {
+                console.error("Failed to fetch auth users for emails:", e);
+                // メールアドレス取得に失敗しても処理は継続
+            }
+        }
 
         // 3. Merge data
-        const mergedUsers = usersData?.map((u: any) => {
-            const authUser = authData.users.find((au) => au.id === u.id);
-            return {
-                ...u,
-                email: authUser?.email || "不明"
-            };
-        });
+        const mergedUsers = usersData?.map((u: any) => ({
+            ...u,
+            email: emailMap[u.id] || null
+        }));
 
         return NextResponse.json({ users: mergedUsers });
 
     } catch (error: any) {
         console.error("Fetch users error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
     }
 }
