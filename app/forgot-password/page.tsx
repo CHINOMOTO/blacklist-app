@@ -27,7 +27,11 @@ export default function ForgotPasswordPage() {
 
             setSuccessMsg("パスワード再設定用のメールを送信しました。メール内のリンクをクリックして新しいパスワードを設定してください。");
         } catch (err: any) {
-            setErrorMsg("エラーが発生しました: " + (err.message || "詳細不明"));
+            if (err.message?.includes("rate limit")) {
+                setErrorMsg("短期間にメールが送信されすぎました。しばらく時間をおいてから再度お試しください。");
+            } else {
+                setErrorMsg("エラーが発生しました: " + (err.message || "詳細不明"));
+            }
         } finally {
             setIsLoading(false);
         }
