@@ -59,11 +59,18 @@ export async function GET(request: Request) {
         if (supabaseServiceRoleKey) {
             try {
                 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
-                const { data: authData, error: authError } = await supabaseAdmin.auth.admin.listUsers();
-                if (!authError && authData) {
+                // ページネーションで全ユーザーを取得（デフォルトは50件まで）
+                let page = 1;
+                const perPage = 1000;
+                let hasMore = true;
+                while (hasMore) {
+                    const { data: authData, error: authError } = await supabaseAdmin.auth.admin.listUsers({ page, perPage });
+                    if (authError || !authData) break;
                     for (const au of authData.users) {
                         emailMap[au.id] = au.email || "不明";
                     }
+                    hasMore = authData.users.length === perPage;
+                    page++;
                 }
             } catch (e) {
                 console.error("Failed to fetch auth users for emails:", e);
