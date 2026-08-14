@@ -235,28 +235,6 @@ export default function AdminDashboardPage() {
                             </div>
                         </Link>
 
-                        {/* アクセスログタイル */}
-                        <Link
-                            href="/admin/audit-logs"
-                            className="block group relative p-8 rounded-3xl border border-indigo-400/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(129,140,248,0.3)] flex flex-col overflow-hidden"
-                        >
-                            <div className="absolute inset-0 bg-indigo-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                            <div className="relative z-10">
-                                <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-indigo-400/10 text-3xl shadow-inner text-indigo-400">
-                                        🛡️
-                                    </div>
-                                </div>
-
-                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-indigo-400 transition-colors duration-300">
-                                    アクセスログ（証跡）
-                                </h2>
-                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    誰がいつどのデータを検索・閲覧したかの履歴を確認します。
-                                </p>
-                            </div>
-                        </Link>
 
                     </div>
                 </div>
