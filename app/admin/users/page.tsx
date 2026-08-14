@@ -74,8 +74,8 @@ export default function AdminUsersPage() {
                             <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承認</h1>
                             <p className="text-slate-400">User Approval</p>
                         </div>
-                        <Link href="/dashboard" className="btn-secondary text-xs">
-                            ダッシュボードへ戻る
+                        <Link href="/admin" className="btn-secondary text-xs">
+                            管理者メニューへ戻る
                         </Link>
                     </div>
 
@@ -100,11 +100,8 @@ export default function AdminUsersPage() {
                                             </span>
                                         </div>
                                         <div className="text-slate-400 text-sm flex items-center gap-2">
-                                            <span className="text-slate-500">Company:</span>
+                                            <span className="text-slate-500">所属:</span>
                                             {user.companies?.name || "未所属"}
-                                        </div>
-                                        <div className="text-slate-500 text-xs mt-1">
-                                            User ID: {user.id}
                                         </div>
                                     </div>
 
