@@ -3,7 +3,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 
 export const metadata: Metadata = {
-  title: "SCOUTER - 建設業要注意人物共有システム",
+  title: "SCOUTER - 建設業界のための人材適性管理システム",
   description: "Construction Industry Scouter System",
 };
 
