@@ -160,7 +160,7 @@ export default function NewCasePage() {
             type: 'new_case',
             data: {
               targetName: name,
-              company: appUser?.companies?.name || "不明"
+              company: (appUser?.companies as any)?.name || "不明"
             }
           })
         });

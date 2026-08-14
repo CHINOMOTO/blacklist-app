@@ -14,6 +14,7 @@ type AppUser = {
         name: string;
     } | null;
     is_approved: boolean;
+    email?: string;
     created_at?: string;
 };
 
@@ -23,22 +24,21 @@ export default function RegisteredUsersPage() {
 
     const fetchUsers = async () => {
         setLoading(true);
-        // 承認済み(is_approved = true)のユーザーを取得
-        const { data, error } = await supabase
-            .from("app_users")
-            .select(`
-        id,
-        role,
-        display_name,
-        is_approved,
-        companies ( id, name )
-      `)
-            .eq("is_approved", true);
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            const token = session?.access_token;
 
-        if (error) {
+            const res = await fetch("/api/admin/users", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error);
+
+            setUsers(data.users || []);
+        } catch (error) {
             console.error(error);
-        } else {
-            setUsers((data as any) || []);
         }
         setLoading(false);
     };
@@ -105,6 +105,7 @@ export default function RegisteredUsersPage() {
                                         <tr>
                                             <th className="px-6 py-5 tracking-widest">氏名</th>
                                             <th className="px-6 py-5 tracking-widest">会社名</th>
+                                            <th className="px-6 py-5 tracking-widest">メールアドレス</th>
                                             <th className="px-6 py-5 tracking-widest">権限</th>
                                             <th className="px-6 py-5 tracking-widest text-right">ユーザーID</th>
                                             <th className="px-6 py-5 tracking-widest text-center">操作</th>
@@ -118,6 +119,9 @@ export default function RegisteredUsersPage() {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     {user.companies?.name || "未所属"}
+                                                </td>
+                                                <td className="px-6 py-4 text-xs font-mono text-slate-400">
+                                                    {user.email || "不明"}
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center gap-3">
