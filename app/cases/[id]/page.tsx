@@ -135,6 +135,26 @@ export default function CaseDetailPage() {
 
             setCaseDetail(data as CaseDetail);
 
+            // アクセスログの保存
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session?.access_token) {
+                    await fetch("/api/audit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${session.access_token}`
+                        },
+                        body: JSON.stringify({
+                            action_type: "VIEW_CASE",
+                            target_id: id
+                        })
+                    });
+                }
+            } catch (logErr) {
+                console.error("Failed to save audit log:", logErr);
+            }
+
             // Fetch Company Name if exists
             if (data.registered_company_id) {
                 const { data: comp } = await supabase

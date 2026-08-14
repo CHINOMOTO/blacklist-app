@@ -70,6 +70,17 @@ export default function DashboardPage() {
               onClick={() => router.push("/cases/new")}
             />
 
+            {/* アカウント設定 */}
+            <DashboardCard
+              title="アカウント設定"
+              subtitle="SETTINGS"
+              description="表示名やパスワードの変更、アカウント情報の確認を行います。"
+              icon="⚙️"
+              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
+              bgGradient="group-hover:bg-[#00e5ff]/10"
+              onClick={() => router.push("/settings")}
+            />
+
             {/* 管理者メニュー */}
             {isAdmin && (
               <DashboardCard

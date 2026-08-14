@@ -107,6 +107,28 @@ export default function SearchPage() {
 
       setResults(filtered);
       setHasSearched(true);
+
+      // アクセスログの保存
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.access_token) {
+          const logQuery = [nameQuery, dateQuery].filter(Boolean).join(", ");
+          await fetch("/api/audit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${session.access_token}`
+            },
+            body: JSON.stringify({
+              action_type: "SEARCH",
+              target_id: logQuery
+            })
+          });
+        }
+      } catch (logErr) {
+        console.error("Failed to save audit log:", logErr);
+      }
+
     } catch (err: any) {
       setErrorMsg(err.message || "予期せぬエラーが発生しました。");
     } finally {
