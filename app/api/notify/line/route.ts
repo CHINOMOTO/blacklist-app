@@ -24,22 +24,30 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Unknown notification type" }, { status: 400 });
         }
 
-        const res = await fetch('https://api.line.me/v2/bot/message/push', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                to: adminUserId,
-                messages: [{ type: "text", text: messageText }]
-            })
+        const targetIds = adminUserId.split(',').map(id => id.trim()).filter(id => id);
+
+        const pushPromises = targetIds.map(targetId => {
+            return fetch('https://api.line.me/v2/bot/message/push', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    to: targetId,
+                    messages: [{ type: "text", text: messageText }]
+                })
+            });
         });
 
-        if (!res.ok) {
-            const errText = await res.text();
-            console.error("LINE API Error:", errText);
-            return NextResponse.json({ error: "Failed to send LINE notification" }, { status: 500 });
+        const results = await Promise.all(pushPromises);
+        
+        for (const res of results) {
+            if (!res.ok) {
+                const errText = await res.text();
+                console.error("LINE API Error:", errText);
+                // 1つでも失敗したらエラーを返すかログだけ残すか。ここでは全体としては止めないようにする。
+            }
         }
 
         return NextResponse.json({ success: true });
