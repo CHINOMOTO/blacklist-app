@@ -465,15 +465,9 @@ export default function AdminCaseDetailPage() {
           {showSuccessModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in">
               <div className={`p-10 rounded-3xl max-w-sm w-full text-center border-t-4 shadow-2xl ${showSuccessModal.type === 'approved' ? 'border-[#00e5ff] shadow-[0_0_50px_rgba(0,229,255,0.2)]' : 'border-red-500 shadow-[0_0_50px_rgba(239,68,68,0.2)]'}`}>
-                <div className="text-6xl mb-4">
-                  {showSuccessModal.type === 'approved' ? '✅' : '🚫'}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {showSuccessModal.type === 'approved' ? 'APPROVAL COMPLETE' : 'REJECTION COMPLETE'}
-                </h3>
-                <p className="text-slate-400 mb-8">
+                <h3 className="text-xl font-bold text-white mb-8">
                   {showSuccessModal.type === 'approved' ? '申請が承認されました。' : '申請が却下されました。'}
-                </p>
+                </h3>
                 <button
                   onClick={() => router.push("/admin/cases")}
                   className={`w-full py-3 rounded-lg font-bold text-black ${showSuccessModal.type === 'approved' ? 'bg-[#00e5ff] hover:bg-[#00e5ff]/80' : 'bg-red-500 hover:bg-red-400 text-white'}`}
