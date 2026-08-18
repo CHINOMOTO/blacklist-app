@@ -40,44 +40,44 @@ export default function DashboardPage() {
             {/* 検索 */}
             <DashboardCard
               title="検索・照会"
-              subtitle="SEARCH"
-              description="氏名・カナ・生年月日などから登録データを照会します。"
+              subtitle="検索"
+              description="氏名やカナなどから登録データを検索します。"
               icon="🔍"
-              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
-              bgGradient="group-hover:bg-[#00e5ff]/10"
+              colorClass="group-hover:text-[#00e5ff]"
+              bgGradient="from-[#00e5ff]/20 to-transparent"
               onClick={() => router.push("/search")}
             />
 
             {/* 一覧 */}
             <DashboardCard
               title="登録データ一覧"
-              subtitle="LIST"
-              description="現在登録されている応募者属性の全データを確認します。"
+              subtitle="一覧"
+              description="現在登録されている全データを確認します。"
               icon="📋"
-              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
-              bgGradient="group-hover:bg-[#00e5ff]/10"
+              colorClass="group-hover:text-purple-400"
+              bgGradient="from-purple-500/20 to-transparent"
               onClick={() => router.push("/cases")}
             />
 
             {/* 新規登録 */}
             <DashboardCard
               title="新規登録"
-              subtitle="REGISTER"
-              description="新たな対象者を応募者属性リストに追加登録します。"
-              icon="✍️"
-              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
-              bgGradient="group-hover:bg-[#00e5ff]/10"
+              subtitle="登録"
+              description="新たな対象者を登録データに追加します。"
+              icon="📝"
+              colorClass="group-hover:text-pink-400"
+              bgGradient="from-pink-500/20 to-transparent"
               onClick={() => router.push("/cases/new")}
             />
 
             {/* アカウント設定 */}
             <DashboardCard
               title="アカウント設定"
-              subtitle="SETTINGS"
-              description="表示名やパスワードの変更、アカウント情報の確認を行います。"
+              subtitle="設定"
+              description="ログインパスワードの変更や、アカウントの確認を行います。"
               icon="⚙️"
-              colorClass="group-hover:text-[#00e5ff] group-hover:border-[#00e5ff]/50"
-              bgGradient="group-hover:bg-[#00e5ff]/10"
+              colorClass="group-hover:text-emerald-400"
+              bgGradient="from-emerald-500/20 to-transparent"
               onClick={() => router.push("/settings")}
             />
 
@@ -85,7 +85,7 @@ export default function DashboardPage() {
             {isAdmin && (
               <DashboardCard
                 title="管理者メニュー"
-                subtitle="ADMIN"
+                subtitle="管理"
                 description="新規登録申請やユーザーアカウントの承認・管理を行います。"
                 icon="⚡"
                 isAdmin

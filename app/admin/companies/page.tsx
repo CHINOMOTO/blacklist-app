@@ -63,7 +63,7 @@ export default function AdminCompaniesPage() {
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
                             <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">会社管理</h1>
-                            <p className="text-slate-300 font-medium">Company List</p>
+                            <p className="text-slate-300 font-medium">登録されている加盟企業の一覧です</p>
                         </div>
                         <div className="flex gap-3 items-center">
                             <Link href="/dashboard" className="btn-secondary text-xs h-10 px-4 flex items-center">

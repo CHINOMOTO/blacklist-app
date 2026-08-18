@@ -234,7 +234,7 @@ export default function NewCasePage() {
 
           <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-3xl font-bold text-white mb-2">新規登録申請</h1>
-            <p className="text-slate-400">New Registration</p>
+            <p className="text-slate-400">新しいデータを登録します</p>
           </div>
 
           <div className="glass-panel rounded-2xl p-6 md:p-10 animate-fade-in delay-100">

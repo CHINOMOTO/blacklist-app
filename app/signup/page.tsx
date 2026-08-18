@@ -161,7 +161,7 @@ export default function SignUpPage() {
                             新規アカウント作成
                         </h1>
                         <p className="text-slate-400 text-sm">
-                            Create Account
+                            アカウント情報を入力してください
                         </p>
                     </div>
 

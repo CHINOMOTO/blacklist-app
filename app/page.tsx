@@ -84,7 +84,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-[#00e5ff] tracking-widest uppercase mb-1">
               ログイン
             </h2>
-            <p className="text-xs text-slate-500">System Login</p>
+            <p className="text-xs text-slate-500">アカウント情報を入力してください</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

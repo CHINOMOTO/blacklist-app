@@ -86,7 +86,7 @@ export default function UpdatePasswordPage() {
                         新パスワードの設定
                     </h1>
                     <p className="text-slate-400 text-sm">
-                        Update Password
+                        8文字以上の新しいパスワードを入力してください
                     </p>
                 </div>
 

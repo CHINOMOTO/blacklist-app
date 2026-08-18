@@ -126,7 +126,7 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
                             <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">アカウント設定</h1>
-                            <p className="text-slate-400">Account Settings</p>
+                            <p className="text-slate-400">登録情報やパスワードの変更を行います</p>
                         </div>
                         <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
                             ダッシュボードへ戻る
