@@ -83,10 +83,10 @@ export default function UpdatePasswordPage() {
             <main className="w-full max-w-lg flex flex-col items-center justify-center relative z-10 animate-fade-in">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                        新しいパスワードの設定
+                        新パスワードの設定
                     </h1>
                     <p className="text-slate-400 text-sm">
-                        8文字以上の新しいパスワードを入力してください
+                        Update Password
                     </p>
                 </div>
 

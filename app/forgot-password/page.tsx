@@ -50,7 +50,7 @@ export default function ForgotPasswordPage() {
                         パスワード再発行
                     </h1>
                     <p className="text-slate-400 text-sm">
-                        登録済みのメールアドレスを入力してください
+                        Reset Password
                     </p>
                 </div>
 

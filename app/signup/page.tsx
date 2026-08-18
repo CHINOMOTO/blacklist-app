@@ -158,10 +158,10 @@ export default function SignUpPage() {
                             <span className="text-2xl filter drop-shadow-lg">✨</span>
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                            Create Account
+                            新規アカウント作成
                         </h1>
                         <p className="text-slate-400 text-sm">
-                            利用申請フォームを入力してください
+                            Create Account
                         </p>
                     </div>
 

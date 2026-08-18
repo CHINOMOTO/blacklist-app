@@ -81,10 +81,10 @@ export default function Home() {
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
           <div className="mb-6 md:mb-8 text-center">
-            <h2 className="text-xs md:text-sm font-bold text-[#00e5ff] tracking-[0.2em] uppercase mb-1">
-              System Login
+            <h2 className="text-xl font-bold text-[#00e5ff] tracking-widest uppercase mb-1">
+              ログイン
             </h2>
-            <p className="text-xs text-slate-500">アカウント情報を入力してください</p>
+            <p className="text-xs text-slate-500">System Login</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

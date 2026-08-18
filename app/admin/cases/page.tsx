@@ -48,8 +48,8 @@ export default function AdminCaseList() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">承認待ち案件</h1>
-              <p className="text-[#00e5ff] font-medium">審査が必要な申請一覧</p>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">承認待ち一覧</h1>
+              <p className="text-[#00e5ff] font-medium">Pending Approvals</p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
               戻る
