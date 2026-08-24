@@ -189,7 +189,7 @@ export default function Navigation() {
                                     <div className="relative inline-block">
                                         <Link
                                             href="/admin"
-                                            className={`ml-1 px-2 py-1.5 rounded-none text-xs font-bold border transition-all uppercase tracking-wider whitespace-nowrap ${pathname.startsWith("/admin")
+                                            className={`ml-2 px-3 py-1.5 rounded-none text-sm font-bold border transition-all uppercase tracking-wider whitespace-nowrap ${pathname.startsWith("/admin")
                                                 ? "bg-[#00e5ff]/20 border-[#00e5ff] text-[#00e5ff] shadow-[0_0_10px_rgba(0,255,65,0.3)]"
                                                 : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
                                                 }`}
@@ -208,11 +208,11 @@ export default function Navigation() {
                     )}
 
                     <div className="hidden md:block">
-                        <div className="ml-2 flex items-center md:ml-3 gap-2">
+                        <div className="ml-4 flex items-center md:ml-6 gap-4">
                             {session && userName && (
                                 <Link
                                     href="/profile"
-                                    className="text-[10px] text-[#00e5ff]/80 bg-[#00e5ff]/10 px-2 py-1 border border-[#00e5ff]/30 font-mono tracking-wider hover:bg-[#00e5ff]/20 hover:border-[#00e5ff]/50 transition-all cursor-pointer whitespace-nowrap max-w-[180px] truncate"
+                                    className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider hover:bg-[#00e5ff]/20 hover:border-[#00e5ff]/50 transition-all cursor-pointer whitespace-nowrap max-w-[200px] truncate"
                                 >
                                     <span className="font-bold">{userName}</span>
                                 </Link>
@@ -283,7 +283,7 @@ function NavLink({ href, children, active }: { href: string, children: React.Rea
     return (
         <Link
             href={href}
-            className={`px-2 py-2 rounded-none text-xs font-bold tracking-wider transition-all duration-200 border-b-2 whitespace-nowrap ${active
+            className={`px-3 py-2 rounded-none text-sm font-bold tracking-wider transition-all duration-200 border-b-2 whitespace-nowrap ${active
                 ? "border-[#00e5ff] text-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_8px_rgba(0,255,65,0.2)]"
                 : "border-transparent text-[#00e5ff]/60 hover:text-[#00e5ff] hover:bg-[#00e5ff]/5"
                 }`}
