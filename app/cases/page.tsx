@@ -23,7 +23,15 @@ export default function CasesPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("created_desc");
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: "asc" | "desc" }>({ key: "created_at", direction: "desc" });
+
+  const handleSort = (key: string) => {
+    let direction: "asc" | "desc" = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
 
   const filteredAndSortedCases = useMemo(() => {
     let result = [...cases];
@@ -37,22 +45,25 @@ export default function CasesPage() {
     }
 
     result.sort((a, b) => {
-      switch (sortBy) {
-        case "created_desc":
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        case "created_asc":
-          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-        case "name_asc":
-          return (a.full_name || "").localeCompare(b.full_name || "");
-        case "name_desc":
-          return (b.full_name || "").localeCompare(a.full_name || "");
+      const dir = sortConfig.direction === "asc" ? 1 : -1;
+      switch (sortConfig.key) {
+        case "created_at":
+          return (new Date(a.created_at).getTime() - new Date(b.created_at).getTime()) * dir;
+        case "full_name":
+          return (a.full_name || "").localeCompare(b.full_name || "") * dir;
+        case "birth_date":
+          return (a.birth_date || "").localeCompare(b.birth_date || "") * dir;
+        case "reason_text":
+          return (a.reason_text || "").localeCompare(b.reason_text || "") * dir;
+        case "status":
+          return (a.status || "").localeCompare(b.status || "") * dir;
         default:
           return 0;
       }
     });
 
     return result;
-  }, [cases, searchTerm, sortBy]);
+  }, [cases, searchTerm, sortConfig]);
 
   useEffect(() => {
     const init = async () => {
@@ -123,6 +134,23 @@ export default function CasesPage() {
     }
   };
 
+  const renderSortableHeader = (label: string, key: string, isRightAlign = false) => {
+    const isActive = sortConfig.key === key;
+    return (
+      <th 
+        className={`px-6 py-5 tracking-widest cursor-pointer hover:bg-slate-800/50 transition-colors select-none ${isRightAlign ? 'text-right' : ''}`}
+        onClick={() => handleSort(key)}
+      >
+        <div className={`flex items-center gap-2 ${isRightAlign ? 'justify-end' : ''}`}>
+          {label}
+          <span className={`text-[10px] ${isActive ? 'text-[#00e5ff]' : 'text-slate-600'}`}>
+            {isActive ? (sortConfig.direction === 'asc' ? '▲' : '▼') : '↕'}
+          </span>
+        </div>
+      </th>
+    );
+  };
+
   return (
     <RequireAuth>
       <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
@@ -152,8 +180,8 @@ export default function CasesPage() {
 
           {/* Controls Bar */}
           {!isLoading && cases.length > 0 && (
-            <div className="flex flex-col md:flex-row gap-4 mb-6 animate-fade-in delay-100">
-              <div className="flex-1 relative">
+            <div className="flex gap-4 mb-6 animate-fade-in delay-100">
+              <div className="flex-1 relative max-w-md">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
                 <input
                   type="text"
@@ -162,18 +190,6 @@ export default function CasesPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-slate-500 transition-colors"
                 />
-              </div>
-              <div className="md:w-64">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-slate-500 transition-colors cursor-pointer"
-                >
-                  <option value="created_desc">登録日（新しい順）</option>
-                  <option value="created_asc">登録日（古い順）</option>
-                  <option value="name_asc">氏名（昇順）</option>
-                  <option value="name_desc">氏名（降順）</option>
-                </select>
               </div>
             </div>
           )}
@@ -193,11 +209,11 @@ export default function CasesPage() {
                 <table className="w-full text-left text-sm text-slate-300">
                   <thead className="bg-slate-900/60 text-xs uppercase font-bold text-slate-400">
                     <tr>
-                      <th className="px-6 py-5 tracking-widest">氏名</th>
-                      <th className="px-6 py-5 tracking-widest">生年月日</th>
-                      <th className="px-6 py-5 tracking-widest">登録理由</th>
-                      <th className="px-6 py-5 tracking-widest">ステータス</th>
-                      <th className="px-6 py-5 tracking-widest text-right">登録日</th>
+                      {renderSortableHeader("氏名", "full_name")}
+                      {renderSortableHeader("生年月日", "birth_date")}
+                      {renderSortableHeader("登録理由", "reason_text")}
+                      {renderSortableHeader("ステータス", "status")}
+                      {renderSortableHeader("登録日", "created_at", true)}
                       {isAdmin && <th className="px-6 py-5 tracking-widest text-right">操作</th>}
                     </tr>
                   </thead>
