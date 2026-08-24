@@ -42,7 +42,7 @@ export default function NewCompanyPage() {
                         <Link href="/admin/companies" className="text-slate-500 hover:text-slate-300 text-sm flex items-center gap-1 mb-4">
                             キャンセルして一覧へ戻る
                         </Link>
-                        <h1 className="text-3xl font-bold text-white mb-2">新規会社登録</h1>
+                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">新規会社登録</h1>
                         <p className="text-slate-400">新しいグループ会社をシステムに追加します</p>
                     </div>
 

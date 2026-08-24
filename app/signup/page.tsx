@@ -157,7 +157,7 @@ export default function SignUpPage() {
                         <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 mb-4 border border-white/5">
                             <span className="text-2xl filter">✨</span>
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
                             新規アカウント作成
                         </h1>
                         <p className="text-slate-400 text-sm">

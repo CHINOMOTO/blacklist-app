@@ -79,7 +79,7 @@ export default function RegisteredUsersPage() {
 
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2">登録済みユーザー一覧</h1>
+                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">登録済みユーザー一覧</h1>
                             <p className="text-slate-400">現在システムに登録されているユーザーの一覧です</p>
                         </div>
                         <Link href="/admin" className="btn-secondary text-xs">

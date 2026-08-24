@@ -71,7 +71,7 @@ export default function AdminUsersPage() {
 
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承認</h1>
+                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">新規ユーザー承認</h1>
                             <p className="text-slate-400">新規利用申請の確認と承認を行います</p>
                         </div>
                         <Link href="/admin" className="btn-secondary text-xs">

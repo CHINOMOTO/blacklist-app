@@ -29,11 +29,11 @@ export default function DashboardPage() {
       <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
         <div className="max-w-5xl w-full animate-fade-in relative z-10">
 
-          <div className="mb-12 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
+          <div className="mb-12">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
               ダッシュボード
             </h1>
-
+            <p className="text-slate-400 font-medium">SCOUTERシステムのメインメニュー</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

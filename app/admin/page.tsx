@@ -69,9 +69,12 @@ export default function AdminDashboardPage() {
         <RequireAdmin>
             <div className="min-h-screen text-slate-100 flex items-center justify-center pt-24 pb-12">
                 <div className="max-w-5xl w-full mx-4">
-                    <h1 className="text-3xl font-bold text-[#00e5ff] mb-8 text-center">
-                        管理者ダッシュボード
-                    </h1>
+                    <div className="mb-12">
+                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+                            管理者ダッシュボード
+                        </h1>
+                        <p className="text-slate-400 font-medium">システムの各種管理と設定を行います</p>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {/* 承認待ちタイル */}

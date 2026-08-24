@@ -233,7 +233,7 @@ export default function NewCasePage() {
         <div className="max-w-3xl w-full">
 
           <div className="mb-8 text-center animate-fade-in">
-            <h1 className="text-3xl font-bold text-white mb-2">新規登録申請</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">新規登録申請</h1>
             <p className="text-slate-400">新しいデータを登録します</p>
           </div>
 

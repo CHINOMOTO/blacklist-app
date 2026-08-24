@@ -132,7 +132,7 @@ export default function ContactPage() {
                     {/* ヘッダー */}
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
                                 お問い合わせ
                             </h1>
                             <p className="text-slate-400">

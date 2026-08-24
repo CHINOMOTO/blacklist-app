@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
 
             <main className="w-full max-w-lg flex flex-col items-center justify-center relative z-10 animate-fade-in">
                 <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
                         パスワード再発行
                     </h1>
                     <p className="text-slate-400 text-sm">

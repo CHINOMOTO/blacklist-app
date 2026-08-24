@@ -189,7 +189,7 @@ export default function EditCasePage() {
                 <div className="max-w-3xl w-full">
 
                     <div className="mb-8 text-center animate-fade-in">
-                        <h1 className="text-3xl font-bold text-white mb-2">登録情報の編集</h1>
+                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">登録情報の編集</h1>
                         <p className="text-slate-400">登録データの編集（管理者のみ）</p>
                     </div>
 

@@ -265,7 +265,7 @@ export default function AdminCaseDetailPage() {
                 >
                   一覧へ戻る
                 </Link>
-                <h1 className="text-xl font-bold text-[#00e5ff]">
+                <h1 className="text-xl font-bold text-white">
                   承認・却下（詳細）
                 </h1>
               </div>
