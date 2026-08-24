@@ -28,7 +28,6 @@ h6 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 /* Components - Standard CSS to avoid @apply build issues */
@@ -49,7 +48,6 @@ h6 {
 .btn-primary:hover {
   background-color: var(--color-scouter-green);
   color: black;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
 }
 
 .btn-secondary {
@@ -82,11 +80,10 @@ h6 {
 
 .glass-panel {
   position: relative;
-  background-color: rgba(6, 11, 13, 0.9);
-  border: 1px solid rgba(0, 229, 255, 0.3);
+  background-color: rgba(15, 23, 42, 0.6); /* Tailwind slate-900 with opacity */
+  border: 1px solid rgba(148, 163, 184, 0.2); /* Tailwind slate-400 with opacity */
   padding: 1.5rem;
   backdrop-filter: blur(4px);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05);
 }
 
 
