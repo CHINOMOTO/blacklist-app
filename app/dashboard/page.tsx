@@ -40,7 +40,6 @@ export default function DashboardPage() {
             {/* 検索 */}
             <DashboardCard
               title="検索・照会"
-              subtitle="検索"
               description="氏名やカナなどから登録データを検索します。"
               icon="🔍"
               colorClass="group-hover:text-[#00e5ff]"
@@ -51,7 +50,6 @@ export default function DashboardPage() {
             {/* 一覧 */}
             <DashboardCard
               title="登録データ一覧"
-              subtitle="一覧"
               description="現在登録されている全データを確認します。"
               icon="📋"
               colorClass="group-hover:text-purple-400"
@@ -62,7 +60,6 @@ export default function DashboardPage() {
             {/* 新規登録 */}
             <DashboardCard
               title="新規登録"
-              subtitle="登録"
               description="新たな対象者を登録データに追加します。"
               icon="📝"
               colorClass="group-hover:text-pink-400"
@@ -73,7 +70,6 @@ export default function DashboardPage() {
             {/* アカウント設定 */}
             <DashboardCard
               title="アカウント設定"
-              subtitle="設定"
               description="ログインパスワードの変更や、アカウントの確認を行います。"
               icon="⚙️"
               colorClass="group-hover:text-emerald-400"
@@ -84,7 +80,6 @@ export default function DashboardPage() {
             {/* お問い合わせ */}
             <DashboardCard
               title="お問い合わせ"
-              subtitle="連絡"
               description="システムの不具合や機能要望など、管理者にご連絡いただけます。"
               icon="📩"
               colorClass="group-hover:text-amber-400"
@@ -96,8 +91,7 @@ export default function DashboardPage() {
             {isAdmin && (
               <DashboardCard
                 title="管理者メニュー"
-                subtitle="管理"
-                description="新規登録申請やユーザーアカウントの承認・管理を行います。"
+              description="新規登録申請やユーザーアカウントの承認・管理を行います。"
                 icon="⚡"
                 isAdmin
                 onClick={() => router.push("/admin")}
@@ -111,9 +105,9 @@ export default function DashboardPage() {
 }
 
 function DashboardCard({
-  title, subtitle, description, icon, onClick, colorClass = "", bgGradient = "", isAdmin = false
+  title, description, icon, onClick, colorClass = "", bgGradient = "", isAdmin = false
 }: {
-  title: string, subtitle: string, description: string, icon: string, onClick: () => void, colorClass?: string, bgGradient?: string, isAdmin?: boolean
+  title: string, description: string, icon: string, onClick: () => void, colorClass?: string, bgGradient?: string, isAdmin?: boolean
 }) {
   return (
     <button
@@ -138,10 +132,6 @@ function DashboardCard({
         <h3 className={`text-2xl font-bold text-slate-100 mb-2 transition-colors duration-300 ${colorClass} ${isAdmin ? 'text-[#00e5ff]' : ''}`}>
           {title}
         </h3>
-        <div className="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">
-          {subtitle}
-        </div>
-
         <p className="text-sm text-slate-400 leading-relaxed mt-auto group-hover:text-slate-200 transition-colors duration-300">
           {description}
         </p>
