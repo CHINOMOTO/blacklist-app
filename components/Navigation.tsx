@@ -171,19 +171,19 @@ export default function Navigation() {
                         <div className="hidden md:block">
                             <div className="ml-6 flex items-baseline space-x-1">
                                 <NavLink href="/dashboard" active={pathname === "/dashboard"}>
-                                    ホーム
+                                    ダッシュボード
                                 </NavLink>
                                 <NavLink href="/search" active={pathname === "/search"}>
                                     検索
                                 </NavLink>
                                 <NavLink href="/cases" active={pathname.startsWith("/cases") && pathname !== "/cases/new"}>
-                                    一覧
+                                    登録データ一覧
                                 </NavLink>
                                 <NavLink href="/cases/new" active={pathname === "/cases/new"}>
-                                    登録
+                                    新規登録
                                 </NavLink>
                                 <NavLink href="/contact" active={pathname === "/contact"}>
-                                    問合せ
+                                    お問い合わせ
                                 </NavLink>
                                 {isAdmin && (
                                     <div className="relative inline-block">
@@ -194,7 +194,7 @@ export default function Navigation() {
                                                 : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
                                                 }`}
                                         >
-                                            管理
+                                            管理メニュー
                                         </Link>
                                         {notificationCount > 0 && (
                                             <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg animate-pulse ring-2 ring-black">
