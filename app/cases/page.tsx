@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import { FolderOpen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
@@ -275,7 +276,7 @@ export default function CasesPage() {
                     {cases.length === 0 && searchTerm === "" && (
                       <tr>
                         <td colSpan={isAdmin ? 6 : 5} className="px-6 py-20 text-center text-slate-500">
-                          <div className="text-4xl mb-3 opacity-30">📂</div>
+                          <FolderOpen className="w-12 h-12 mx-auto mb-3 text-slate-500 opacity-50" strokeWidth={1} />
                           <p>データがまだありません</p>
                         </td>
                       </tr>

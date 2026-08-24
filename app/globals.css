@@ -80,10 +80,10 @@ h6 {
 
 .glass-panel {
   position: relative;
-  background-color: rgba(15, 23, 42, 0.6); /* Tailwind slate-900 with opacity */
-  border: 1px solid rgba(148, 163, 184, 0.2); /* Tailwind slate-400 with opacity */
-  padding: 1.5rem;
-  backdrop-filter: blur(4px);
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
 }
 
 

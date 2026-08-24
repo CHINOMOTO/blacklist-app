@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
+import { Search, ClipboardList, UserPlus, Settings, Mail, ShieldAlert } from "lucide-react";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="検索・照会"
               description="氏名やカナなどから登録データを検索します。"
-              icon="🔍"
+              icon={<Search className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-[#00e5ff]"
               bgGradient="from-[#00e5ff]/20 to-transparent"
               onClick={() => router.push("/search")}
@@ -51,7 +52,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="登録データ一覧"
               description="現在登録されている全データを確認します。"
-              icon="📋"
+              icon={<ClipboardList className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-purple-400"
               bgGradient="from-purple-500/20 to-transparent"
               onClick={() => router.push("/cases")}
@@ -61,7 +62,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="新規登録"
               description="新たな対象者を登録データに追加します。"
-              icon="📝"
+              icon={<UserPlus className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-pink-400"
               bgGradient="from-pink-500/20 to-transparent"
               onClick={() => router.push("/cases/new")}
@@ -71,7 +72,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="アカウント設定"
               description="ログインパスワードの変更や、アカウントの確認を行います。"
-              icon="⚙️"
+              icon={<Settings className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-emerald-400"
               bgGradient="from-emerald-500/20 to-transparent"
               onClick={() => router.push("/settings")}
@@ -81,7 +82,7 @@ export default function DashboardPage() {
             <DashboardCard
               title="お問い合わせ"
               description="システムの不具合や機能要望など、管理者にご連絡いただけます。"
-              icon="📩"
+              icon={<Mail className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-amber-400"
               bgGradient="from-amber-500/20 to-transparent"
               onClick={() => router.push("/contact")}
@@ -92,7 +93,7 @@ export default function DashboardPage() {
               <DashboardCard
                 title="管理者メニュー"
               description="新規登録申請やユーザーアカウントの承認・管理を行います。"
-                icon="⚡"
+                icon={<ShieldAlert className="w-10 h-10" strokeWidth={1.5} />}
                 isAdmin
                 onClick={() => router.push("/admin")}
               />
@@ -107,7 +108,7 @@ export default function DashboardPage() {
 function DashboardCard({
   title, description, icon, onClick, colorClass = "", bgGradient = "", isAdmin = false
 }: {
-  title: string, description: string, icon: string, onClick: () => void, colorClass?: string, bgGradient?: string, isAdmin?: boolean
+  title: string, description: string, icon: React.ReactNode, onClick: () => void, colorClass?: string, bgGradient?: string, isAdmin?: boolean
 }) {
   return (
     <button
@@ -119,7 +120,7 @@ function DashboardCard({
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start justify-between mb-6 w-full">
-          <div className={`p-4 rounded-2xl text-4xl transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-[#00e5ff]/20' : 'bg-white/5'}`}>
+          <div className={`p-4 rounded-2xl transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-[#00e5ff]/20' : 'bg-white/5'}`}>
             {icon}
           </div>
           {isAdmin && (

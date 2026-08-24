@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ClipboardCheck, UserCheck, Building, Users, MessageSquare, Mail } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { RequireAdmin } from "@/components/RequireAdmin";
 
@@ -80,15 +81,15 @@ export default function AdminDashboardPage() {
                         {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
-                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:border-slate-500/30 hover:bg-slate-800/20 flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
-                                        📋
-                                    </div>
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff]">
+     <ClipboardCheck className="w-8 h-8" strokeWidth={1.5} />
+   </div>
                                     <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Action Required
                                     </span>
@@ -121,15 +122,15 @@ export default function AdminDashboardPage() {
                         {/* ユーザー承認タイル */}
                         <Link
                             href="/admin/users"
-                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:border-slate-500/30 hover:bg-slate-800/20 flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
-                                        👤
-                                    </div>
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff]">
+     <UserCheck className="w-8 h-8" strokeWidth={1.5} />
+   </div>
                                     <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Review
                                     </span>
@@ -164,15 +165,15 @@ export default function AdminDashboardPage() {
                         {/* 登録済みユーザー一覧タイル */}
                         <Link
                             href="/admin/registered-users"
-                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:border-slate-500/30 hover:bg-slate-800/20 flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
-                                        👥
-                                    </div>
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff]">
+     <Users className="w-8 h-8" strokeWidth={1.5} />
+   </div>
                                     <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Member
                                     </span>
@@ -207,15 +208,15 @@ export default function AdminDashboardPage() {
                         {/* 会社管理タイル */}
                         <Link
                             href="/admin/companies"
-                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:border-slate-500/30 hover:bg-slate-800/20 flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
-                                        🏢
-                                    </div>
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff]">
+     <Building className="w-8 h-8" strokeWidth={1.5} />
+   </div>
                                     <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         System
                                     </span>
@@ -250,15 +251,15 @@ export default function AdminDashboardPage() {
                         {/* お問い合わせ管理タイル */}
                         <Link
                             href="/admin/inquiries"
-                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:border-slate-500/30 hover:bg-slate-800/20 flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
-                                        📩
-                                    </div>
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff]">
+     <Mail className="w-8 h-8" strokeWidth={1.5} />
+   </div>
                                     <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Support
                                     </span>
