@@ -169,32 +169,32 @@ export default function Navigation() {
 
                     {session && (
                         <div className="hidden md:block">
-                            <div className="ml-10 flex items-baseline space-x-2">
+                            <div className="ml-6 flex items-baseline space-x-1">
                                 <NavLink href="/dashboard" active={pathname === "/dashboard"}>
-                                    ダッシュボード
+                                    ホーム
                                 </NavLink>
                                 <NavLink href="/search" active={pathname === "/search"}>
                                     検索
                                 </NavLink>
                                 <NavLink href="/cases" active={pathname.startsWith("/cases") && pathname !== "/cases/new"}>
-                                    登録データ一覧
+                                    一覧
                                 </NavLink>
                                 <NavLink href="/cases/new" active={pathname === "/cases/new"}>
-                                    新規登録
+                                    登録
                                 </NavLink>
                                 <NavLink href="/contact" active={pathname === "/contact"}>
-                                    お問い合わせ
+                                    問合せ
                                 </NavLink>
                                 {isAdmin && (
                                     <div className="relative inline-block">
                                         <Link
                                             href="/admin"
-                                            className={`ml-2 px-3 py-1.5 rounded-none text-sm font-bold border transition-all uppercase tracking-wider ${pathname.startsWith("/admin")
+                                            className={`ml-1 px-2 py-1.5 rounded-none text-xs font-bold border transition-all uppercase tracking-wider whitespace-nowrap ${pathname.startsWith("/admin")
                                                 ? "bg-[#00e5ff]/20 border-[#00e5ff] text-[#00e5ff] shadow-[0_0_10px_rgba(0,255,65,0.3)]"
                                                 : "border-[#00e5ff]/30 text-[#00e5ff]/70 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
                                                 }`}
                                         >
-                                            管理メニュー
+                                            管理
                                         </Link>
                                         {notificationCount > 0 && (
                                             <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg animate-pulse ring-2 ring-black">
@@ -208,13 +208,12 @@ export default function Navigation() {
                     )}
 
                     <div className="hidden md:block">
-                        <div className="ml-4 flex items-center md:ml-6 gap-4">
+                        <div className="ml-2 flex items-center md:ml-3 gap-2">
                             {session && userName && (
                                 <Link
                                     href="/profile"
-                                    className="text-xs text-[#00e5ff]/80 bg-[#00e5ff]/10 px-3 py-1 border border-[#00e5ff]/30 font-mono tracking-wider hover:bg-[#00e5ff]/20 hover:border-[#00e5ff]/50 transition-all cursor-pointer"
+                                    className="text-[10px] text-[#00e5ff]/80 bg-[#00e5ff]/10 px-2 py-1 border border-[#00e5ff]/30 font-mono tracking-wider hover:bg-[#00e5ff]/20 hover:border-[#00e5ff]/50 transition-all cursor-pointer whitespace-nowrap max-w-[180px] truncate"
                                 >
-                                    <span className="mr-1 opacity-50">ユーザー:</span>
                                     <span className="font-bold">{userName}</span>
                                 </Link>
                             )}
@@ -284,7 +283,7 @@ function NavLink({ href, children, active }: { href: string, children: React.Rea
     return (
         <Link
             href={href}
-            className={`px-3 py-2 rounded-none text-sm font-bold tracking-wider transition-all duration-200 border-b-2 ${active
+            className={`px-2 py-2 rounded-none text-xs font-bold tracking-wider transition-all duration-200 border-b-2 whitespace-nowrap ${active
                 ? "border-[#00e5ff] text-[#00e5ff] bg-[#00e5ff]/10 shadow-[0_0_8px_rgba(0,255,65,0.2)]"
                 : "border-transparent text-[#00e5ff]/60 hover:text-[#00e5ff] hover:bg-[#00e5ff]/5"
                 }`}
