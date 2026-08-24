@@ -77,16 +77,16 @@ export default function AdminDashboardPage() {
                         {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
-                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
                                         📋
                                     </div>
-                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Action Required
                                     </span>
                                 </div>
@@ -99,7 +99,7 @@ export default function AdminDashboardPage() {
                                 </p>
 
                                 <div className="mt-auto">
-                                    <div className="text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]">
+                                    <div className="text-5xl font-bold text-white -[0_0_10px_rgba(0,229,255,0.5)]">
                                         {loading ? (
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
@@ -118,16 +118,16 @@ export default function AdminDashboardPage() {
                         {/* ユーザー承認タイル */}
                         <Link
                             href="/admin/users"
-                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
                                         👤
                                     </div>
-                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Review
                                     </span>
                                 </div>
@@ -145,7 +145,7 @@ export default function AdminDashboardPage() {
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
                                             <>
-                                                <span className={pendingUserCount && pendingUserCount > 0 ? "text-[#00e5ff] drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]" : ""}>
+                                                <span className={pendingUserCount && pendingUserCount > 0 ? "text-[#00e5ff] -[0_0_10px_rgba(0,229,255,0.5)]" : ""}>
                                                     {pendingUserCount ?? 0}
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
@@ -161,16 +161,16 @@ export default function AdminDashboardPage() {
                         {/* 登録済みユーザー一覧タイル */}
                         <Link
                             href="/admin/registered-users"
-                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
                                         👥
                                     </div>
-                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Member
                                     </span>
                                 </div>
@@ -204,16 +204,16 @@ export default function AdminDashboardPage() {
                         {/* 会社管理タイル */}
                         <Link
                             href="/admin/companies"
-                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
                                         🏢
                                     </div>
-                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         System
                                     </span>
                                 </div>
@@ -247,16 +247,16 @@ export default function AdminDashboardPage() {
                         {/* お問い合わせ管理タイル */}
                         <Link
                             href="/admin/inquiries"
-                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                            className="block group relative p-8 rounded-3xl border border-slate-700/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl text-[#00e5ff]">
                                         📩
                                     </div>
-                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
                                         Support
                                     </span>
                                 </div>
@@ -274,7 +274,7 @@ export default function AdminDashboardPage() {
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
                                             <>
-                                                <span className={inquiryCount && inquiryCount > 0 ? "text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]" : "group-hover:text-[#00e5ff] transition-colors"}>
+                                                <span className={inquiryCount && inquiryCount > 0 ? "text-amber-400 -[0_0_10px_rgba(245,158,11,0.5)]" : "group-hover:text-[#00e5ff] transition-colors"}>
                                                     {inquiryCount ?? 0}
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">

@@ -156,7 +156,7 @@ export default function SearchPage() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">検索</h1>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">検索</h1>
               <p className="text-slate-300 font-medium">登録データの検索・照会を行います</p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
@@ -164,7 +164,7 @@ export default function SearchPage() {
             </Link>
           </div>
 
-          <div className="glass-panel rounded-3xl p-8 md:p-10 mb-8 animate-fade-in delay-100 shadow-2xl border border-white/10">
+          <div className="glass-panel rounded-3xl p-8 md:p-10 mb-8 animate-fade-in delay-100 border border-white/10">
             <form onSubmit={handleSearch} className="space-y-8">
               <div className="grid md:grid-cols-2 gap-8">
 
@@ -182,7 +182,7 @@ export default function SearchPage() {
                     type="text"
                     value={nameQuery}
                     onChange={(e) => setNameQuery(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                     placeholder="例: 山田 太郎"
                   />
                 </div>
@@ -203,7 +203,7 @@ export default function SearchPage() {
                     maxLength={4}
                     value={searchYear}
                     onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchYear(e.target.value); }}
-                    className="w-20 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    className="w-20 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-slate-700/30 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
                     placeholder="0000"
                   />
                   <span className="text-slate-400">年</span>
@@ -213,7 +213,7 @@ export default function SearchPage() {
                     maxLength={2}
                     value={searchMonth}
                     onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchMonth(e.target.value); }}
-                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-slate-700/30 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
                     placeholder="00"
                   />
                   <span className="text-slate-400">月</span>
@@ -223,7 +223,7 @@ export default function SearchPage() {
                     maxLength={2}
                     value={searchDay}
                     onChange={(e) => { if (/^\d*$/.test(e.target.value)) setSearchDay(e.target.value); }}
-                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
+                    className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-slate-700/30 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
                     placeholder="00"
                   />
                   <span className="text-slate-400">日</span>
@@ -237,7 +237,7 @@ export default function SearchPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-primary min-w-[160px] shadow-lg shadow-[#00e5ff]/20 py-3 rounded-xl font-bold tracking-wide"
+                  className="btn-primary min-w-[160px] py-3 rounded-xl font-bold tracking-wide"
                 >
                   {isLoading ?
                     <span className="flex items-center justify-center gap-2">
@@ -262,7 +262,7 @@ export default function SearchPage() {
             <div className="animate-fade-in delay-200">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                 検索結果
-                <span className="text-xs font-bold text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/20 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-bold text-[#00e5ff] bg-[#00e5ff]/10 border border-slate-700/30 px-2.5 py-0.5 rounded-full">
                   {results.length} 件
                 </span>
               </h2>

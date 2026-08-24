@@ -125,7 +125,7 @@ export default function SettingsPage() {
 
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">アカウント設定</h1>
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">アカウント設定</h1>
                             <p className="text-slate-400">登録情報やパスワードの変更を行います</p>
                         </div>
                         <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
@@ -135,7 +135,7 @@ export default function SettingsPage() {
 
                     <div className="space-y-8 animate-fade-in delay-100">
                         {/* 基本情報設定 */}
-                        <div className="glass-panel p-6 md:p-8 rounded-3xl border border-[#00e5ff]/20 relative overflow-hidden">
+                        <div className="glass-panel p-6 md:p-8 rounded-3xl border border-slate-700/30 relative overflow-hidden">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                 <span className="text-[#00e5ff]">👤</span> 基本情報
                             </h2>
@@ -175,7 +175,7 @@ export default function SettingsPage() {
                                         required
                                         value={displayName}
                                         onChange={(e) => setDisplayName(e.target.value)}
-                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-[#00e5ff]/60 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all text-sm"
+                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-slate-700/30 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all text-sm"
                                     />
                                 </div>
 
@@ -199,7 +199,7 @@ export default function SettingsPage() {
                         </div>
 
                         {/* パスワード設定 */}
-                        <div className="glass-panel p-6 md:p-8 rounded-3xl border border-[#00e5ff]/20 relative overflow-hidden">
+                        <div className="glass-panel p-6 md:p-8 rounded-3xl border border-slate-700/30 relative overflow-hidden">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                 <span className="text-[#00e5ff]">🔒</span> パスワード変更
                             </h2>
@@ -216,7 +216,7 @@ export default function SettingsPage() {
                                         value={newPassword}
                                         onChange={(e) => setNewPassword(e.target.value)}
                                         placeholder="8文字以上"
-                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-[#00e5ff]/60 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-slate-700/30 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                                     />
                                 </div>
                                 
@@ -231,7 +231,7 @@ export default function SettingsPage() {
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         placeholder="もう一度入力してください"
-                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-[#00e5ff]/60 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                                        className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-slate-700/30 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                                     />
                                 </div>
 

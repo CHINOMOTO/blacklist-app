@@ -123,7 +123,7 @@ export default function EditCompanyPage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-[#00e5ff]/20"
+                                    className="btn-primary w-full py-3 text-base"
                                 >
                                     {saving ? "更新中..." : "変更を保存"}
                                 </button>

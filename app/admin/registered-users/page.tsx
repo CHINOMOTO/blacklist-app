@@ -98,7 +98,7 @@ export default function RegisteredUsersPage() {
                     ) : (
                         <div className="space-y-3 animate-fade-in delay-100">
                             {users.map((user) => (
-                                <div key={user.id} className="glass-panel rounded-2xl border border-white/10 hover:border-[#00e5ff]/30 transition-all p-5">
+                                <div key={user.id} className="glass-panel rounded-2xl border border-white/10 hover:border-slate-700/30 transition-all p-5">
                                     <div className="flex items-center justify-between gap-4">
                                         {/* 左側：ユーザー情報 */}
                                         <div className="flex-1 min-w-0">
@@ -106,10 +106,7 @@ export default function RegisteredUsersPage() {
                                                 <h3 className="text-white font-bold text-base truncate">
                                                     {user.display_name || "未設定"}
                                                 </h3>
-                                                <span className={`shrink-0 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${user.role === 'admin'
-                                                    ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                                                    : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                                                    }`}>
+                                                <span className={`shrink-0 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${user.role === 'admin' ? "bg-purple-500/20 text-purple-400 border border-purple-500/30" : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" }`}>
                                                     {user.role}
                                                 </span>
                                             </div>

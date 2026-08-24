@@ -72,7 +72,7 @@ export default function AdminInquiriesPage() {
                     {/* ヘッダー */}
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
                                 お問い合わせ管理
                             </h1>
                             <p className="text-slate-400">
@@ -89,7 +89,7 @@ export default function AdminInquiriesPage() {
                             <div className="animate-spin h-10 w-10 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
                         </div>
                     ) : inquiries.length === 0 ? (
-                        <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-[#00e5ff]/20">
+                        <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-slate-700/30">
                             <div className="text-4xl mb-4 opacity-30">📭</div>
                             <p className="text-slate-400 font-medium">お問い合わせはまだありません。</p>
                         </div>
@@ -99,10 +99,7 @@ export default function AdminInquiriesPage() {
                                 <button
                                     key={inq.id}
                                     onClick={() => setSelectedInquiry(inq)}
-                                    className={`w-full text-left glass-panel rounded-2xl p-5 border transition-all hover:-translate-y-0.5 hover:shadow-lg ${inq.status === 'unread'
-                                        ? 'border-red-500/30 hover:border-red-500/50'
-                                        : 'border-[#00e5ff]/10 hover:border-[#00e5ff]/30'
-                                        }`}
+                                    className={`w-full text-left glass-panel rounded-2xl p-5 border transition-all hover:-translate-y-0.5 ${inq.status === 'unread' ? 'border-red-500/30 hover:border-red-500/50' : 'border-slate-700/30 hover:border-slate-700/30' }`}
                                 >
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-3">
@@ -138,7 +135,7 @@ export default function AdminInquiriesPage() {
                     onClick={() => setSelectedInquiry(null)}
                 >
                     <div
-                        className="glass-panel rounded-3xl p-8 max-w-xl w-full mx-4 border border-[#00e5ff]/20 max-h-[80vh] overflow-y-auto"
+                        className="glass-panel rounded-3xl p-8 max-w-xl w-full mx-4 border border-slate-700/30 max-h-[80vh] overflow-y-auto"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* ステータスバッジ */}

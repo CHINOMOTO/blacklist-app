@@ -48,7 +48,7 @@ export default function AdminCaseList() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">承認待ち一覧</h1>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">承認待ち一覧</h1>
               <p className="text-[#00e5ff] font-medium">確認が必要な申請の一覧です</p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
@@ -57,7 +57,7 @@ export default function AdminCaseList() {
           </div>
 
           {errorMsg && (
-            <div className="p-4 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in shadow-lg">
+            <div className="p-4 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in">
               <span className="text-lg">⚠️</span>
               <span className="pt-0.5">{errorMsg}</span>
             </div>
@@ -66,7 +66,7 @@ export default function AdminCaseList() {
           {loading ? (
             <div className="flex justify-center py-24">
               <div className="relative">
-                <div className="animate-spin h-12 w-12 border-4 border-[#00e5ff]/20 rounded-full border-t-[#00e5ff]"></div>
+                <div className="animate-spin h-12 w-12 border-4 border-slate-700/30 rounded-full border-t-[#00e5ff]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="h-4 w-4 bg-[#00e5ff]/20 rounded-full blur-md"></div>
                 </div>
@@ -84,7 +84,7 @@ export default function AdminCaseList() {
                 <Link
                   key={c.id}
                   href={`/admin/cases/${c.id}`}
-                  className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-[#00e5ff]/5 hover:border-[#00e5ff]/30 transition-all group border-l-4 border-l-yellow-500"
+                  className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-[#00e5ff]/5 hover:border-slate-700/30 transition-all group border-l-4 border-l-yellow-500"
                 >
                   <div className="flex items-center gap-6">
                     <div className="h-12 w-12 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">

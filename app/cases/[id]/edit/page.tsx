@@ -395,7 +395,7 @@ export default function EditCasePage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary flex-1 py-3 text-base shadow-lg shadow-[#00e5ff]/20"
+                                    className="btn-primary flex-1 py-3 text-base"
                                 >
                                     {saving ? "更新中..." : "変更を保存"}
                                 </button>
@@ -412,7 +412,7 @@ export default function EditCasePage() {
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
     return (
         <div className="space-y-4">
-            <h3 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">
+            <h3 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-slate-700/30 pb-2">
                 {title}
             </h3>
             {children}
@@ -425,7 +425,7 @@ function Label({ children, required }: { children: React.ReactNode, required?: b
         <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
             {children}
             {required ? (
-                <span className="text-[#00e5ff] text-[10px] border border-[#00e5ff]/30 bg-[#00e5ff]/10 px-1.5 py-0.5 rounded">
+                <span className="text-[#00e5ff] text-[10px] border border-slate-700/30 bg-[#00e5ff]/10 px-1.5 py-0.5 rounded">
                     必須
                 </span>
             ) : (

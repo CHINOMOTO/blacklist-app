@@ -98,21 +98,21 @@ export default function CasesPage() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">登録データ一覧</h1>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">登録データ一覧</h1>
               <p className="text-slate-300 font-medium">登録されている全データの一覧です</p>
             </div>
             <div className="flex items-center gap-3">
               <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
                 戻る
               </Link>
-              <Link href="/cases/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-[#00e5ff]/20 hover:shadow-[#00e5ff]/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
+              <Link href="/cases/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
                 <span>+</span> 新規登録
               </Link>
             </div>
           </div>
 
           {errorMSG && (
-            <div className="p-4 mb-8 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in shadow-lg">
+            <div className="p-4 mb-8 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in">
               <span className="text-lg">⚠️</span>
               <span className="pt-0.5">{errorMSG}</span>
             </div>
@@ -121,14 +121,14 @@ export default function CasesPage() {
           {isLoading ? (
             <div className="flex justify-center py-24">
               <div className="relative">
-                <div className="animate-spin h-12 w-12 border-4 border-[#00e5ff]/20 rounded-full border-t-[#00e5ff]"></div>
+                <div className="animate-spin h-12 w-12 border-4 border-slate-700/30 rounded-full border-t-[#00e5ff]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="h-4 w-4 bg-[#00e5ff]/20 rounded-full blur-md"></div>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 shadow-2xl border border-[#00e5ff]/30 shadow-[#00e5ff]/10">
+            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 border border-slate-700/30">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm text-slate-300">
                   <thead className="bg-slate-900/60 text-xs uppercase font-bold text-slate-400">
@@ -215,7 +215,7 @@ function StatusBadge({ status }: { status: string }) {
     styles = "bg-yellow-500/10 text-yellow-400 border-yellow-500/30";
     label = "承認待ち";
   } else if (status === "approved") {
-    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30";
+    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-slate-700/30";
     label = "承認済み";
   } else if (status === "rejected") {
     styles = "bg-red-500/10 text-red-400 border-red-500/30";

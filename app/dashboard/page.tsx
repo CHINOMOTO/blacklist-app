@@ -30,7 +30,7 @@ export default function DashboardPage() {
         <div className="max-w-5xl w-full animate-fade-in relative z-10">
 
           <div className="mb-12 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
               ダッシュボード
             </h1>
 
@@ -118,22 +118,18 @@ function DashboardCard({
   return (
     <button
       onClick={onClick}
-      className={`group relative text-left p-8 rounded-3xl border transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-2xl flex flex-col h-full overflow-hidden
-            ${isAdmin
-          ? 'border-[#00e5ff]/40 bg-[#00e5ff]/10 hover:bg-[#00e5ff]/20'
-          : 'border-white/10 hover:border-white/20'
-        }`}
+      className={`group relative text-left p-8 rounded-3xl border transition-all duration-300 glass-panel hover:-translate-y-2 flex flex-col h-full overflow-hidden ${isAdmin ? 'border-slate-700/30 bg-[#00e5ff]/10 hover:bg-[#00e5ff]/20' : 'border-white/10 hover:border-white/20' }`}
     >
       {/* Background Hover Glow */}
       <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${bgGradient} ${isAdmin ? 'opacity-100' : 'group-hover:opacity-100'}`} />
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start justify-between mb-6 w-full">
-          <div className={`p-4 rounded-2xl text-4xl shadow-inner transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-[#00e5ff]/20' : 'bg-white/5'}`}>
+          <div className={`p-4 rounded-2xl text-4xl transition-transform duration-300 group-hover:scale-110 ${isAdmin ? 'bg-[#00e5ff]/20' : 'bg-white/5'}`}>
             {icon}
           </div>
           {isAdmin && (
-            <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+            <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-slate-700/30 uppercase tracking-wider shadow-sm">
               Admin Only
             </span>
           )}

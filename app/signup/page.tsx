@@ -151,11 +151,11 @@ export default function SignUpPage() {
     return (
         <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
             <div className="w-full max-w-lg relative z-10 my-8">
-                <div className="glass-panel rounded-3xl p-8 md:p-10 shadow-2xl border border-white/5 animate-fade-in backdrop-blur-xl">
+                <div className="glass-panel rounded-3xl p-8 md:p-10 border border-white/5 animate-fade-in backdrop-blur-xl">
 
                     <div className="mb-8 text-center">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 mb-4 border border-white/5 shadow-inner">
-                            <span className="text-2xl filter drop-shadow-lg">✨</span>
+                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 mb-4 border border-white/5">
+                            <span className="text-2xl filter">✨</span>
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
                             新規アカウント作成
@@ -178,7 +178,7 @@ export default function SignUpPage() {
                                     required
                                     value={displayName}
                                     onChange={(e) => setDisplayName(e.target.value)}
-                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                                     placeholder="例: 山田 太郎"
                                 />
                             </div>
@@ -193,7 +193,7 @@ export default function SignUpPage() {
                                     required
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
-                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                                     placeholder="例: 株式会社〇〇建設"
                                 />
                                 <p className="text-[10px] text-slate-500 pl-1">
@@ -211,7 +211,7 @@ export default function SignUpPage() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                                     placeholder="name@company.com"
                                 />
                             </div>
@@ -227,7 +227,7 @@ export default function SignUpPage() {
                                     minLength={8}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
+                                    className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
                                     placeholder="8文字以上で設定"
                                 />
                             </div>
@@ -245,7 +245,7 @@ export default function SignUpPage() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00e5ff] shadow-lg shadow-[#00e5ff]/25 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6"
+                            className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00e5ff] transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6"
                         >
                             {isLoading ? (
                                 <div className="flex items-center gap-2">

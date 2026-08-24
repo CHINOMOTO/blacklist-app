@@ -58,7 +58,7 @@ function statusLabel(status: CaseDetail["status"]) {
 function statusColor(status: CaseDetail["status"]) {
     switch (status) {
         case "approved":
-            return "text-[#00e5ff] border-[#00e5ff]/30 bg-[#00e5ff]/20";
+            return "text-[#00e5ff] border-slate-700/30 bg-[#00e5ff]/20";
         case "pending":
             return "text-amber-400 border-amber-500/30 bg-amber-500/20";
         case "rejected":
@@ -219,7 +219,7 @@ export default function CaseDetailPage() {
                         </Link>
                     </div>
 
-                    <div className="glass-panel rounded-2xl p-8 shadow-xl animate-fade-in delay-100">
+                    <div className="glass-panel rounded-2xl p-8 animate-fade-in delay-100">
                         {loading ? (
                             <div className="flex justify-center py-12">
                                 <span className="w-8 h-8 border-4 border-[#00e5ff] border-t-transparent rounded-full animate-spin"></span>
@@ -252,7 +252,7 @@ export default function CaseDetailPage() {
                                 {/* Info Grid */}
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">基本情報</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-slate-700/30 pb-2">基本情報</h2>
                                         <dl className="space-y-3 text-sm">
                                             <div className="grid grid-cols-[120px_1fr]">
                                                 <dt className="text-slate-400">性別</dt>
@@ -296,7 +296,7 @@ export default function CaseDetailPage() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">トラブル詳細・理由</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-slate-700/30 pb-2">トラブル詳細・理由</h2>
                                         <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700 min-h-[160px]">
                                             <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">
                                                 {caseDetail.reason_text}
@@ -307,13 +307,13 @@ export default function CaseDetailPage() {
 
                                 {/* Evidence Files */}
                                 <div className="space-y-4">
-                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">添付資料</h2>
+                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-slate-700/30 pb-2">添付資料</h2>
                                     {evidenceFiles.length === 0 ? (
                                         <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
                                     ) : (
                                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                             {evidenceFiles.map((file, i) => (
-                                                <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-[#00e5ff]/50 transition-colors">
+                                                <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-slate-700/30 transition-colors">
                                                     {file.type === 'image' ? (
                                                         <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
                                                             <div className="aspect-square relative flex items-center justify-center bg-slate-950">

@@ -62,14 +62,14 @@ export default function AdminCompaniesPage() {
                 <div className="max-w-4xl w-full relative z-10">
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">会社管理</h1>
+                            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">会社管理</h1>
                             <p className="text-slate-300 font-medium">登録されている加盟企業の一覧です</p>
                         </div>
                         <div className="flex gap-3 items-center">
                             <Link href="/dashboard" className="btn-secondary text-xs h-10 px-4 flex items-center">
                                 戻る
                             </Link>
-                            <Link href="/admin/companies/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 shadow-lg shadow-[#00e5ff]/20 hover:shadow-[#00e5ff]/40 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
+                            <Link href="/admin/companies/new" className="btn-primary flex items-center gap-2 px-5 py-2.5 hover:-translate-y-0.5 transition-all rounded-xl font-bold text-sm">
                                 <span>+</span> 新規会社追加
                             </Link>
                         </div>
@@ -81,7 +81,7 @@ export default function AdminCompaniesPage() {
                 {loading ? (
                     <div className="flex justify-center py-24">
                         <div className="relative">
-                            <div className="animate-spin h-12 w-12 border-4 border-[#00e5ff]/20 rounded-full border-t-[#00e5ff]"></div>
+                            <div className="animate-spin h-12 w-12 border-4 border-slate-700/30 rounded-full border-t-[#00e5ff]"></div>
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <div className="h-4 w-4 bg-[#00e5ff]/20 rounded-full blur-md"></div>
                             </div>
@@ -98,10 +98,10 @@ export default function AdminCompaniesPage() {
                         {companies.map((company) => (
                             <div
                                 key={company.id}
-                                className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-slate-800/30 transition-all border border-white/5 hover:border-[#00e5ff]/30 hover:shadow-lg group"
+                                className="glass-panel p-6 rounded-2xl flex items-center justify-between hover:bg-slate-800/30 transition-all border border-white/5 hover:border-slate-700/30 group"
                             >
                                 <div className="flex items-center gap-5">
-                                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-2xl shadow-inner group-hover:from-[#00e5ff]/20 group-hover:to-slate-800 transition-colors">
+                                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-2xl group-hover:from-[#00e5ff]/20 group-hover:to-slate-800 transition-colors">
                                         🏢
                                     </div>
                                     <div>
@@ -110,7 +110,7 @@ export default function AdminCompaniesPage() {
                                         </h3>
                                         <div className="flex items-center gap-3 mt-1.5">
                                             {company.is_main && (
-                                                <span className="text-[10px] bg-[#00e5ff]/10 text-[#00e5ff] px-2.5 py-0.5 rounded-full border border-[#00e5ff]/20 font-bold tracking-widest">
+                                                <span className="text-[10px] bg-[#00e5ff]/10 text-[#00e5ff] px-2.5 py-0.5 rounded-full border border-slate-700/30 font-bold tracking-widest">
                                                     HQ / MAIN
                                                 </span>
                                             )}

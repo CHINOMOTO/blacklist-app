@@ -86,7 +86,7 @@ export default function NewCompanyPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-[#00e5ff]/20"
+                                    className="btn-primary w-full py-3 text-base"
                                 >
                                     {loading ? "登録中..." : "会社情報を保存"}
                                 </button>

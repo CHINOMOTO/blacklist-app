@@ -90,7 +90,7 @@ export default function UpdatePasswordPage() {
                     </p>
                 </div>
 
-                <div className="w-full glass-panel rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
+                <div className="w-full glass-panel rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-700/30 backdrop-blur-xl relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
                     {successMsg ? (
@@ -113,7 +113,7 @@ export default function UpdatePasswordPage() {
                                     minLength={8}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                                     placeholder="8文字以上"
                                 />
                             </div>
@@ -128,7 +128,7 @@ export default function UpdatePasswordPage() {
                                     minLength={8}
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                                     placeholder="もう一度入力してください"
                                 />
                             </div>

@@ -61,12 +61,12 @@ export default function Home() {
         {/* Logo & Tagline */}
         <div className="text-center mb-6 md:mb-10">
           <div className="mb-2 md:mb-4 inline-block relative group">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] drop-shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] -[0_0_25px_rgba(0,229,255,0.6)]">
               SCOUTER
             </h1>
             <div className="absolute -inset-2 bg-[#00e5ff]/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 -z-10"></div>
           </div>
-          <h2 className="text-base md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-wider drop-shadow-md">
+          <h2 className="text-base md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-wider">
             リスクを未然に防ぐ、人材管理システム
           </h2>
           <p className="text-slate-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto">
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
 
         {/* Login Form Container */}
-        <div className="w-full max-w-md glass-panel rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl border border-[#00e5ff]/20 backdrop-blur-xl relative overflow-hidden">
+        <div className="w-full max-w-md glass-panel rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-700/30 backdrop-blur-xl relative overflow-hidden">
           {/* Decorative decorative line */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00e5ff] to-transparent opacity-50"></div>
 
@@ -95,7 +95,7 @@ export default function Home() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                   placeholder="メールアドレス"
                 />
               </div>
@@ -105,7 +105,7 @@ export default function Home() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
+                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-slate-700/30 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                   placeholder="パスワード"
                 />
               </div>

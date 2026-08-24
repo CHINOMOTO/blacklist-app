@@ -77,7 +77,7 @@ export default function ProfilePage() {
                         </Link>
                     </div>
 
-                    <div className="glass-panel rounded-2xl p-8 shadow-xl animate-fade-in delay-100">
+                    <div className="glass-panel rounded-2xl p-8 animate-fade-in delay-100">
                         {loading ? (
                             <div className="flex justify-center py-12">
                                 <span className="w-8 h-8 border-4 border-[#00e5ff] border-t-transparent rounded-full animate-spin"></span>
@@ -88,7 +88,7 @@ export default function ProfilePage() {
                             <div className="space-y-8">
                                 {/* Header */}
                                 <div className="text-center pb-6 border-b border-white/10">
-                                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[#00e5ff]/10 border-2 border-[#00e5ff]/30 flex items-center justify-center">
+                                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[#00e5ff]/10 border-2 border-slate-700/30 flex items-center justify-center">
                                         <span className="text-3xl">👤</span>
                                     </div>
                                     <h1 className="text-2xl font-bold text-white mb-1">{profile.displayName}</h1>
@@ -99,7 +99,7 @@ export default function ProfilePage() {
 
                                 {/* Info */}
                                 <div className="space-y-1">
-                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2 mb-4">
+                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-slate-700/30 pb-2 mb-4">
                                         アカウント情報
                                     </h2>
                                     <dl className="space-y-4 text-sm">
@@ -118,11 +118,7 @@ export default function ProfilePage() {
                                         <div className="grid grid-cols-[140px_1fr] items-center py-3 px-4 rounded-lg bg-slate-900/40 border border-white/5">
                                             <dt className="text-slate-400 font-medium">権限</dt>
                                             <dd>
-                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${
-                                                    profile.role === "admin"
-                                                        ? "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30"
-                                                        : "bg-slate-800 text-slate-300 border-slate-600"
-                                                }`}>
+                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${ profile.role === "admin" ? "bg-[#00e5ff]/10 text-[#00e5ff] border-slate-700/30" : "bg-slate-800 text-slate-300 border-slate-600" }`}>
                                                     {roleLabel(profile.role)}
                                                 </span>
                                             </dd>
@@ -130,11 +126,7 @@ export default function ProfilePage() {
                                         <div className="grid grid-cols-[140px_1fr] items-center py-3 px-4 rounded-lg bg-slate-900/40 border border-white/5">
                                             <dt className="text-slate-400 font-medium">アカウント状態</dt>
                                             <dd>
-                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${
-                                                    profile.isApproved
-                                                        ? "bg-green-500/10 text-green-400 border-green-500/30"
-                                                        : "bg-yellow-500/10 text-yellow-400 border-yellow-500/30"
-                                                }`}>
+                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${ profile.isApproved ? "bg-green-500/10 text-green-400 border-green-500/30" : "bg-yellow-500/10 text-yellow-400 border-yellow-500/30" }`}>
                                                     {profile.isApproved ? "承認済み" : "承認待ち"}
                                                 </span>
                                             </dd>

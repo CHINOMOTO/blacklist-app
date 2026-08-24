@@ -246,7 +246,7 @@ export default function AdminCaseDetailPage() {
   return (
     <RequireAdmin>
       <div className="min-h-screen bg-slate-900 text-slate-100 flex items-center justify-center pt-12 pb-12">
-        <div className="max-w-3xl w-full mx-4 bg-slate-800/80 border border-slate-700 rounded-2xl p-8 shadow-xl relative">
+        <div className="max-w-3xl w-full mx-4 bg-slate-800/80 border border-slate-700 rounded-2xl p-8 relative">
 
           {loading ? (
             <p className="text-sm text-slate-200 text-center py-10">読み込み中です...</p>
@@ -279,7 +279,7 @@ export default function AdminCaseDetailPage() {
 
               <div className="space-y-4 mb-8">
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">基本情報</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-slate-700/30 pb-2">基本情報</h2>
                   <div className="space-y-2 text-sm">
                     <div className="grid grid-cols-[140px_1fr]">
                       <span className="text-slate-400">氏名：</span>
@@ -325,7 +325,7 @@ export default function AdminCaseDetailPage() {
                 </div>
 
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">トラブル詳細・理由</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-slate-700/30 pb-2">トラブル詳細・理由</h2>
                   <div className="text-sm text-slate-100 whitespace-pre-wrap leading-relaxed">
                     {caseDetail.reason_text}
                   </div>
@@ -333,13 +333,13 @@ export default function AdminCaseDetailPage() {
 
                 {/* 証拠ファイルセクション */}
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-[#00e5ff]/20 pb-2">添付資料</h2>
+                  <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest mb-4 border-b border-slate-700/30 pb-2">添付資料</h2>
                   {evidenceFiles.length === 0 ? (
                     <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
                   ) : (
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {evidenceFiles.map((file, i) => (
-                        <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-[#00e5ff]/50 transition-colors">
+                        <div key={i} className="group relative bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-slate-700/30 transition-colors">
                           {file.type === 'image' ? (
                             <a href={file.signedUrl} target="_blank" rel="noopener noreferrer" className="block outline-none">
                               <div className="aspect-square relative flex items-center justify-center bg-slate-950">
@@ -369,7 +369,7 @@ export default function AdminCaseDetailPage() {
                   type="button"
                   onClick={() => setShowApproveModal(true)}
                   disabled={isProcessing}
-                  className="flex-1 bg-[#00e5ff]/80 hover:bg-[#00e5ff] disabled:bg-[#00e5ff]/40 text-black font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-[#00e5ff]/20"
+                  className="flex-1 bg-[#00e5ff]/80 hover:bg-[#00e5ff] disabled:bg-[#00e5ff]/40 text-black font-bold py-3 rounded-lg text-sm transition-all"
                 >
                   承認する
                 </button>
@@ -380,7 +380,7 @@ export default function AdminCaseDetailPage() {
                     setShowRejectModal(true)
                   }}
                   disabled={isProcessing}
-                  className="flex-1 bg-red-600 hover:bg-red-500 disabled:bg-red-800/60 text-white font-bold py-3 rounded-lg text-sm transition-all shadow-lg shadow-red-900/20"
+                  className="flex-1 bg-red-600 hover:bg-red-500 disabled:bg-red-800/60 text-white font-bold py-3 rounded-lg text-sm transition-all shadow-red-900/20"
                 >
                   却下する
                 </button>
@@ -464,7 +464,7 @@ export default function AdminCaseDetailPage() {
           {/* Success Modal */}
           {showSuccessModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in">
-              <div className={`p-10 rounded-3xl max-w-sm w-full text-center border-t-4 shadow-2xl ${showSuccessModal.type === 'approved' ? 'border-[#00e5ff] shadow-[0_0_50px_rgba(0,229,255,0.2)]' : 'border-red-500 shadow-[0_0_50px_rgba(239,68,68,0.2)]'}`}>
+              <div className={`p-10 rounded-3xl max-w-sm w-full text-center border-t-4 ${showSuccessModal.type === 'approved' ? 'border-[#00e5ff] shadow-[0_0_50px_rgba(0,229,255,0.2)]' : 'border-red-500 shadow-[0_0_50px_rgba(239,68,68,0.2)]'}`}>
                 <h3 className="text-xl font-bold text-white mb-8">
                   {showSuccessModal.type === 'approved' ? '申請が承認されました。' : '申請が却下されました。'}
                 </h3>

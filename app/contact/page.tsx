@@ -103,7 +103,7 @@ export default function ContactPage() {
             <RequireAuth>
                 <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
                     <div className="max-w-2xl w-full relative z-10">
-                        <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-[#00e5ff]/20">
+                        <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-slate-700/30">
                             <div className="text-5xl mb-6">✅</div>
                             <h2 className="text-2xl font-bold text-white mb-4">
                                 お問い合わせを送信しました
@@ -132,7 +132,7 @@ export default function ContactPage() {
                     {/* ヘッダー */}
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
                                 お問い合わせ
                             </h1>
                             <p className="text-slate-400">
@@ -145,7 +145,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* フォーム */}
-                    <div className="glass-panel rounded-3xl p-6 md:p-10 animate-fade-in border border-[#00e5ff]/20">
+                    <div className="glass-panel rounded-3xl p-6 md:p-10 animate-fade-in border border-slate-700/30">
                         {isLoading ? (
                             <div className="flex items-center justify-center py-12">
                                 <div className="animate-spin h-8 w-8 border-4 border-[#00e5ff] rounded-full border-t-transparent"></div>
