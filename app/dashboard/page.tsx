@@ -44,7 +44,7 @@ export default function DashboardPage() {
               description="氏名やカナなどから登録データを検索します。"
               icon={<Search className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-[#00e5ff]"
-              bgGradient="from-[#00e5ff]/20 to-transparent"
+              bgGradient="bg-[#00e5ff]/5"
               onClick={() => router.push("/search")}
             />
 
@@ -54,7 +54,7 @@ export default function DashboardPage() {
               description="現在登録されている全データを確認します。"
               icon={<ClipboardList className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-purple-400"
-              bgGradient="from-purple-500/20 to-transparent"
+              bgGradient="bg-purple-500/5"
               onClick={() => router.push("/cases")}
             />
 
@@ -64,7 +64,7 @@ export default function DashboardPage() {
               description="新たな対象者を登録データに追加します。"
               icon={<UserPlus className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-pink-400"
-              bgGradient="from-pink-500/20 to-transparent"
+              bgGradient="bg-pink-500/5"
               onClick={() => router.push("/cases/new")}
             />
 
@@ -74,7 +74,7 @@ export default function DashboardPage() {
               description="ログインパスワードの変更や、アカウントの確認を行います。"
               icon={<Settings className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-emerald-400"
-              bgGradient="from-emerald-500/20 to-transparent"
+              bgGradient="bg-emerald-500/5"
               onClick={() => router.push("/settings")}
             />
 
@@ -84,7 +84,7 @@ export default function DashboardPage() {
               description="システムの不具合や機能要望など、管理者にご連絡いただけます。"
               icon={<Mail className="w-10 h-10" strokeWidth={1.5} />}
               colorClass="group-hover:text-amber-400"
-              bgGradient="from-amber-500/20 to-transparent"
+              bgGradient="bg-amber-500/5"
               onClick={() => router.push("/contact")}
             />
 
