@@ -10,6 +10,7 @@ export default function AdminDashboardPage() {
     const [pendingUserCount, setPendingUserCount] = useState<number | null>(null);
     const [approvedUserCount, setApprovedUserCount] = useState<number | null>(null);
     const [companyCount, setCompanyCount] = useState<number | null>(null);
+    const [inquiryCount, setInquiryCount] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -39,17 +40,25 @@ export default function AdminDashboardPage() {
                 .from("companies")
                 .select("*", { count: "exact", head: true });
 
-            const [casesResult, usersResult, approvedUsersResult, companiesResult] = await Promise.all([
+            // お問い合わせ未読件数
+            const inquiriesQuery = supabase
+                .from("contact_inquiries")
+                .select("*", { count: "exact", head: true })
+                .eq("status", "unread");
+
+            const [casesResult, usersResult, approvedUsersResult, companiesResult, inquiriesResult] = await Promise.all([
                 casesQuery,
                 usersQuery,
                 approvedUsersQuery,
-                companiesQuery
+                companiesQuery,
+                inquiriesQuery
             ]);
 
             if (!casesResult.error) setPendingCount(casesResult.count);
             if (!usersResult.error) setPendingUserCount(usersResult.count);
             if (!approvedUsersResult.error) setApprovedUserCount(approvedUsersResult.count);
             if (!companiesResult.error) setCompanyCount(companiesResult.count);
+            if (!inquiriesResult.error) setInquiryCount(inquiriesResult.count);
             setLoading(false);
         };
 
@@ -227,6 +236,49 @@ export default function AdminDashboardPage() {
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
                                                     CORP
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+
+                        {/* お問い合わせ管理タイル */}
+                        <Link
+                            href="/admin/inquiries"
+                            className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-3xl shadow-inner text-[#00e5ff]">
+                                        📩
+                                    </div>
+                                    <span className="px-3 py-1 bg-[#00e5ff]/20 text-[#00e5ff] text-xs font-bold rounded-lg border border-[#00e5ff]/30 uppercase tracking-wider shadow-sm">
+                                        Support
+                                    </span>
+                                </div>
+
+                                <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
+                                    お問い合わせ管理
+                                </h2>
+                                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                                    ユーザーからのお問い合わせを確認・管理します。
+                                </p>
+
+                                <div className="mt-auto">
+                                    <div className="text-5xl font-bold text-slate-500 group-hover:text-white transition-colors duration-300">
+                                        {loading ? (
+                                            <span className="text-2xl text-slate-600 animate-pulse">...</span>
+                                        ) : (
+                                            <>
+                                                <span className={inquiryCount && inquiryCount > 0 ? "text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]" : "group-hover:text-[#00e5ff] transition-colors"}>
+                                                    {inquiryCount ?? 0}
+                                                </span>
+                                                <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
+                                                    未読
                                                 </span>
                                             </>
                                         )}

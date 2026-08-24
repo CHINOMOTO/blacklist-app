@@ -81,6 +81,17 @@ export default function DashboardPage() {
               onClick={() => router.push("/settings")}
             />
 
+            {/* お問い合わせ */}
+            <DashboardCard
+              title="お問い合わせ"
+              subtitle="連絡"
+              description="システムの不具合や機能要望など、管理者にご連絡いただけます。"
+              icon="📩"
+              colorClass="group-hover:text-amber-400"
+              bgGradient="from-amber-500/20 to-transparent"
+              onClick={() => router.push("/contact")}
+            />
+
             {/* 管理者メニュー */}
             {isAdmin && (
               <DashboardCard

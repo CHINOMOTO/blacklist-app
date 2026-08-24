@@ -182,6 +182,9 @@ export default function Navigation() {
                                 <NavLink href="/cases/new" active={pathname === "/cases/new"}>
                                     新規登録
                                 </NavLink>
+                                <NavLink href="/contact" active={pathname === "/contact"}>
+                                    お問い合わせ
+                                </NavLink>
                                 {isAdmin && (
                                     <div className="relative inline-block">
                                         <Link
@@ -252,6 +255,9 @@ export default function Navigation() {
                         </MobileNavLink>
                         <MobileNavLink href="/cases/new" active={pathname === "/cases/new"} onClick={() => setIsMobileMenuOpen(false)}>
                             新規登録
+                        </MobileNavLink>
+                        <MobileNavLink href="/contact" active={pathname === "/contact"} onClick={() => setIsMobileMenuOpen(false)}>
+                            お問い合わせ
                         </MobileNavLink>
                         {isAdmin && (
                             <MobileNavLink href="/admin" active={pathname.startsWith("/admin")} onClick={() => setIsMobileMenuOpen(false)} isSpecial>
