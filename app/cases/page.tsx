@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
@@ -21,6 +21,38 @@ export default function CasesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMSG, setErrorMSG] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("created_desc");
+
+  const filteredAndSortedCases = useMemo(() => {
+    let result = [...cases];
+
+    if (searchTerm.trim() !== "") {
+      const lowerTerm = searchTerm.toLowerCase();
+      result = result.filter(c => 
+        (c.full_name && c.full_name.toLowerCase().includes(lowerTerm)) ||
+        (c.reason_text && c.reason_text.toLowerCase().includes(lowerTerm))
+      );
+    }
+
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case "created_desc":
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        case "created_asc":
+          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        case "name_asc":
+          return (a.full_name || "").localeCompare(b.full_name || "");
+        case "name_desc":
+          return (b.full_name || "").localeCompare(a.full_name || "");
+        default:
+          return 0;
+      }
+    });
+
+    return result;
+  }, [cases, searchTerm, sortBy]);
 
   useEffect(() => {
     const init = async () => {
@@ -118,6 +150,34 @@ export default function CasesPage() {
             </div>
           )}
 
+          {/* Controls Bar */}
+          {!isLoading && cases.length > 0 && (
+            <div className="flex flex-col md:flex-row gap-4 mb-6 animate-fade-in delay-100">
+              <div className="flex-1 relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                <input
+                  type="text"
+                  placeholder="氏名や登録理由で絞り込み..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-slate-500 transition-colors"
+                />
+              </div>
+              <div className="md:w-64">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-slate-500 transition-colors cursor-pointer"
+                >
+                  <option value="created_desc">登録日（新しい順）</option>
+                  <option value="created_asc">登録日（古い順）</option>
+                  <option value="name_asc">氏名（昇順）</option>
+                  <option value="name_desc">氏名（降順）</option>
+                </select>
+              </div>
+            </div>
+          )}
+
           {isLoading ? (
             <div className="flex justify-center py-24">
               <div className="relative">
@@ -128,7 +188,7 @@ export default function CasesPage() {
               </div>
             </div>
           ) : (
-            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 border border-slate-700/30">
+            <div className="glass-panel rounded-3xl overflow-hidden animate-fade-in delay-100 border border-slate-700/30 p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm text-slate-300">
                   <thead className="bg-slate-900/60 text-xs uppercase font-bold text-slate-400">
@@ -141,8 +201,15 @@ export default function CasesPage() {
                       {isAdmin && <th className="px-6 py-5 tracking-widest text-right">操作</th>}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {cases.map((c) => (
+                  <tbody className="divide-y divide-slate-700/30">
+                    {filteredAndSortedCases.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="px-6 py-12 text-center text-slate-500">
+                          データが見つかりません
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredAndSortedCases.map((c) => (
                       <tr key={c.id} className="hover:bg-white/[0.03] transition-colors group">
                         <td className="px-6 py-4">
                           <Link
@@ -187,8 +254,9 @@ export default function CasesPage() {
                           </td>
                         )}
                       </tr>
-                    ))}
-                    {cases.length === 0 && (
+                    ))
+                    )}
+                    {cases.length === 0 && searchTerm === "" && (
                       <tr>
                         <td colSpan={isAdmin ? 6 : 5} className="px-6 py-20 text-center text-slate-500">
                           <div className="text-4xl mb-3 opacity-30">📂</div>
