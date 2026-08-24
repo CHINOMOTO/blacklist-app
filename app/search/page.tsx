@@ -62,7 +62,7 @@ export default function SearchPage() {
         ? `${searchYear}-${searchMonth.padStart(2, '0')}-${searchDay.padStart(2, '0')}`
         : "";
       if (!nameQuery && !dateQuery) {
-        throw new Error("検索条件を入力してください。");
+        throw new Error("検索条件を�E力してください、E);
       }
 
       // クライアントサイドフィルタリング
@@ -70,7 +70,7 @@ export default function SearchPage() {
         .from("blacklist_cases")
         .select("*");
 
-      // 管理者でない場合は自社データのみ＋承認済みのみ（個人情報保護法対応）
+      // 管琁E��E��なぁE��合�E自社チE�Eタのみ�E�承認済みのみ�E�個人惁E��保護法対応！E
       if (!isAdmin) {
         query = query.eq("status", "approved");
         if (userCompanyId) {
@@ -81,7 +81,7 @@ export default function SearchPage() {
       const { data, error } = await query;
 
       if (error) {
-        throw new Error("データの取得に失敗しました: " + error.message);
+        throw new Error("チE�Eタの取得に失敗しました: " + error.message);
       }
 
       const filtered = (data || []).filter((item) => {
@@ -102,13 +102,13 @@ export default function SearchPage() {
         return matchName && matchDate;
       });
 
-      // 登録日でソート (降順)
+      // 登録日でソーチE(降頁E
       filtered.sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
 
       setResults(filtered);
       setHasSearched(true);
 
-      // アクセスログの保存
+      // アクセスログの保孁E
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.access_token) {
@@ -130,7 +130,7 @@ export default function SearchPage() {
       }
 
     } catch (err: any) {
-      setErrorMsg(err.message || "予期せぬエラーが発生しました。");
+      setErrorMsg(err.message || "予期せぬエラーが発生しました、E);
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +143,7 @@ export default function SearchPage() {
       case "pending":
         return { label: "審査中", className: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20", borderLeft: "border-l-yellow-500" };
       case "rejected":
-        return { label: "却下", className: "bg-slate-500/10 text-slate-400 border-slate-500/20", borderLeft: "border-l-slate-500" };
+        return { label: "却丁E, className: "bg-slate-500/10 text-slate-400 border-slate-500/20", borderLeft: "border-l-slate-500" };
       default:
         return { label: status, className: "bg-slate-500/10 text-slate-400 border-slate-500/20", borderLeft: "border-l-slate-500" };
     }
@@ -156,11 +156,11 @@ export default function SearchPage() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">検索</h1>
-              <p className="text-slate-300 font-medium">登録データの検索・照会を行います</p>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">検索</h1>
+              <p className="text-slate-300 font-medium">登録チE�Eタの検索・照会を行いまぁE/p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
-              戻る
+              戻めE
             </Link>
           </div>
 
@@ -172,10 +172,10 @@ export default function SearchPage() {
                 <div className="input-group group space-y-2">
                   <div className="flex justify-between items-center ml-1">
                     <label className="text-xs font-bold text-slate-400 uppercase tracking-widest transition-colors duration-300">
-                      氏名 / カナ
+                      氏名 / カチE
                     </label>
                     <span className="text-[10px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/5">
-                      任意
+                      任愁E
                     </span>
                   </div>
                   <input
@@ -183,7 +183,7 @@ export default function SearchPage() {
                     value={nameQuery}
                     onChange={(e) => setNameQuery(e.target.value)}
                     className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
-                    placeholder="例: 山田 太郎"
+                    placeholder="侁E 山田 太郁E
                   />
                 </div>
 
@@ -194,7 +194,7 @@ export default function SearchPage() {
                       生年月日
                     </label>
                     <span className="text-[10px] text-slate-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/5">
-                      任意
+                      任愁E
                     </span>
                   </div>
                   <input
@@ -216,7 +216,7 @@ export default function SearchPage() {
                     className="w-14 bg-slate-900/40 border border-slate-700/50 rounded-xl px-3 py-3.5 text-slate-100 focus:outline-none focus:border-[#00e5ff]/50 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300 text-center"
                     placeholder="00"
                   />
-                  <span className="text-slate-400">月</span>
+                  <span className="text-slate-400">朁E/span>
                   <input
                     type="text"
                     inputMode="numeric"
@@ -232,26 +232,26 @@ export default function SearchPage() {
 
               <div className="flex items-center justify-between pt-2">
                 <p className="text-xs text-slate-500">
-                  ※氏名または生年月日の<span className="text-[#00e5ff] font-bold">どちらか一方は必須</span>です
+                  ※氏名また�E生年月日の<span className="text-[#00e5ff] font-bold">どちらか一方は忁E��E/span>でぁE
                 </p>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-primary min-w-[160px] shadow-lg shadow-[#00e5ff]/20 py-3 rounded-xl font-bold tracking-wide"
+                  className="btn-primary min-w-[160px] shadow-lg py-3 rounded-xl font-bold tracking-wide"
                 >
                   {isLoading ?
                     <span className="flex items-center justify-center gap-2">
                       <span className="w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
                       検索中...
                     </span>
-                    : "検索実行"
+                    : "検索実衁E
                   }
                 </button>
               </div>
 
               {errorMsg && (
                 <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in">
-                  <span className="text-lg">⚠️</span>
+                  <span className="text-lg">⚠�E�E/span>
                   <span className="pt-0.5">{errorMsg}</span>
                 </div>
               )}
@@ -270,8 +270,8 @@ export default function SearchPage() {
               {results.length === 0 ? (
                 <div className="glass-panel p-12 text-center rounded-3xl border-white/5 bg-slate-900/30">
                   <div className="text-4xl mb-4 opacity-50">🔍</div>
-                  <p className="text-slate-400 font-medium">該当するデータは見つかりませんでした。</p>
-                  <p className="text-slate-500 text-sm mt-2">条件を変更して再度検索してください。</p>
+                  <p className="text-slate-400 font-medium">該当するデータは見つかりませんでした、E/p>
+                  <p className="text-slate-500 text-sm mt-2">条件を変更して再度検索してください、E/p>
                 </div>
               ) : (
                 <div className="grid gap-5">
@@ -300,7 +300,7 @@ export default function SearchPage() {
                           </div>
 
                           <div className="bg-slate-900/40 rounded-xl p-4 border border-white/5">
-                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">登録理由</h4>
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">登録琁E��</h4>
                             <p className="text-sm text-slate-300 leading-relaxed font-medium line-clamp-3">
                               {item.reason_text}
                             </p>
@@ -319,7 +319,7 @@ export default function SearchPage() {
                           </div>
 
                           <Link
-                            href={`/cases/${item.id}`} // 詳細ページができたら飛ぶ想定（なければ#）
+                            href={`/cases/${item.id}`} // 詳細ペ�Eジができたら飛�E想定（なければ#�E�E
                             className="mt-4 text-xs text-[#00e5ff] hover:text-[#00e5ff] font-bold hover:underline decoration-[#00e5ff]/30 underline-offset-4 transition-all"
                           >
                             詳細を見る

@@ -6,10 +6,10 @@ import { supabase } from "@/lib/supabaseClient";
 import { RequireAuth } from "@/components/RequireAuth";
 
 const CATEGORIES = [
-    { value: "bug", label: "システム不具合の報告" },
-    { value: "feature", label: "機能の追加・改善要望" },
-    { value: "account", label: "アカウントに関する相談" },
-    { value: "other", label: "その他" },
+    { value: "bug", label: "シスチE��不�E合�E報呁E },
+    { value: "feature", label: "機�Eの追加・改喁E��望" },
+    { value: "account", label: "アカウントに関する相諁E },
+    { value: "other", label: "そ�E仁E },
 ];
 
 const MAX_MESSAGE_LENGTH = 2000;
@@ -36,7 +36,7 @@ export default function ContactPage() {
 
                 if (appUser) {
                     setUserName(appUser.display_name || "");
-                    setCompanyName((appUser.companies as any)?.name || "未所属");
+                    setCompanyName((appUser.companies as any)?.name || "未所屁E);
                 }
             }
             setIsLoading(false);
@@ -49,15 +49,15 @@ export default function ContactPage() {
         setError(null);
 
         if (!category) {
-            setError("お問い合わせ種類を選択してください。");
+            setError("お問ぁE��わせ種類を選択してください、E);
             return;
         }
         if (!message.trim()) {
-            setError("お問い合わせ内容を入力してください。");
+            setError("お問ぁE��わせ冁E��を�E力してください、E);
             return;
         }
         if (message.length > MAX_MESSAGE_LENGTH) {
-            setError(`お問い合わせ内容は${MAX_MESSAGE_LENGTH}文字以内で入力してください。`);
+            setError(`お問ぁE��わせ冁E��は${MAX_MESSAGE_LENGTH}斁E��以冁E��入力してください。`);
             return;
         }
 
@@ -66,7 +66,7 @@ export default function ContactPage() {
         try {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                setError("ログイン情報が取得できませんでした。再度ログインしてください。");
+                setError("ログイン惁E��が取得できませんでした。�E度ログインしてください、E);
                 setIsSending(false);
                 return;
             }
@@ -87,12 +87,12 @@ export default function ContactPage() {
 
             if (!res.ok) {
                 const data = await res.json();
-                throw new Error(data.error || "送信に失敗しました。");
+                throw new Error(data.error || "送信に失敗しました、E);
             }
 
             setSuccess(true);
         } catch (err: any) {
-            setError(err.message || "予期せぬエラーが発生しました。");
+            setError(err.message || "予期せぬエラーが発生しました、E);
         } finally {
             setIsSending(false);
         }
@@ -104,20 +104,18 @@ export default function ContactPage() {
                 <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center">
                     <div className="max-w-2xl w-full relative z-10">
                         <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-[#00e5ff]/20">
-                            <div className="text-5xl mb-6">✅</div>
+                            <div className="text-5xl mb-6">✁E/div>
                             <h2 className="text-2xl font-bold text-white mb-4">
-                                お問い合わせを送信しました
+                                お問ぁE��わせを送信しました
                             </h2>
                             <p className="text-slate-400 mb-8 leading-relaxed">
-                                ご連絡ありがとうございます。<br />
-                                管理者が確認次第、対応いたします。
-                            </p>
+                                ご連絡ありがとぁE��ざいます、Ebr />
+                                管琁E��E��確認次第、対応いたします、E                            </p>
                             <Link
                                 href="/dashboard"
                                 className="inline-block px-8 py-3 bg-gradient-to-r from-[#008299] to-[#00e5ff] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all"
                             >
-                                ダッシュボードへ戻る
-                            </Link>
+                                ダチE��ュボ�Eドへ戻めE                            </Link>
                         </div>
                     </div>
                 </div>
@@ -132,16 +130,14 @@ export default function ContactPage() {
                     {/* ヘッダー */}
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
-                                お問い合わせ
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                                お問ぁE��わせ
                             </h1>
                             <p className="text-slate-400">
-                                管理者への連絡・ご相談はこちらから
-                            </p>
+                                管琁E��E��の連絡・ご相諁E�EこちらかめE                            </p>
                         </div>
                         <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
-                            戻る
-                        </Link>
+                            戻めE                        </Link>
                     </div>
 
                     {/* フォーム */}
@@ -152,11 +148,10 @@ export default function ContactPage() {
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-6">
-                                {/* 会社名（自動入力） */}
+                                {/* 会社名（�E動�E力！E*/}
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-slate-300">
-                                        会社名
-                                    </label>
+                                        会社吁E                                    </label>
                                     <input
                                         type="text"
                                         value={companyName}
@@ -165,11 +160,10 @@ export default function ContactPage() {
                                     />
                                 </div>
 
-                                {/* ユーザー名（自動入力） */}
+                                {/* ユーザー名（�E動�E力！E*/}
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-slate-300">
-                                        ユーザー名
-                                    </label>
+                                        ユーザー吁E                                    </label>
                                     <input
                                         type="text"
                                         value={userName}
@@ -178,10 +172,10 @@ export default function ContactPage() {
                                     />
                                 </div>
 
-                                {/* お問い合わせ種類 */}
+                                {/* お問ぁE��わせ種顁E*/}
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-slate-300">
-                                        お問い合わせ種類 <span className="text-red-400">*</span>
+                                        お問ぁE��わせ種顁E<span className="text-red-400">*</span>
                                     </label>
                                     <select
                                         value={category}
@@ -197,15 +191,15 @@ export default function ContactPage() {
                                     </select>
                                 </div>
 
-                                {/* お問い合わせ内容 */}
+                                {/* お問ぁE��わせ冁E�� */}
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-slate-300">
-                                        お問い合わせ内容 <span className="text-red-400">*</span>
+                                        お問ぁE��わせ冁E�� <span className="text-red-400">*</span>
                                     </label>
                                     <textarea
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        placeholder="お問い合わせ内容を入力してください"
+                                        placeholder="お問ぁE��わせ冁E��を�E力してください"
                                         rows={6}
                                         maxLength={MAX_MESSAGE_LENGTH}
                                         className="input-field w-full resize-none"
@@ -215,10 +209,10 @@ export default function ContactPage() {
                                     </p>
                                 </div>
 
-                                {/* エラーメッセージ */}
+                                {/* エラーメチE��ージ */}
                                 {error && (
                                     <div className="flex items-start gap-3 bg-red-500/10 border border-red-500/30 rounded-xl p-4">
-                                        <span className="text-red-400 text-lg">⚠️</span>
+                                        <span className="text-red-400 text-lg">⚠�E�E/span>
                                         <p className="text-sm text-red-200 leading-snug pt-0.5">{error}</p>
                                     </div>
                                 )}

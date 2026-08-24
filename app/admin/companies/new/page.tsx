@@ -40,17 +40,17 @@ export default function NewCompanyPage() {
                 <div className="max-w-2xl w-full">
                     <div className="mb-8 animate-fade-in">
                         <Link href="/admin/companies" className="text-slate-500 hover:text-slate-300 text-sm flex items-center gap-1 mb-4">
-                            キャンセルして一覧へ戻る
+                            キャンセルして一覧へ戻めE
                         </Link>
                         <h1 className="text-3xl font-bold text-white mb-2">新規会社登録</h1>
-                        <p className="text-slate-400">新しいグループ会社をシステムに追加します</p>
+                        <p className="text-slate-400">新しいグループ会社をシスチE��に追加しまぁE/p>
                     </div>
 
                     <div className="glass-panel p-8 rounded-2xl animate-fade-in delay-100">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-300">
-                                    会社名 <span className="text-[#00e5ff]">*</span>
+                                    会社吁E<span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -58,7 +58,7 @@ export default function NewCompanyPage() {
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     className="input-field"
-                                    placeholder="例: 株式会社〇〇支店"
+                                    placeholder="侁E 株式会社、E��E��庁E
                                 />
                             </div>
 
@@ -72,13 +72,13 @@ export default function NewCompanyPage() {
                                 />
                                 <label htmlFor="isMain" className="cursor-pointer">
                                     <span className="block text-sm font-semibold text-slate-200">メイン会社として登録</span>
-                                    <span className="block text-xs text-slate-500">※通常はチェック不要です（管理用フラグ）</span>
+                                    <span className="block text-xs text-slate-500">※通常はチェチE��不要です（管琁E��フラグ�E�E/span>
                                 </label>
                             </div>
 
                             {error && (
                                 <div className="p-4 bg-red-500/10 border border-red-500/50 rounded-lg text-red-200 text-sm">
-                                    ⚠️ {error}
+                                    ⚠�E�E{error}
                                 </div>
                             )}
 
@@ -86,9 +86,9 @@ export default function NewCompanyPage() {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="btn-primary w-full py-3 text-base shadow-lg shadow-[#00e5ff]/20"
+                                    className="btn-primary w-full py-3 text-base shadow-lg"
                                 >
-                                    {loading ? "登録中..." : "会社情報を保存"}
+                                    {loading ? "登録中..." : "会社惁E��を保孁E}
                                 </button>
                             </div>
                         </form>

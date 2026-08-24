@@ -39,7 +39,7 @@ export default function SettingsPage() {
 
                 if (appUser) {
                     setDisplayName(appUser.display_name || "");
-                    setCompanyName((appUser.companies as any)?.name || "未所属");
+                    setCompanyName((appUser.companies as any)?.name || "未所屁E);
                 }
             }
             setIsLoading(false);
@@ -61,14 +61,13 @@ export default function SettingsPage() {
 
             if (error) throw error;
             
-            // auth側のメタデータも更新（表示名同期のため）
-            await supabase.auth.updateUser({
+            // auth側のメタチE�Eタも更新�E�表示名同期�Eため�E�E            await supabase.auth.updateUser({
                 data: { display_name: displayName }
             });
 
-            setProfileMsg({ type: 'success', text: "プロフィール情報を更新しました。" });
+            setProfileMsg({ type: 'success', text: "プロフィール惁E��を更新しました、E });
         } catch (err: any) {
-            setProfileMsg({ type: 'error', text: err.message || "更新に失敗しました。" });
+            setProfileMsg({ type: 'error', text: err.message || "更新に失敗しました、E });
         } finally {
             setIsSavingProfile(false);
         }
@@ -80,13 +79,13 @@ export default function SettingsPage() {
         setPasswordMsg(null);
 
         if (newPassword !== confirmPassword) {
-            setPasswordMsg({ type: 'error', text: "パスワードが一致しません。" });
+            setPasswordMsg({ type: 'error', text: "パスワードが一致しません、E });
             setIsSavingPassword(false);
             return;
         }
 
         if (newPassword.length < 8) {
-            setPasswordMsg({ type: 'error', text: "パスワードは8文字以上で入力してください。" });
+            setPasswordMsg({ type: 'error', text: "パスワード�E8斁E��以上で入力してください、E });
             setIsSavingPassword(false);
             return;
         }
@@ -98,11 +97,11 @@ export default function SettingsPage() {
 
             if (error) throw error;
 
-            setPasswordMsg({ type: 'success', text: "パスワードを更新しました。" });
+            setPasswordMsg({ type: 'success', text: "パスワードを更新しました、E });
             setNewPassword("");
             setConfirmPassword("");
         } catch (err: any) {
-            setPasswordMsg({ type: 'error', text: err.message || "更新に失敗しました。" });
+            setPasswordMsg({ type: 'error', text: err.message || "更新に失敗しました、E });
         } finally {
             setIsSavingPassword(false);
         }
@@ -125,19 +124,18 @@ export default function SettingsPage() {
 
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">アカウント設定</h1>
-                            <p className="text-slate-400">登録情報やパスワードの変更を行います</p>
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">アカウント設宁E/h1>
+                            <p className="text-slate-400">登録惁E��めE��スワード�E変更を行いまぁE/p>
                         </div>
                         <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10">
-                            ダッシュボードへ戻る
-                        </Link>
+                            ダチE��ュボ�Eドへ戻めE                        </Link>
                     </div>
 
                     <div className="space-y-8 animate-fade-in delay-100">
-                        {/* 基本情報設定 */}
+                        {/* 基本惁E��設宁E*/}
                         <div className="glass-panel p-6 md:p-8 rounded-3xl border border-[#00e5ff]/20 relative overflow-hidden">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                <span className="text-[#00e5ff]">👤</span> 基本情報
+                                <span className="text-[#00e5ff]">👤</span> 基本惁E��
                             </h2>
 
                             <form onSubmit={handleUpdateProfile} className="space-y-5">
@@ -151,7 +149,7 @@ export default function SettingsPage() {
                                         value={companyName}
                                         className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-400 cursor-not-allowed text-sm"
                                     />
-                                    <p className="text-[10px] text-slate-500 mt-1 ml-1">※所属会社はシステム管理者のみ変更可能です。</p>
+                                    <p className="text-[10px] text-slate-500 mt-1 ml-1">※所属会社はシスチE��管琁E��E�Eみ変更可能です、E/p>
                                 </div>
                                 
                                 <div>
@@ -168,8 +166,7 @@ export default function SettingsPage() {
 
                                 <div>
                                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">
-                                        表示名（氏名）
-                                    </label>
+                                        表示名（氏名�E�E                                    </label>
                                     <input
                                         type="text"
                                         required
@@ -181,7 +178,7 @@ export default function SettingsPage() {
 
                                 {profileMsg && (
                                     <div className={`p-3 rounded-lg text-sm flex items-start gap-2 ${profileMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                                        <span className="pt-0.5">{profileMsg.type === 'success' ? '✅' : '⚠️'}</span>
+                                        <span className="pt-0.5">{profileMsg.type === 'success' ? '✁E : '⚠�E�E}</span>
                                         <p>{profileMsg.text}</p>
                                     </div>
                                 )}
@@ -198,7 +195,7 @@ export default function SettingsPage() {
                             </form>
                         </div>
 
-                        {/* パスワード設定 */}
+                        {/* パスワード設宁E*/}
                         <div className="glass-panel p-6 md:p-8 rounded-3xl border border-[#00e5ff]/20 relative overflow-hidden">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                 <span className="text-[#00e5ff]">🔒</span> パスワード変更
@@ -207,23 +204,21 @@ export default function SettingsPage() {
                             <form onSubmit={handleUpdatePassword} className="space-y-5">
                                 <div>
                                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">
-                                        新しいパスワード
-                                    </label>
+                                        新しいパスワーチE                                    </label>
                                     <input
                                         type="password"
                                         required
                                         minLength={8}
                                         value={newPassword}
                                         onChange={(e) => setNewPassword(e.target.value)}
-                                        placeholder="8文字以上"
+                                        placeholder="8斁E��以丁E
                                         className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 focus:border-[#00e5ff]/60 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
                                     />
                                 </div>
                                 
                                 <div>
                                     <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">
-                                        新しいパスワード（確認用）
-                                    </label>
+                                        新しいパスワード（確認用�E�E                                    </label>
                                     <input
                                         type="password"
                                         required
@@ -237,7 +232,7 @@ export default function SettingsPage() {
 
                                 {passwordMsg && (
                                     <div className={`p-3 rounded-lg text-sm flex items-start gap-2 ${passwordMsg.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                                        <span className="pt-0.5">{passwordMsg.type === 'success' ? '✅' : '⚠️'}</span>
+                                        <span className="pt-0.5">{passwordMsg.type === 'success' ? '✁E : '⚠�E�E}</span>
                                         <p>{passwordMsg.text}</p>
                                     </div>
                                 )}

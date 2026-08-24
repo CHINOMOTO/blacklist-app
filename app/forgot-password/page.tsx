@@ -25,12 +25,12 @@ export default function ForgotPasswordPage() {
                 throw error;
             }
 
-            setSuccessMsg("パスワード再設定用のメールを送信しました。メール内のリンクをクリックして新しいパスワードを設定してください。");
+            setSuccessMsg("パスワード�E設定用のメールを送信しました。メール冁E�EリンクをクリチE��して新しいパスワードを設定してください、E);
         } catch (err: any) {
             if (err.message?.includes("rate limit")) {
-                setErrorMsg("短期間にメールが送信されすぎました。しばらく時間をおいてから再度お試しください。");
+                setErrorMsg("短期間にメールが送信されすぎました。しばらく時間をおぁE��から再度お試しください、E);
             } else {
-                setErrorMsg("エラーが発生しました: " + (err.message || "詳細不明"));
+                setErrorMsg("エラーが発生しました: " + (err.message || "詳細不�E"));
             }
         } finally {
             setIsLoading(false);
@@ -47,10 +47,9 @@ export default function ForgotPasswordPage() {
             <main className="w-full max-w-lg flex flex-col items-center justify-center relative z-10 animate-fade-in">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                        パスワード再発行
-                    </h1>
+                        パスワード�E発衁E                    </h1>
                     <p className="text-slate-400 text-sm">
-                        登録済みのメールアドレスを入力してください
+                        登録済みのメールアドレスを�E力してください
                     </p>
                 </div>
 
@@ -60,14 +59,13 @@ export default function ForgotPasswordPage() {
                     {successMsg ? (
                         <div className="text-center">
                             <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
-                                <span className="text-2xl">✉️</span>
+                                <span className="text-2xl">✉︁E/span>
                             </div>
                             <p className="text-slate-200 leading-relaxed text-sm mb-6">
                                 {successMsg}
                             </p>
                             <Link href="/" className="btn-secondary w-full inline-block py-3">
-                                ログイン画面に戻る
-                            </Link>
+                                ログイン画面に戻めE                            </Link>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,7 +85,7 @@ export default function ForgotPasswordPage() {
 
                             {errorMsg && (
                                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex items-start gap-2 animate-fade-in">
-                                    <span className="text-red-400 text-sm">⚠️</span>
+                                    <span className="text-red-400 text-sm">⚠�E�E/span>
                                     <p className="text-xs text-red-200 pt-0.5">{errorMsg}</p>
                                 </div>
                             )}
@@ -97,15 +95,14 @@ export default function ForgotPasswordPage() {
                                 disabled={isLoading}
                                 className="w-full py-4 px-4 rounded-xl text-white font-bold bg-gradient-to-r from-[#008299] to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed hover:text-black tracking-widest uppercase text-sm"
                             >
-                                {isLoading ? "SENDING..." : "リセットメールを送信"}
+                                {isLoading ? "SENDING..." : "リセチE��メールを送信"}
                             </button>
                         </form>
                     )}
 
                     <div className="text-center mt-8 pt-4 border-t border-white/5">
                         <Link href="/" className="text-xs text-slate-500 hover:text-[#00e5ff] transition-colors">
-                            キャンセルして戻る
-                        </Link>
+                            キャンセルして戻めE                        </Link>
                     </div>
                 </div>
             </main>

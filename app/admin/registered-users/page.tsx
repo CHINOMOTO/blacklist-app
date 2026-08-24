@@ -47,9 +47,9 @@ export default function RegisteredUsersPage() {
         fetchUsers();
     }, []);
 
-    // 削除機能
+    // 削除機�E
     const handleDelete = async (userId: string) => {
-        if (!confirm("本当にこのユーザーを削除しますか？\n※投稿データは保持されますが、ログインできなくなります。\nこの操作は取り消せません。")) return;
+        if (!confirm("本当にこ�Eユーザーを削除しますか�E�\n※投稿チE�Eタは保持されますが、ログインできなくなります、Enこ�E操作�E取り消せません、E)) return;
 
         try {
             const { data: { session } } = await supabase.auth.getSession();
@@ -66,7 +66,7 @@ export default function RegisteredUsersPage() {
             if (data.error) throw new Error(data.error);
 
             setUsers(prev => prev.filter(u => u.id !== userId));
-            alert("ユーザーを削除しました。");
+            alert("ユーザーを削除しました、E);
         } catch (e: any) {
             alert("削除に失敗しました: " + e.message);
         }
@@ -80,11 +80,10 @@ export default function RegisteredUsersPage() {
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
                             <h1 className="text-3xl font-bold text-white mb-2">登録済みユーザー一覧</h1>
-                            <p className="text-slate-400">現在システムに登録されているユーザーの一覧です</p>
+                            <p className="text-slate-400">現在シスチE��に登録されてぁE��ユーザーの一覧でぁE/p>
                         </div>
                         <Link href="/admin" className="btn-secondary text-xs">
-                            管理者メニューへ戻る
-                        </Link>
+                            管琁E��E��ニューへ戻めE                        </Link>
                     </div>
 
                     {loading ? (
@@ -93,18 +92,18 @@ export default function RegisteredUsersPage() {
                         </div>
                     ) : users.length === 0 ? (
                         <div className="glass-panel p-10 text-center rounded-2xl animate-fade-in">
-                            <p className="text-slate-300">登録ユーザーはいません。</p>
+                            <p className="text-slate-300">登録ユーザーはぁE��せん、E/p>
                         </div>
                     ) : (
                         <div className="space-y-3 animate-fade-in delay-100">
                             {users.map((user) => (
                                 <div key={user.id} className="glass-panel rounded-2xl border border-white/10 hover:border-[#00e5ff]/30 transition-all p-5">
                                     <div className="flex items-center justify-between gap-4">
-                                        {/* 左側：ユーザー情報 */}
+                                        {/* 左側�E�ユーザー惁E�� */}
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-3 mb-1.5">
                                                 <h3 className="text-white font-bold text-base truncate">
-                                                    {user.display_name || "未設定"}
+                                                    {user.display_name || "未設宁E}
                                                 </h3>
                                                 <span className={`shrink-0 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${user.role === 'admin'
                                                     ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
@@ -114,26 +113,26 @@ export default function RegisteredUsersPage() {
                                                 </span>
                                             </div>
                                             <div className="flex items-center gap-4 text-xs text-slate-400">
-                                                <span>{user.companies?.name || "未所属"}</span>
+                                                <span>{user.companies?.name || "未所屁E}</span>
                                                 <span className="text-slate-600">|</span>
-                                                <span className="font-mono">{user.email || "—"}</span>
+                                                <span className="font-mono">{user.email || " E}</span>
                                             </div>
                                         </div>
 
-                                        {/* 右側：操作ボタン */}
+                                        {/* 右側�E�操作�Eタン */}
                                         <div className="flex items-center gap-2 shrink-0">
                                             <button
                                                 onClick={async () => {
                                                     if (user.role === 'admin') {
                                                         const adminCount = users.filter(u => u.role === 'admin').length;
                                                         if (adminCount <= 1) {
-                                                            alert("エラー: 最後の管理者は降格できません。\n少なくとも1人の管理者が存在する必要があります。");
+                                                            alert("エラー: 最後�E管琁E��E�E降格できません、En少なくとめE人の管琁E��E��存在する忁E��があります、E);
                                                             return;
                                                         }
                                                     }
 
                                                     const newRole = user.role === 'admin' ? 'viewer' : 'admin';
-                                                    if (!confirm(`「${user.display_name}」の権限を【${newRole.toUpperCase()}】に変更しますか？`)) return;
+                                                    if (!confirm(`、E{user.display_name}」�E権限を、E{newRole.toUpperCase()}】に変更しますか�E�`)) return;
 
                                                     try {
                                                         const { data: { session } } = await supabase.auth.getSession();
@@ -152,13 +151,13 @@ export default function RegisteredUsersPage() {
                                                         if (data.error) throw new Error(data.error);
 
                                                         setUsers(prev => prev.map(u => u.id === user.id ? { ...u, role: newRole } : u));
-                                                        alert("権限を更新しました。");
+                                                        alert("権限を更新しました、E);
                                                     } catch (err: any) {
                                                         alert("更新に失敗しました: " + err.message);
                                                     }
                                                 }}
                                                 className="whitespace-nowrap text-xs text-slate-400 hover:text-white border border-slate-600 hover:bg-slate-700 px-3 py-1.5 rounded-lg transition-colors"
-                                                title={user.role === 'admin' ? "一般ユーザーに降格" : "管理者に昇格"}
+                                                title={user.role === 'admin' ? "一般ユーザーに降格" : "管琁E��E��昁E��"}
                                             >
                                                 権限変更
                                             </button>

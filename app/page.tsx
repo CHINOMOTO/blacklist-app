@@ -24,17 +24,17 @@ export default function Home() {
       });
 
       const timeoutPromise = new Promise<{ data: { session: null }; error: { message: string } }>((_, reject) =>
-        setTimeout(() => reject(new Error("サーバーからの応答がありません。ネットワーク接続を確認してください。")), 15000)
+        setTimeout(() => reject(new Error("サーバ�Eからの応答がありません。ネチE��ワーク接続を確認してください、E)), 15000)
       );
 
       const { data, error } = await Promise.race([loginPromise, timeoutPromise]) as any;
 
       if (error) {
         if (error.message.includes("Invalid login credentials")) {
-          throw new Error("メールアドレスまたはパスワードが間違っています。");
+          throw new Error("メールアドレスまた�Eパスワードが間違ってぁE��す、E);
         }
         if (error.message.includes("Email not confirmed")) {
-          throw new Error("メールアドレスの確認が完了していません。受信トレイを確認してください。");
+          throw new Error("メールアドレスの確認が完亁E��てぁE��せん。受信トレイを確認してください、E);
         }
         throw error;
       }
@@ -43,7 +43,7 @@ export default function Home() {
         router.push("/dashboard");
       }
     } catch (err: any) {
-      setErrorMsg(err.message || "ログイン中に問題が発生しました。");
+      setErrorMsg(err.message || "ログイン中に問題が発生しました、E);
       setIsLoading(false);
     }
   };
@@ -61,18 +61,17 @@ export default function Home() {
         {/* Logo & Tagline */}
         <div className="text-center mb-6 md:mb-10">
           <div className="mb-2 md:mb-4 inline-block relative group">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)] drop-shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-[family-name:var(--font-orbitron)]">
               SCOUTER
             </h1>
             <div className="absolute -inset-2 bg-[#00e5ff]/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 -z-10"></div>
           </div>
           <h2 className="text-base md:text-2xl font-bold text-white mb-3 md:mb-4 tracking-wider drop-shadow-md">
-            リスクを未然に防ぐ、人材管理システム
+            リスクを未然に防ぐ、人材管琁E��スチE��
           </h2>
           <p className="text-slate-400 text-xs md:text-base font-medium leading-relaxed max-w-md mx-auto">
-            過去のトラブルや注意情報を一元管理し、<br />
-            同じリスクを繰り返さない
-          </p>
+            過去のトラブルめE��意情報を一允E��琁E��、Ebr />
+            同じリスクを繰り返さなぁE          </p>
         </div>
 
         {/* Login Form Container */}
@@ -84,7 +83,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-[#00e5ff] tracking-widest uppercase mb-1">
               ログイン
             </h2>
-            <p className="text-xs text-slate-500">アカウント情報を入力してください</p>
+            <p className="text-xs text-slate-500">アカウント情報を�E力してください</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -106,14 +105,14 @@ export default function Home() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/60 focus:bg-slate-900/80 focus:ring-1 focus:ring-[#00e5ff]/40 transition-all font-mono text-sm"
-                  placeholder="パスワード"
+                  placeholder="パスワーチE
                 />
               </div>
             </div>
 
             {errorMsg && (
               <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex items-start gap-2 animate-fade-in">
-                <span className="text-red-400 text-sm">⚠️</span>
+                <span className="text-red-400 text-sm">⚠�E�E/span>
                 <p className="text-xs text-red-200 pt-0.5">{errorMsg}</p>
               </div>
             )}
@@ -129,11 +128,9 @@ export default function Home() {
 
           <div className="text-center mt-8 border-t border-white/5 pt-6 flex flex-col gap-3">
             <Link href="/forgot-password" className="text-xs text-slate-400 hover:text-[#00e5ff] transition-colors">
-              パスワードをお忘れの方はこちら
-            </Link>
+              パスワードをお忘れの方はこちめE            </Link>
             <Link href="/signup" className="text-xs text-slate-500 hover:text-[#00e5ff] transition-colors">
-              &gt;&gt; 新規アカウント作成はこちら
-            </Link>
+              &gt;&gt; 新規アカウント作�EはこちめE            </Link>
           </div>
         </div>
       </main>

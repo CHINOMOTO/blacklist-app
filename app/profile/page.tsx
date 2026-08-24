@@ -42,7 +42,7 @@ export default function ProfilePage() {
 
                 setProfile({
                     email: user.email || "",
-                    displayName: appUser?.display_name || user.user_metadata?.display_name || "未設定",
+                    displayName: appUser?.display_name || user.user_metadata?.display_name || "未設宁E,
                     companyName,
                     role: appUser?.role || "viewer",
                     isApproved: appUser?.is_approved ?? false,
@@ -60,7 +60,7 @@ export default function ProfilePage() {
 
     const roleLabel = (role: string) => {
         switch (role) {
-            case "admin": return "管理者";
+            case "admin": return "管琁E��E;
             case "viewer": return "一般ユーザー";
             default: return role;
         }
@@ -73,8 +73,7 @@ export default function ProfilePage() {
 
                     <div className="mb-6 animate-fade-in">
                         <Link href="/dashboard" className="btn-secondary text-sm inline-flex items-center gap-2 px-4 py-2 hover:bg-slate-800 transition-colors">
-                            ← ダッシュボードへ戻る
-                        </Link>
+                            ↁEダチE��ュボ�Eドへ戻めE                        </Link>
                     </div>
 
                     <div className="glass-panel rounded-2xl p-8 shadow-xl animate-fade-in delay-100">
@@ -83,7 +82,7 @@ export default function ProfilePage() {
                                 <span className="w-8 h-8 border-4 border-[#00e5ff] border-t-transparent rounded-full animate-spin"></span>
                             </div>
                         ) : !profile ? (
-                            <p className="text-slate-400 text-center py-8">プロフィール情報を取得できませんでした。</p>
+                            <p className="text-slate-400 text-center py-8">プロフィール惁E��を取得できませんでした、E/p>
                         ) : (
                             <div className="space-y-8">
                                 {/* Header */}
@@ -113,10 +112,10 @@ export default function ProfilePage() {
                                         </div>
                                         <div className="grid grid-cols-[140px_1fr] items-center py-3 px-4 rounded-lg bg-slate-900/40 border border-white/5">
                                             <dt className="text-slate-400 font-medium">所属会社</dt>
-                                            <dd className="text-white font-bold">{profile.companyName || "未設定"}</dd>
+                                            <dd className="text-white font-bold">{profile.companyName || "未設宁E}</dd>
                                         </div>
                                         <div className="grid grid-cols-[140px_1fr] items-center py-3 px-4 rounded-lg bg-slate-900/40 border border-white/5">
-                                            <dt className="text-slate-400 font-medium">権限</dt>
+                                            <dt className="text-slate-400 font-medium">権陁E/dt>
                                             <dd>
                                                 <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${
                                                     profile.role === "admin"
@@ -128,14 +127,14 @@ export default function ProfilePage() {
                                             </dd>
                                         </div>
                                         <div className="grid grid-cols-[140px_1fr] items-center py-3 px-4 rounded-lg bg-slate-900/40 border border-white/5">
-                                            <dt className="text-slate-400 font-medium">アカウント状態</dt>
+                                            <dt className="text-slate-400 font-medium">アカウント状慁E/dt>
                                             <dd>
                                                 <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${
                                                     profile.isApproved
                                                         ? "bg-green-500/10 text-green-400 border-green-500/30"
                                                         : "bg-yellow-500/10 text-yellow-400 border-yellow-500/30"
                                                 }`}>
-                                                    {profile.isApproved ? "承認済み" : "承認待ち"}
+                                                    {profile.isApproved ? "承認済み" : "承認征E��"}
                                                 </span>
                                             </dd>
                                         </div>

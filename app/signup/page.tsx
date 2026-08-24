@@ -29,38 +29,38 @@ export default function SignUpPage() {
 
             if (authError) {
                 if (authError.message.includes("User already registered")) {
-                    throw new Error("このメールアドレスは既に登録されています。ログイン画面からログインしてください。");
+                    throw new Error("こ�Eメールアドレスは既に登録されてぁE��す。ログイン画面からログインしてください、E);
                 }
                 if (authError.message.includes("Password should be at least")) {
-                    throw new Error("パスワードは8文字以上で設定してください。");
+                    throw new Error("パスワード�E8斁E��以上で設定してください、E);
                 }
                 throw new Error("アカウント登録に失敗しました: " + authError.message);
             }
 
             if (!authData.user) {
-                throw new Error("ユーザー作成に失敗しました。時間をおいて再度お試しください。");
+                throw new Error("ユーザー作�Eに失敗しました。時間をおいて再度お試しください、E);
             }
 
             const userId = authData.user.id;
 
-            // 2. 会社情報の検索または作成
+            // 2. 会社惁E��の検索また�E作�E
             let companyId: string | null = null;
 
-            // 会社名を正規化（表記ゆれ対策）
+            // 会社名を正規化�E�表記ゆれ対策！E
             const normalizeCompanyName = (name: string): string => {
                 let n = name.trim();
-                // 全角スペース・半角スペースを除去
+                // 全角スペ�Eス・半角スペ�Eスを除去
                 n = n.replace(/[\s\u3000]+/g, '');
-                // ㈱ → 株式会社
+                // ㈱ ↁE株式会社
                 n = n.replace(/㈱/g, '株式会社');
-                // ㈲ → 有限会社
+                // ㈲ ↁE有限会社
                 n = n.replace(/㈲/g, '有限会社');
-                // (株) → 株式会社
-                n = n.replace(/[（(]株[）)]/g, '株式会社');
-                // (有) → 有限会社
-                n = n.replace(/[（(]有[）)]/g, '有限会社');
+                // (株) ↁE株式会社
+                n = n.replace(/[�E�E]株[�E�E]/g, '株式会社');
+                // (朁E ↁE有限会社
+                n = n.replace(/[�E�E]有[�E�E]/g, '有限会社');
                 // 全角英数字を半角に変換
-                n = n.replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) =>
+                n = n.replace(/[�E�-�E��E�E�E�！E�E�]/g, (s) =>
                     String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
                 );
                 return n;
@@ -68,7 +68,7 @@ export default function SignUpPage() {
 
             const normalizedName = normalizeCompanyName(companyName);
 
-            // 既存の会社を全件取得して正規化後の名前で比較
+            // 既存�E会社を�E件取得して正規化後�E名前で比輁E
             const { data: allCompanies } = await supabase
                 .from("companies")
                 .select("id, name");
@@ -80,7 +80,7 @@ export default function SignUpPage() {
             if (matchedCompany) {
                 companyId = matchedCompany.id;
             } else {
-                // 新規作成（ユーザーが入力したそのままの名前で保存）
+                // 新規作�E�E�ユーザーが�E力したそのままの名前で保存！E
                 const { data: newCompany, error: companyError } = await supabase
                     .from("companies")
                     .insert([{ name: companyName.trim(), is_main: false }])
@@ -88,17 +88,17 @@ export default function SignUpPage() {
                     .single();
 
                 if (companyError) {
-                    throw new Error("会社情報の登録に失敗しました。管理者にお問い合わせください。");
+                    throw new Error("会社惁E��の登録に失敗しました。管琁E��E��お問ぁE��わせください、E);
                 }
                 companyId = newCompany.id;
             }
 
             if (authData.user && authData.user.identities && authData.user.identities.length === 0) {
-                throw new Error("このメールアドレスは既に登録されています。ログイン画面からログインしてください。");
+                throw new Error("こ�Eメールアドレスは既に登録されてぁE��す。ログイン画面からログインしてください、E);
             }
 
-            // 3. app_usersテーブルへの追加
-            // 少し待機してauth.usersの伝播を確実にする（念の為）
+            // 3. app_usersチE�Eブルへの追加
+            // 少し征E��してauth.usersの伝播を確実にする�E�念の為�E�E
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             const { error: appUserError } = await supabase
@@ -116,12 +116,12 @@ export default function SignUpPage() {
             if (appUserError) {
                 console.error("App User Insert Error:", appUserError);
                 if (appUserError.code === "23503") {
-                    throw new Error("このメールアドレスは既に登録されています。ログイン画面からログインしてください。");
+                    throw new Error("こ�Eメールアドレスは既に登録されてぁE��す。ログイン画面からログインしてください、E);
                 }
                 throw new Error(`ユーザープロフィールの保存に失敗しました: ${appUserError.message} (Code: ${appUserError.code})`);
             }
 
-            // LINE通知APIの呼び出し（失敗してもユーザーの画面遷移は止めない）
+            // LINE通知APIの呼び出し（失敗してもユーザーの画面遷移は止めなぁE��E
             try {
                 await fetch('/api/notify/line', {
                     method: 'POST',
@@ -142,7 +142,7 @@ export default function SignUpPage() {
             router.push("/pending-approval");
 
         } catch (err: any) {
-            setErrorMsg(err.message || "予期せぬエラーが発生しました。");
+            setErrorMsg(err.message || "予期せぬエラーが発生しました、E);
         } finally {
             setIsLoading(false);
         }
@@ -155,13 +155,13 @@ export default function SignUpPage() {
 
                     <div className="mb-8 text-center">
                         <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 mb-4 border border-white/5 shadow-inner">
-                            <span className="text-2xl filter drop-shadow-lg">✨</span>
+                            <span className="text-2xl filter">✨</span>
                         </div>
                         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                            新規アカウント作成
+                            新規アカウント作�E
                         </h1>
                         <p className="text-slate-400 text-sm">
-                            アカウント情報を入力してください
+                            アカウント情報を�E力してください
                         </p>
                     </div>
 
@@ -171,7 +171,7 @@ export default function SignUpPage() {
                             {/* Display Name */}
                             <div className="input-group group space-y-1.5">
                                 <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">
-                                    氏名（表示名） <span className="text-[#00e5ff]">*</span>
+                                    氏名�E�表示名！E<span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -179,14 +179,14 @@ export default function SignUpPage() {
                                     value={displayName}
                                     onChange={(e) => setDisplayName(e.target.value)}
                                     className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
-                                    placeholder="例: 山田 太郎"
+                                    placeholder="侁E 山田 太郁E
                                 />
                             </div>
 
                             {/* Company Name */}
                             <div className="input-group group space-y-1.5">
                                 <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">
-                                    会社名 <span className="text-[#00e5ff]">*</span>
+                                    会社吁E<span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="text"
@@ -194,10 +194,10 @@ export default function SignUpPage() {
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
                                     className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
-                                    placeholder="例: 株式会社〇〇建設"
+                                    placeholder="侁E 株式会社、E��E��設"
                                 />
                                 <p className="text-[10px] text-slate-500 pl-1">
-                                    ※既存の会社がある場合は自動的に紐付けられます
+                                    ※既存�E会社がある場合�E自動的に紐付けられまぁE
                                 </p>
                             </div>
 
@@ -219,7 +219,7 @@ export default function SignUpPage() {
                             {/* Password */}
                             <div className="input-group group space-y-1.5">
                                 <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">
-                                    パスワード <span className="text-[#00e5ff]">*</span>
+                                    パスワーチE<span className="text-[#00e5ff]">*</span>
                                 </label>
                                 <input
                                     type="password"
@@ -228,14 +228,14 @@ export default function SignUpPage() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-full bg-slate-900/40 border border-slate-700/50 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-[#00e5ff]/50 focus:bg-slate-900/60 focus:ring-4 focus:ring-[#00e5ff]/10 transition-all duration-300"
-                                    placeholder="8文字以上で設定"
+                                    placeholder="8斁E��以上で設宁E
                                 />
                             </div>
                         </div>
 
                         {errorMsg && (
                             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 animate-fade-in flex items-start gap-3 mt-4">
-                                <span className="text-red-400 text-lg">⚠️</span>
+                                <span className="text-red-400 text-lg">⚠�E�E/span>
                                 <p className="text-sm text-red-200 leading-snug pt-0.5">
                                     {errorMsg}
                                 </p>
@@ -245,7 +245,7 @@ export default function SignUpPage() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00e5ff] shadow-lg shadow-[#00e5ff]/25 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6"
+                            className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-[#00e5ff]/80 to-[#00e5ff] hover:from-[#00e5ff] hover:to-[#00e5ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00e5ff] shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6"
                         >
                             {isLoading ? (
                                 <div className="flex items-center gap-2">
@@ -256,22 +256,22 @@ export default function SignUpPage() {
                                     <span>Processing...</span>
                                 </div>
                             ) : (
-                                "アカウント作成（申請）"
+                                "アカウント作�E�E�申請！E
                             )}
                         </button>
                     </form>
 
                     <p className="mt-8 text-xs text-slate-500 text-center leading-relaxed">
-                        登録申請後、管理者による承認が必要です。<br />
+                        登録申請後、管琁E��E��よる承認が忁E��です、Ebr />
                         <Link href="/" className="text-[#00e5ff] hover:text-[#00e5ff] underline underline-offset-2 ml-1">
-                            すでにアカウントをお持ちの方はこちら
+                            すでにアカウントをお持ちの方はこちめE
                         </Link>
                     </p>
                 </div>
 
                 <div className="text-center mt-6">
                     <Link href="/" className="text-slate-500 hover:text-slate-300 text-xs transition-colors">
-                        トップページに戻る
+                        トップ�Eージに戻めE
                     </Link>
                 </div>
             </div>

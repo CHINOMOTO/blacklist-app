@@ -48,17 +48,17 @@ export default function AdminCaseList() {
 
           <div className="flex items-center justify-between mb-8 animate-fade-in">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">承認待ち一覧</h1>
-              <p className="text-[#00e5ff] font-medium">確認が必要な申請の一覧です</p>
+              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">承認征E��一覧</h1>
+              <p className="text-[#00e5ff] font-medium">確認が忁E��な申請�E一覧でぁE/p>
             </div>
             <Link href="/dashboard" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
-              戻る
+              戻めE
             </Link>
           </div>
 
           {errorMsg && (
             <div className="p-4 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-start gap-3 animate-fade-in shadow-lg">
-              <span className="text-lg">⚠️</span>
+              <span className="text-lg">⚠�E�E/span>
               <span className="pt-0.5">{errorMsg}</span>
             </div>
           )}
@@ -74,9 +74,9 @@ export default function AdminCaseList() {
             </div>
           ) : cases.length === 0 ? (
             <div className="glass-panel p-12 text-center rounded-3xl border-white/5 bg-slate-900/30 animate-fade-in">
-              <div className="text-4xl mb-4 opacity-30">✅</div>
-              <p className="text-slate-400 font-medium">現在、審査中の案件はありません。</p>
-              <p className="text-slate-500 text-sm mt-2">全ての申請が処理されました。</p>
+              <div className="text-4xl mb-4 opacity-30">✁E/div>
+              <p className="text-slate-400 font-medium">現在、審査中の案件はありません、E/p>
+              <p className="text-slate-500 text-sm mt-2">全ての申請が処琁E��れました、E/p>
             </div>
           ) : (
             <div className="grid gap-4 animate-fade-in delay-100">
@@ -88,14 +88,14 @@ export default function AdminCaseList() {
                 >
                   <div className="flex items-center gap-6">
                     <div className="h-12 w-12 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                      ⚠️
+                      ⚠�E�E
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-white group-hover:text-[#00e5ff] transition-colors">
                         {c.full_name}
                       </h3>
                       <div className="flex gap-4 text-sm text-slate-400 mt-1">
-                        <span className="font-mono">生年月日: {c.birth_date ? c.birth_date.replace(/-/g, "/") : "不明"}</span>
+                        <span className="font-mono">生年月日: {c.birth_date ? c.birth_date.replace(/-/g, "/") : "不�E"}</span>
                       </div>
                     </div>
                   </div>
