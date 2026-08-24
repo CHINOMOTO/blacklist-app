@@ -212,10 +212,10 @@ function StatusBadge({ status }: { status: string }) {
   let label = status;
 
   if (status === "pending") {
-    styles = "bg-yellow-500/10 text-yellow-400 border-yellow-500/30 shadow-[0_0_10px_rgba(234,179,8,0.2)]";
+    styles = "bg-yellow-500/10 text-yellow-400 border-yellow-500/30";
     label = "承認待ち";
   } else if (status === "approved") {
-    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30 shadow-[0_0_10px_rgba(0,229,255,0.2)]";
+    styles = "bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/30";
     label = "承認済み";
   } else if (status === "rejected") {
     styles = "bg-red-500/10 text-red-400 border-red-500/30";
