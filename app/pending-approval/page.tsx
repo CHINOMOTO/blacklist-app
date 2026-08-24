@@ -20,20 +20,20 @@ export default function PendingApprovalPage() {
                 </div>
 
                 <h1 className="text-2xl font-bold text-white mb-3">
-                    承認征E��でぁE
+                    承認待ちです
                 </h1>
 
                 <p className="text-slate-300 mb-8 leading-relaxed">
-                    アカウント登録の申請を受け付けました、Ebr />
-                    現在、管琁E��E��よる確認を行っております、E
+                    アカウント登録の申請を受け付けました。<br />
+                    現在、管理者による確認を行っております。
                 </p>
 
                 <div className="bg-slate-900/40 rounded-xl p-6 text-left mb-8 border border-slate-700/50">
                     <h3 className="text-xs font-bold text-[#00e5ff] mb-2 uppercase tracking-widest">Next Steps</h3>
                     <ul className="text-sm text-slate-400 space-y-2 list-disc list-inside">
-                        <li>管琁E��E��あなた�E所属情報を確認しまぁE/li>
-                        <li>確認メールが送られましたので、認証リンクをクリチE��してください</li>
-                        <li>承認後、本シスチE��を利用可能になりまぁE/li>
+                        <li>管理者があなたの所属情報を確認します</li>
+                        <li>確認メールが送られましたので、認証リンクをクリックしてください</li>
+                        <li>承認後、本システムを利用可能になります</li>
                     </ul>
                 </div>
 
@@ -41,7 +41,7 @@ export default function PendingApprovalPage() {
                     onClick={handleLogout}
                     className="btn-secondary w-full"
                 >
-                    一度ログアウトして征E��すめE
+                    一度ログアウトして待機する
                 </button>
             </div>
         </div>

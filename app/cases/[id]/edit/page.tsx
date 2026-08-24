@@ -47,7 +47,7 @@ export default function EditCasePage() {
                 .single();
 
             if (error) {
-                setErrorMsg("チE�Eタの取得に失敗しました: " + error.message);
+                setErrorMsg("データの取得に失敗しました: " + error.message);
                 setLoading(false);
                 return;
             }
@@ -103,7 +103,7 @@ export default function EditCasePage() {
     };
 
     const removeExistingFile = (pathToRemove: string) => {
-        if (!confirm("保存時にこ�Eファイルは削除されます。リストから除外しますか�E�E)) return;
+        if (!confirm("保存時にこのファイルは削除されます。リストから除外しますか？")) return;
         setExistingFiles((prev) => prev.filter((f) => f.path !== pathToRemove));
     };
 
@@ -114,10 +114,10 @@ export default function EditCasePage() {
 
         try {
             const { data: { user } } = await supabase.auth.getUser();
-            if (!user) throw new Error("セチE��ョンが�Eれました。�Eログインしてください、E);
+            if (!user) throw new Error("セッションが切れました。再ログインしてください。");
 
             if (nameKana && !/^[ァ-ヶー\s　]*$/.test(nameKana)) {
-                throw new Error("氏名�E�カナ）�E全角カタカナで入力してください、E);
+                throw new Error("氏名（カナ）は全角カタカナで入力してください。");
             }
 
             // 1. Upload new files
@@ -131,7 +131,7 @@ export default function EditCasePage() {
                         .from('case-evidence')
                         .upload(fileName, file);
 
-                    if (uploadError) throw new Error(`ファイルアチE�Eロード失敁E ${file.name}`);
+                    if (uploadError) throw new Error(`ファイルアップロード失敗: ${file.name}`);
                     if (uploadData?.path) newUploadedPaths.push(uploadData.path);
                 }
             }
@@ -189,15 +189,15 @@ export default function EditCasePage() {
                 <div className="max-w-3xl w-full">
 
                     <div className="mb-8 text-center animate-fade-in">
-                        <h1 className="text-3xl font-bold text-white mb-2">登録惁E��の編雁E/h1>
-                        <p className="text-slate-400">登録チE�Eタの編雁E��管琁E��E�Eみ�E�E/p>
+                        <h1 className="text-3xl font-bold text-white mb-2">登録情報の編集</h1>
+                        <p className="text-slate-400">登録データの編集（管理者のみ）</p>
                     </div>
 
                     <div className="glass-panel rounded-2xl p-6 md:p-10 animate-fade-in delay-100">
                         <form onSubmit={handleSubmit} className="space-y-8">
 
-                            {/* 基本惁E�� */}
-                            <Section title="基本惁E��">
+                            {/* 基本情報 */}
+                            <Section title="基本情報">
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <Label required>氏名</Label>
@@ -210,7 +210,7 @@ export default function EditCasePage() {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label>氏名�E�カナ！E/Label>
+                                        <Label>氏名（カナ）</Label>
                                         <input
                                             type="text"
                                             value={nameKana}
@@ -231,7 +231,7 @@ export default function EditCasePage() {
                                             <input type="text" inputMode="numeric" maxLength={2} value={birthMonth}
                                                 onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthMonth(e.target.value); }}
                                                 className="input-field w-16 text-center" placeholder="00" />
-                                            <span className="text-slate-400">朁E/span>
+                                            <span className="text-slate-400">月</span>
                                             <input type="text" inputMode="numeric" maxLength={2} value={birthDay}
                                                 onChange={(e) => { if (/^\d*$/.test(e.target.value)) setBirthDay(e.target.value); }}
                                                 className="input-field w-16 text-center" placeholder="00" />
@@ -248,17 +248,17 @@ export default function EditCasePage() {
                                             <option value="">選択してください</option>
                                             <option value="male">男性</option>
                                             <option value="female">女性</option>
-                                            <option value="other">そ�E仁E/option>
+                                            <option value="other">その他</option>
                                         </select>
                                     </div>
                                 </div>
                             </Section>
 
-                            {/* 詳細惁E�� */}
-                            <Section title="トラブル惁E��">
+                            {/* 詳細情報 */}
+                            <Section title="トラブル情報">
                                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                                     <div className="space-y-2">
-                                        <Label>携帯電話番号�E�丁E桁E��E/Label>
+                                        <Label>携帯電話番号（下4桁）</Label>
                                         <input
                                             type="text"
                                             maxLength={4}
@@ -268,7 +268,7 @@ export default function EditCasePage() {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label>住所�E�市区町村！E/Label>
+                                        <Label>住所（市区町村）</Label>
                                         <input
                                             type="text"
                                             value={city}
@@ -287,7 +287,7 @@ export default function EditCasePage() {
                                             <input type="text" inputMode="numeric" maxLength={2} value={occurrenceMonth}
                                                 onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceMonth(e.target.value); }}
                                                 className="input-field w-16 text-center" placeholder="00" />
-                                            <span className="text-slate-400">朁E/span>
+                                            <span className="text-slate-400">月</span>
                                             <input type="text" inputMode="numeric" maxLength={2} value={occurrenceDay}
                                                 onChange={(e) => { if (/^\d*$/.test(e.target.value)) setOccurrenceDay(e.target.value); }}
                                                 className="input-field w-16 text-center" placeholder="00" />
@@ -296,7 +296,7 @@ export default function EditCasePage() {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label required>登録琁E�� / 詳細</Label>
+                                    <Label required>登録理由 / 詳細</Label>
                                     <textarea
                                         required
                                         rows={5}
@@ -308,7 +308,7 @@ export default function EditCasePage() {
 
                                 {/* FILE UPLOAD SECTION */}
                                 <div className="space-y-2 mt-6 border-t border-slate-700/50 pt-6">
-                                    <Label>添付賁E���E�画像�EPDF等！E/Label>
+                                    <Label>添付資料（画像・PDF等）</Label>
 
                                     {/* Existing Files */}
                                     {existingFiles.length > 0 && (
@@ -344,7 +344,7 @@ export default function EditCasePage() {
                                         <div className="pointer-events-none">
                                             <span className="text-2xl block mb-2">📁</span>
                                             <p className="text-sm text-slate-400">ファイルをここに追加</p>
-                                            <p className="text-xs text-slate-500 mt-1">�E�クリチE��また�EドラチE���E�E��ロチE�E�E�E/p>
+                                            <p className="text-xs text-slate-500 mt-1">（クリックまたはドラッグ＆ドロップ）</p>
                                         </div>
                                     </div>
 
@@ -360,7 +360,7 @@ export default function EditCasePage() {
                                                         onClick={() => removeNewFile(index)}
                                                         className="text-red-400 hover:text-red-300 hover:bg-red-500/10 p-1 rounded transition-colors"
                                                     >
-                                                        ✁E
+                                                        ✕
                                                     </button>
                                                 </div>
                                             ))}
@@ -369,7 +369,7 @@ export default function EditCasePage() {
                                 </div>
 
                                 <div className="space-y-2 mt-4">
-                                    <Label>スチE�Eタス</Label>
+                                    <Label>ステータス</Label>
                                     <select
                                         value={status}
                                         onChange={(e) => setStatus(e.target.value)}
@@ -377,14 +377,14 @@ export default function EditCasePage() {
                                     >
                                         <option value="pending">審査中 (Pending)</option>
                                         <option value="approved">承認済み (Approved)</option>
-                                        <option value="rejected">却丁E(Rejected)</option>
+                                        <option value="rejected">却下 (Rejected)</option>
                                     </select>
                                 </div>
                             </Section>
 
                             {errorMsg && (
                                 <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-sm">
-                                    ⚠�E�E{errorMsg}
+                                    ⚠️ {errorMsg}
                                 </div>
                             )}
 
@@ -395,9 +395,9 @@ export default function EditCasePage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary flex-1 py-3 text-base shadow-lg"
+                                    className="btn-primary flex-1 py-3 text-base shadow-lg shadow-[#00e5ff]/20"
                                 >
-                                    {saving ? "更新中..." : "変更を保孁E}
+                                    {saving ? "更新中..." : "変更を保存"}
                                 </button>
                             </div>
 
@@ -426,11 +426,11 @@ function Label({ children, required }: { children: React.ReactNode, required?: b
             {children}
             {required ? (
                 <span className="text-[#00e5ff] text-[10px] border border-[#00e5ff]/30 bg-[#00e5ff]/10 px-1.5 py-0.5 rounded">
-                    忁E��E
+                    必須
                 </span>
             ) : (
                 <span className="text-slate-500 text-[10px] border border-slate-700 bg-slate-800 px-1.5 py-0.5 rounded">
-                    任愁E
+                    任意
                 </span>
             )}
         </label>

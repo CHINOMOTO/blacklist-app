@@ -17,19 +17,19 @@ export default function AdminDashboardPage() {
         const fetchCounts = async () => {
             setLoading(true);
 
-            // ケースの承認征E��件数
+            // ケースの承認待ち件数
             const casesQuery = supabase
                 .from("blacklist_cases")
                 .select("*", { count: "exact", head: true })
                 .eq("status", "pending");
 
-            // ユーザーの承認征E��件数
+            // ユーザーの承認待ち件数
             const usersQuery = supabase
                 .from("app_users")
                 .select("*", { count: "exact", head: true })
                 .eq("is_approved", false);
 
-            // 登録済み�E�承認済み�E�ユーザー件数
+            // 登録済み（承認済み）ユーザー件数
             const approvedUsersQuery = supabase
                 .from("app_users")
                 .select("*", { count: "exact", head: true })
@@ -40,7 +40,7 @@ export default function AdminDashboardPage() {
                 .from("companies")
                 .select("*", { count: "exact", head: true });
 
-            // お問ぁE��わせ未読件数
+            // お問い合わせ未読件数
             const inquiriesQuery = supabase
                 .from("contact_inquiries")
                 .select("*", { count: "exact", head: true })
@@ -70,11 +70,11 @@ export default function AdminDashboardPage() {
             <div className="min-h-screen text-slate-100 flex items-center justify-center pt-24 pb-12">
                 <div className="max-w-5xl w-full mx-4">
                     <h1 className="text-3xl font-bold text-[#00e5ff] mb-8 text-center">
-                        管琁E��E��チE��ュボ�EチE
+                        管理者ダッシュボード
                     </h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {/* 承認征E��タイル */}
+                        {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
                             className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
@@ -92,14 +92,14 @@ export default function AdminDashboardPage() {
                                 </div>
 
                                 <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
-                                    承認征E��リスチE
+                                    承認待ちリスト
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    新規登録された応募老E��性リスト�E審査を行います、E
+                                    新規登録された応募者属性リストの審査を行います。
                                 </p>
 
                                 <div className="mt-auto">
-                                    <div className="text-5xl font-bold text-white">
+                                    <div className="text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]">
                                         {loading ? (
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
@@ -133,10 +133,10 @@ export default function AdminDashboardPage() {
                                 </div>
 
                                 <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
-                                    新規ユーザー承誁E
+                                    新規ユーザー承認
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    アカウント利用申請を確認し、利用を許可します、E
+                                    アカウント利用申請を確認し、利用を許可します。
                                 </p>
 
                                 <div className="mt-auto">
@@ -145,7 +145,7 @@ export default function AdminDashboardPage() {
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
                                             <>
-                                                <span className={pendingUserCount && pendingUserCount > 0 ? "text-[#00e5ff]" : ""}>
+                                                <span className={pendingUserCount && pendingUserCount > 0 ? "text-[#00e5ff] drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]" : ""}>
                                                     {pendingUserCount ?? 0}
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">
@@ -179,7 +179,7 @@ export default function AdminDashboardPage() {
                                     登録ユーザー一覧
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    現在承認されてぁE��全ユーザーを確認します、E
+                                    現在承認されている全ユーザーを確認します。
                                 </p>
 
                                 <div className="mt-auto">
@@ -201,7 +201,7 @@ export default function AdminDashboardPage() {
                             </div>
                         </Link>
 
-                        {/* 会社管琁E��イル */}
+                        {/* 会社管理タイル */}
                         <Link
                             href="/admin/companies"
                             className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
@@ -219,10 +219,10 @@ export default function AdminDashboardPage() {
                                 </div>
 
                                 <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
-                                    会社管琁E
+                                    会社管理
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    利用会社�E�グループ会社�E��E追加・編雁E��行います、E
+                                    利用会社（グループ会社）の追加・編集を行います。
                                 </p>
 
                                 <div className="mt-auto">
@@ -244,7 +244,7 @@ export default function AdminDashboardPage() {
                             </div>
                         </Link>
 
-                        {/* お問ぁE��わせ管琁E��イル */}
+                        {/* お問い合わせ管理タイル */}
                         <Link
                             href="/admin/inquiries"
                             className="block group relative p-8 rounded-3xl border border-[#00e5ff]/30 transition-all duration-300 glass-panel hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] flex flex-col overflow-hidden"
@@ -262,10 +262,10 @@ export default function AdminDashboardPage() {
                                 </div>
 
                                 <h2 className="text-2xl font-bold text-slate-100 mb-2 group-hover:text-[#00e5ff] transition-colors duration-300">
-                                    お問ぁE��わせ管琁E
+                                    お問い合わせ管理
                                 </h2>
                                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                    ユーザーからのお問ぁE��わせを確認�E管琁E��ます、E
+                                    ユーザーからのお問い合わせを確認・管理します。
                                 </p>
 
                                 <div className="mt-auto">
@@ -274,7 +274,7 @@ export default function AdminDashboardPage() {
                                             <span className="text-2xl text-slate-600 animate-pulse">...</span>
                                         ) : (
                                             <>
-                                                <span className={inquiryCount && inquiryCount > 0 ? "text-amber-400" : "group-hover:text-[#00e5ff] transition-colors"}>
+                                                <span className={inquiryCount && inquiryCount > 0 ? "text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]" : "group-hover:text-[#00e5ff] transition-colors"}>
                                                     {inquiryCount ?? 0}
                                                 </span>
                                                 <span className="text-lg text-slate-500 font-normal ml-2 tracking-widest">

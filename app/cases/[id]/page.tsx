@@ -37,10 +37,10 @@ function genderLabel(g: CaseDetail["gender"]) {
         case "female":
             return "女性";
         case "other":
-            return "そ�E仁E;
+            return "その他";
         case "unknown":
         default:
-            return "未設宁E;
+            return "未設定";
     }
 }
 
@@ -51,7 +51,7 @@ function statusLabel(status: CaseDetail["status"]) {
         case "pending":
             return "審査中";
         case "rejected":
-            return "却丁E;
+            return "却下";
     }
 }
 
@@ -86,10 +86,10 @@ export default function CaseDetailPage() {
             setLoading(true);
             setErrorMsg(null);
 
-            // 現在のログインユーザー惁E��を取征E
+            // 現在のログインユーザー情報を取得
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) {
-                setErrorMsg("認証エラー: ログインしてください、E);
+                setErrorMsg("認証エラー: ログインしてください。");
                 setLoading(false);
                 return;
             }
@@ -101,7 +101,7 @@ export default function CaseDetailPage() {
                 .single();
 
             if (!currentUser) {
-                setErrorMsg("ユーザー惁E��の取得に失敗しました、E);
+                setErrorMsg("ユーザー情報の取得に失敗しました。");
                 setLoading(false);
                 return;
             }
@@ -115,27 +115,27 @@ export default function CaseDetailPage() {
                 .maybeSingle();
 
             if (error) {
-                setErrorMsg(error.message || "チE�Eタの取得に失敗しました、E);
+                setErrorMsg(error.message || "データの取得に失敗しました。");
                 setLoading(false);
                 return;
             }
 
             if (!data) {
-                setErrorMsg("該当するデータが見つかりません、E);
+                setErrorMsg("該当するデータが見つかりません。");
                 setLoading(false);
                 return;
             }
 
-            // アクセス権限チェチE��: 管琁E��Eadmin)であるか、また�E自社のチE�Eタである場合�Eみ閲覧可能
+            // アクセス権限チェック: 管理者(admin)であるか、または自社のデータである場合のみ閲覧可能
             if (currentUser.role !== 'admin' && data.registered_company_id !== currentUser.company_id) {
-                setErrorMsg("アクセス権限がありません。他社のチE�Eタは閲覧できません、E);
+                setErrorMsg("アクセス権限がありません。他社のデータは閲覧できません。");
                 setLoading(false);
                 return;
             }
 
             setCaseDetail(data as CaseDetail);
 
-            // アクセスログの保孁E
+            // アクセスログの保存
             try {
                 const { data: { session } } = await supabase.auth.getSession();
                 if (session?.access_token) {
@@ -179,7 +179,7 @@ export default function CaseDetailPage() {
                 }
             }
 
-            // 証拠ファイルの署名付きURLを取征E
+            // 証拠ファイルの署名付きURLを取得
             if (data.evidence_urls && Array.isArray(data.evidence_urls) && data.evidence_urls.length > 0) {
                 const files: EvidenceFile[] = [];
                 for (const path of data.evidence_urls) {
@@ -215,7 +215,7 @@ export default function CaseDetailPage() {
 
                     <div className="mb-4 animate-fade-in">
                         <Link href="/cases" className="btn-secondary text-sm inline-flex items-center gap-2 px-4 py-2 hover:bg-slate-800 transition-colors mb-4">
-                            一覧へ戻めE
+                            一覧へ戻る
                         </Link>
                     </div>
 
@@ -226,10 +226,10 @@ export default function CaseDetailPage() {
                             </div>
                         ) : errorMsg ? (
                             <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-sm">
-                                ⚠�E�E{errorMsg}
+                                ⚠️ {errorMsg}
                             </div>
                         ) : !caseDetail ? (
-                            <p className="text-slate-400 text-center py-8">チE�Eタが見つかりません、E/p>
+                            <p className="text-slate-400 text-center py-8">データが見つかりません。</p>
                         ) : (
                             <div className="space-y-8">
 
@@ -252,7 +252,7 @@ export default function CaseDetailPage() {
                                 {/* Info Grid */}
                                 <div className="grid md:grid-cols-2 gap-8">
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">基本惁E��</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">基本情報</h2>
                                         <dl className="space-y-3 text-sm">
                                             <div className="grid grid-cols-[120px_1fr]">
                                                 <dt className="text-slate-400">性別</dt>
@@ -263,7 +263,7 @@ export default function CaseDetailPage() {
                                                 <dd className="text-slate-100 font-medium">{caseDetail.birth_date?.replace(/-/g, "/") || "-"}</dd>
                                             </div>
                                             <div className="grid grid-cols-[120px_1fr]">
-                                                <dt className="text-slate-400">電話番号(丁E桁E</dt>
+                                                <dt className="text-slate-400">電話番号(下4桁)</dt>
                                                 <dd className="text-slate-100 font-medium">{caseDetail.phone_last4 || "-"}</dd>
                                             </div>
                                             <div className="grid grid-cols-[120px_1fr]">
@@ -281,13 +281,13 @@ export default function CaseDetailPage() {
                                                 </dd>
                                             </div>
                                             <div className="grid grid-cols-[120px_1fr]">
-                                                <dt className="text-slate-400">登録允E/dt>
+                                                <dt className="text-slate-400">登録元</dt>
                                                 <dd className="text-slate-100 font-medium">
                                                     {companyName || "-"}
                                                 </dd>
                                             </div>
                                             <div className="grid grid-cols-[120px_1fr]">
-                                                <dt className="text-slate-400">登録老E/dt>
+                                                <dt className="text-slate-400">登録者</dt>
                                                 <dd className="text-slate-100 font-medium">
                                                     {registrantName || "-"}
                                                 </dd>
@@ -296,7 +296,7 @@ export default function CaseDetailPage() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">トラブル詳細・琁E��</h2>
+                                        <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">トラブル詳細・理由</h2>
                                         <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700 min-h-[160px]">
                                             <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">
                                                 {caseDetail.reason_text}
@@ -307,9 +307,9 @@ export default function CaseDetailPage() {
 
                                 {/* Evidence Files */}
                                 <div className="space-y-4">
-                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">添付賁E��</h2>
+                                    <h2 className="text-sm font-bold text-[#00e5ff] uppercase tracking-widest border-b border-[#00e5ff]/20 pb-2">添付資料</h2>
                                     {evidenceFiles.length === 0 ? (
-                                        <p className="text-sm text-slate-500">証拠ファイルはありません、E/p>
+                                        <p className="text-sm text-slate-500">証拠ファイルはありません。</p>
                                     ) : (
                                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                             {evidenceFiles.map((file, i) => (

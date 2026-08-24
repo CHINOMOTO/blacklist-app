@@ -14,9 +14,9 @@ type AppUser = {
         name: string;
     } | null;
     is_approved: boolean; // boolean
-    email?: string; // joinで取ってくるのは難しいが、authからは取れなぁE�Eであきらめるか、別途取征E
-    // note: Supabaseでauth.usersとpublicチE�EブルをjoinするのはセキュリチE��上難しいので、E
-    // ここではpublic.app_usersの惁E��だけで表示する、Emailが忁E��ならEdge Functionが忁E��、E
+    email?: string; // joinで取ってくるのは難しいが、authからは取れないのであきらめるか、別途取得
+    // note: Supabaseでauth.usersとpublicテーブルをjoinするのはセキュリティ上難しいので、
+    // ここではpublic.app_usersの情報だけで表示する。Emailが必要ならEdge Functionが必要。
     created_at?: string;
 };
 
@@ -26,7 +26,7 @@ export default function AdminUsersPage() {
 
     const fetchPendingUsers = async () => {
         setLoading(true);
-        // 未承誁Eis_approved = false)のユーザーを取征E
+        // 未承認(is_approved = false)のユーザーを取得
         const { data, error } = await supabase
             .from("app_users")
             .select(`
@@ -71,11 +71,11 @@ export default function AdminUsersPage() {
 
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承誁E/h1>
-                            <p className="text-slate-400">新規利用申請�E確認と承認を行いまぁE/p>
+                            <h1 className="text-3xl font-bold text-white mb-2">新規ユーザー承認</h1>
+                            <p className="text-slate-400">新規利用申請の確認と承認を行います</p>
                         </div>
                         <Link href="/admin" className="btn-secondary text-xs">
-                            管琁E��E��ニューへ戻めE
+                            管理者メニューへ戻る
                         </Link>
                     </div>
 
@@ -86,7 +86,7 @@ export default function AdminUsersPage() {
                     ) : pendingUsers.length === 0 ? (
                         <div className="glass-panel p-10 text-center rounded-2xl animate-fade-in">
                             <span className="text-4xl mb-4 block">👍</span>
-                            <p className="text-slate-300">現在、未承認�EユーザーはぁE��せん、E/p>
+                            <p className="text-slate-300">現在、未承認のユーザーはいません。</p>
                         </div>
                     ) : (
                         <div className="grid gap-4 animate-fade-in delay-100">
@@ -94,29 +94,29 @@ export default function AdminUsersPage() {
                                 <div key={user.id} className="glass-panel p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 card-hover">
                                     <div className="flex-grow">
                                         <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-bold text-white">{user.display_name || "名無ぁE}</h3>
+                                            <h3 className="text-xl font-bold text-white">{user.display_name || "名無し"}</h3>
                                             <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded border border-yellow-500/30">
                                                 PENDING
                                             </span>
                                         </div>
                                         <div className="text-slate-400 text-sm flex items-center gap-2">
-                                            <span className="text-slate-500">所屁E</span>
-                                            {user.companies?.name || "未所屁E}
+                                            <span className="text-slate-500">所属:</span>
+                                            {user.companies?.name || "未所属"}
                                         </div>
                                     </div>
 
                                     <div className="flex gap-3 w-full md:w-auto">
                                         <button
                                             onClick={() => {
-                                                if (confirm("こ�Eユーザーを承認しますか�E�E)) handleApprove(user.id);
+                                                if (confirm("このユーザーを承認しますか？")) handleApprove(user.id);
                                             }}
                                             className="btn-primary flex-grow md:flex-grow-0 whitespace-nowrap"
                                         >
-                                            承認すめE
+                                            承認する
                                         </button>
                                         <button
                                             onClick={async () => {
-                                                if (confirm("本当にこ�E申請を却下（削除�E�しますか�E�\n※こ�E操作�E取り消せません、E)) {
+                                                if (confirm("本当にこの申請を却下（削除）しますか？\n※この操作は取り消せません。")) {
                                                     const { error } = await supabase
                                                         .from("app_users")
                                                         .delete()
@@ -131,7 +131,7 @@ export default function AdminUsersPage() {
                                             }}
                                             className="px-4 py-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all text-sm font-bold whitespace-nowrap"
                                         >
-                                            却丁E
+                                            却下
                                         </button>
                                     </div>
                                 </div>

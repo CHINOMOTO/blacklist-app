@@ -41,7 +41,7 @@ export default function NewCasePage() {
 
       newFiles.forEach(file => {
         if (file.size > MAX_FILE_SIZE) {
-          alert(`ファイル、E{file.name}」�Eサイズが大きすぎまぁE(最大50MB)`);
+          alert(`ファイル「${file.name}」はサイズが大きすぎます (最大50MB)`);
         } else {
           validFiles.push(file);
         }
@@ -58,22 +58,22 @@ export default function NewCasePage() {
   };
 
   const handleOCR = async (file: File) => {
-    if (!confirm("画像を解析してチE��ストを抽出しますか�E�\\n抽出されたテキスト�E「登録琁E��/詳細」に追記されます、E)) return;
+    if (!confirm("画像を解析してテキストを抽出しますか？\\n抽出されたテキストは「登録理由/詳細」に追記されます。")) return;
 
     setIsAnalyzing(true);
     try {
       const text = await recognizeText(file);
       if (text) {
-        // 余�Eな空白を除去して追訁E
+        // 余分な空白を除去して追記
         const cleanedText = text.replace(/\\s+/g, ' ').trim();
         setReason((prev) => prev + (prev ? "\\n\\n" : "") + "[画像解析結果]\\n" + cleanedText);
-        alert("チE��ストを抽出しました�E�E);
+        alert("テキストを抽出しました！");
       } else {
-        alert("チE��ストが見つかりませんでした、E);
+        alert("テキストが見つかりませんでした。");
       }
     } catch (error) {
       console.error(error);
-      alert("解析に失敗しました、E);
+      alert("解析に失敗しました。");
     } finally {
       setIsAnalyzing(false);
     }
@@ -87,10 +87,10 @@ export default function NewCasePage() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        throw new Error("ログインセチE��ョンが�Eれました。�Eログインしてください、E);
+        throw new Error("ログインセッションが切れました。再ログインしてください。");
       }
 
-      // ユーザーの会社IDと会社名を取征E
+      // ユーザーの会社IDと会社名を取得
       const { data: appUser } = await supabase
         .from("app_users")
         .select("company_id, companies(name)")
@@ -98,14 +98,14 @@ export default function NewCasePage() {
         .single();
 
       if (!appUser?.company_id) {
-        throw new Error("所属会社惁E��が見つかりません、E);
+        throw new Error("所属会社情報が見つかりません。");
       }
 
       if (nameKana && !/^[ァ-ヶー\s　]*$/.test(nameKana)) {
-        throw new Error("氏名�E�カナ）�E全角カタカナで入力してください、E);
+        throw new Error("氏名（カナ）は全角カタカナで入力してください。");
       }
 
-      // ファイルアチE�Eロード�E琁E
+      // ファイルアップロード処理
       const uploadedUrls: string[] = [];
       if (selectedFiles.length > 0) {
         for (const file of selectedFiles) {
@@ -118,7 +118,7 @@ export default function NewCasePage() {
 
           if (uploadError) {
             console.error("Upload failed:", uploadError);
-            throw new Error(`ファイルのアチE�Eロードに失敗しました (${file.name}): ${uploadError.message}`);
+            throw new Error(`ファイルのアップロードに失敗しました (${file.name}): ${uploadError.message}`);
           }
 
           if (uploadData?.path) {
@@ -143,15 +143,15 @@ export default function NewCasePage() {
             ? `${occurrenceYear}-${occurrenceMonth.padStart(2, '0')}-${occurrenceDay.padStart(2, '0')}`
             : null,
           reason_text: reason,
-          evidence_urls: uploadedUrls, // アチE�Eロードしたファイルのパス配�E
-          status: "pending", // 初期状態�E未承誁E
+          evidence_urls: uploadedUrls, // アップロードしたファイルのパス配列
+          status: "pending", // 初期状態は未承認
           registered_by_user_id: user.id,
         },
       ]);
 
       if (error) throw error;
 
-      // LINE通知APIの呼び出し（失敗しても画面遷移は止めなぁE��E
+      // LINE通知APIの呼び出し（失敗しても画面遷移は止めない）
       try {
         await fetch('/api/notify/line', {
           method: 'POST',
@@ -160,7 +160,7 @@ export default function NewCasePage() {
             type: 'new_case',
             data: {
               targetName: name,
-              company: (appUser?.companies as any)?.name || "不�E"
+              company: (appUser?.companies as any)?.name || "不明"
             }
           })
         });
@@ -172,7 +172,7 @@ export default function NewCasePage() {
       setIsSubmitted(true);
     } catch (err: any) {
       console.error(err);
-      setErrorMsg("登録処琁E��にエラーが発生しました: " + (err.message || "詳細不�E"));
+      setErrorMsg("登録処理中にエラーが発生しました: " + (err.message || "詳細不明"));
       setLoading(false);
     }
   };
@@ -187,11 +187,11 @@ export default function NewCasePage() {
             <div className="absolute inset-0 bg-[#00e5ff]/5 pointer-events-none"></div>
 
             <h2 className="text-2xl font-bold text-white mb-6 tracking-wider">
-              登録申請完亁E
+              登録申請完了
             </h2>
             <p className="text-slate-300 mb-8 leading-relaxed">
-              登録申請が完亁E��ました、Ebr />
-              管琁E��E�E承認をお征E��ください、E
+              登録申請が完了しました。<br />
+              管理者の承認をお待ちください。
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -217,8 +217,8 @@ export default function NewCasePage() {
               >
                 続けて登録する
               </button>
-              <Link href="/dashboard" className="btn-primary py-3 px-6 shadow-lg">
-                ダチE��ュボ�Eドへ戻めE
+              <Link href="/dashboard" className="btn-primary py-3 px-6 shadow-lg shadow-[#00e5ff]/20">
+                ダッシュボードへ戻る
               </Link>
             </div>
           </div>
@@ -233,15 +233,15 @@ export default function NewCasePage() {
         <div className="max-w-3xl w-full">
 
           <div className="mb-8 text-center animate-fade-in">
-            <h1 className="text-3xl font-bold text-white mb-2">新規登録申諁E/h1>
-            <p className="text-slate-400">新しいチE�Eタを登録しまぁE/p>
+            <h1 className="text-3xl font-bold text-white mb-2">新規登録申請</h1>
+            <p className="text-slate-400">新しいデータを登録します</p>
           </div>
 
           <div className="glass-panel rounded-2xl p-6 md:p-10 animate-fade-in delay-100">
             <form onSubmit={handleSubmit} className="space-y-8">
 
-              {/* 基本惁E�� */}
-              <Section title="基本惁E��">
+              {/* 基本情報 */}
+              <Section title="基本情報">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label required>氏名</Label>
@@ -251,11 +251,11 @@ export default function NewCasePage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="input-field"
-                      placeholder="山田 太郁E
+                      placeholder="山田 太郎"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>氏名�E�カナ！E/Label>
+                    <Label>氏名（カナ）</Label>
                     <input
                       type="text"
                       value={nameKana}
@@ -288,7 +288,7 @@ export default function NewCasePage() {
                         className="input-field w-16 text-center"
                         placeholder="00"
                       />
-                      <span className="text-slate-400">朁E/span>
+                      <span className="text-slate-400">月</span>
                       <input
                         type="text"
                         inputMode="numeric"
@@ -311,17 +311,17 @@ export default function NewCasePage() {
                       <option value="">選択してください</option>
                       <option value="male">男性</option>
                       <option value="female">女性</option>
-                      <option value="other">そ�E仁E/option>
+                      <option value="other">その他</option>
                     </select>
                   </div>
                 </div>
               </Section>
 
-              {/* 詳細惁E�� */}
-              <Section title="トラブル惁E��">
+              {/* 詳細情報 */}
+              <Section title="トラブル情報">
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div className="space-y-2">
-                    <Label>携帯電話番号�E�丁E桁E��E/Label>
+                    <Label>携帯電話番号（下4桁）</Label>
                     <input
                       type="text"
                       maxLength={4}
@@ -337,7 +337,7 @@ export default function NewCasePage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>住所�E�市区町村！E/Label>
+                    <Label>住所（市区町村）</Label>
                     <input
                       type="text"
                       value={city}
@@ -368,7 +368,7 @@ export default function NewCasePage() {
                         className="input-field w-16 text-center"
                         placeholder="00"
                       />
-                      <span className="text-slate-400">朁E/span>
+                      <span className="text-slate-400">月</span>
                       <input
                         type="text"
                         inputMode="numeric"
@@ -383,19 +383,19 @@ export default function NewCasePage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label required>登録琁E�� / 詳細</Label>
+                  <Label required>登録理由 / 詳細</Label>
                   <textarea
                     required
                     rows={5}
                     value={reason}
                     onChange={(e) => setReason(e.target.value)}
                     className="input-field min-h-[120px]"
-                    placeholder="具体的なトラブル冁E��めE��意点を記載してください..."
+                    placeholder="具体的なトラブル内容や注意点を記載してください..."
                   />
                 </div>
 
                 <div className="space-y-2 mt-4">
-                  <Label>添付賁E���E�画像�EPDF等！E/Label>
+                  <Label>添付資料（画像・PDF等）</Label>
                   <div className="border border-dashed border-slate-600 rounded-lg p-6 text-center hover:bg-slate-800/30 transition-colors relative">
                     <input
                       type="file"
@@ -406,8 +406,8 @@ export default function NewCasePage() {
                     />
                     <div className="pointer-events-none">
                       <span className="text-2xl block mb-2">📁</span>
-                      <p className="text-sm text-slate-400">クリチE��また�EドラチE���E�E��ロチE�Eでファイルを追加</p>
-                      <p className="text-xs text-slate-500 mt-1">�E�画像、PDFなど褁E��可�E�E/p>
+                      <p className="text-sm text-slate-400">クリックまたはドラッグ＆ドロップでファイルを追加</p>
+                      <p className="text-xs text-slate-500 mt-1">（画像、PDFなど複数可）</p>
                     </div>
                   </div>
 
@@ -424,7 +424,7 @@ export default function NewCasePage() {
                                 disabled={isAnalyzing}
                                 className="text-xs text-[#00e5ff] hover:text-[#00e5ff] border border-[#00e5ff]/30 bg-[#00e5ff]/10 px-2 py-1 rounded transition-colors"
                               >
-                                {isAnalyzing ? "解析中..." : "斁E��認譁EOCR)"}
+                                {isAnalyzing ? "解析中..." : "文字認識(OCR)"}
                               </button>
                             )}
                             <button
@@ -432,7 +432,7 @@ export default function NewCasePage() {
                               onClick={() => removeFile(index)}
                               className="text-red-400 hover:text-red-300 hover:bg-red-500/10 p-1 rounded transition-colors"
                             >
-                              ✁E
+                              ✕
                             </button>
                           </div>
                         </li>
@@ -444,7 +444,7 @@ export default function NewCasePage() {
 
               {errorMsg && (
                 <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-200 text-sm">
-                  ⚠�E�E{errorMsg}
+                  ⚠️ {errorMsg}
                 </div>
               )}
 
@@ -455,9 +455,9 @@ export default function NewCasePage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn-primary flex-1 py-3 text-base shadow-lg"
+                  className="btn-primary flex-1 py-3 text-base shadow-lg shadow-[#00e5ff]/20"
                 >
-                  {loading ? "送信中..." : "登録を申請すめE}
+                  {loading ? "送信中..." : "登録を申請する"}
                 </button>
               </div>
 
@@ -486,11 +486,11 @@ function Label({ children, required }: { children: React.ReactNode, required?: b
       {children}
       {required ? (
         <span className="text-[#00e5ff] text-[10px] border border-[#00e5ff]/30 bg-[#00e5ff]/10 px-1.5 py-0.5 rounded">
-          忁E��E
+          必須
         </span>
       ) : (
         <span className="text-slate-500 text-[10px] border border-slate-700 bg-slate-800 px-1.5 py-0.5 rounded">
-          任愁E
+          任意
         </span>
       )}
     </label>

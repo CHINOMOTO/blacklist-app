@@ -16,7 +16,7 @@ export default function DashboardPage() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        // Tokenベ�Eスの判定！EBアクセスなし！E
+        // Tokenベースの判定（DBアクセスなし）
         const role = user.app_metadata?.role;
         setIsAdmin(role === 'admin');
       }
@@ -30,8 +30,8 @@ export default function DashboardPage() {
         <div className="max-w-5xl w-full animate-fade-in relative z-10">
 
           <div className="mb-12 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-              ダチE��ュボ�EチE
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+              ダッシュボード
             </h1>
 
           </div>
@@ -39,9 +39,9 @@ export default function DashboardPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* 検索 */}
             <DashboardCard
-              title="検索・照企E
+              title="検索・照会"
               subtitle="検索"
-              description="氏名めE��ナなどから登録チE�Eタを検索します、E
+              description="氏名やカナなどから登録データを検索します。"
               icon="🔍"
               colorClass="group-hover:text-[#00e5ff]"
               bgGradient="from-[#00e5ff]/20 to-transparent"
@@ -50,9 +50,9 @@ export default function DashboardPage() {
 
             {/* 一覧 */}
             <DashboardCard
-              title="登録チE�Eタ一覧"
+              title="登録データ一覧"
               subtitle="一覧"
-              description="現在登録されてぁE��全チE�Eタを確認します、E
+              description="現在登録されている全データを確認します。"
               icon="📋"
               colorClass="group-hover:text-purple-400"
               bgGradient="from-purple-500/20 to-transparent"
@@ -63,41 +63,41 @@ export default function DashboardPage() {
             <DashboardCard
               title="新規登録"
               subtitle="登録"
-              description="新たな対象老E��登録チE�Eタに追加します、E
+              description="新たな対象者を登録データに追加します。"
               icon="📝"
               colorClass="group-hover:text-pink-400"
               bgGradient="from-pink-500/20 to-transparent"
               onClick={() => router.push("/cases/new")}
             />
 
-            {/* アカウント設宁E*/}
+            {/* アカウント設定 */}
             <DashboardCard
-              title="アカウント設宁E
-              subtitle="設宁E
-              description="ログインパスワード�E変更めE��アカウント�E確認を行います、E
-              icon="⚙︁E
+              title="アカウント設定"
+              subtitle="設定"
+              description="ログインパスワードの変更や、アカウントの確認を行います。"
+              icon="⚙️"
               colorClass="group-hover:text-emerald-400"
               bgGradient="from-emerald-500/20 to-transparent"
               onClick={() => router.push("/settings")}
             />
 
-            {/* お問ぁE��わせ */}
+            {/* お問い合わせ */}
             <DashboardCard
-              title="お問ぁE��わせ"
+              title="お問い合わせ"
               subtitle="連絡"
-              description="シスチE��の不�E合や機�E要望など、管琁E��E��ご連絡ぁE��だけます、E
+              description="システムの不具合や機能要望など、管理者にご連絡いただけます。"
               icon="📩"
               colorClass="group-hover:text-amber-400"
               bgGradient="from-amber-500/20 to-transparent"
               onClick={() => router.push("/contact")}
             />
 
-            {/* 管琁E��E��ニュー */}
+            {/* 管理者メニュー */}
             {isAdmin && (
               <DashboardCard
-                title="管琁E��E��ニュー"
-                subtitle="管琁E
-                description="新規登録申請やユーザーアカウント�E承認�E管琁E��行います、E
+                title="管理者メニュー"
+                subtitle="管理"
+                description="新規登録申請やユーザーアカウントの承認・管理を行います。"
                 icon="⚡"
                 isAdmin
                 onClick={() => router.push("/admin")}

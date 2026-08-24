@@ -17,10 +17,10 @@ type Inquiry = {
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
-    bug: "シスチE��不�E合�E報呁E,
-    feature: "機�Eの追加・改喁E��望",
-    account: "アカウントに関する相諁E,
-    other: "そ�E仁E,
+    bug: "システム不具合の報告",
+    feature: "機能の追加・改善要望",
+    account: "アカウントに関する相談",
+    other: "その他",
 };
 
 const STATUS_LABELS: Record<string, { label: string; className: string }> = {
@@ -72,13 +72,16 @@ export default function AdminInquiriesPage() {
                     {/* ヘッダー */}
                     <div className="flex items-center justify-between mb-8 animate-fade-in">
                         <div>
-                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                                お問ぁE��わせ管琁E                            </h1>
+                            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
+                                お問い合わせ管理
+                            </h1>
                             <p className="text-slate-400">
-                                ユーザーからのお問ぁE��わせを確認�E管琁E��まぁE                            </p>
+                                ユーザーからのお問い合わせを確認・管理します
+                            </p>
                         </div>
                         <Link href="/admin" className="btn-secondary text-xs backdrop-blur-md bg-white/5 border-white/10 hover:bg-white/10 px-4 py-2.5">
-                            管琁E��E��ニューへ戻めE                        </Link>
+                            管理者メニューへ戻る
+                        </Link>
                     </div>
 
                     {loading ? (
@@ -88,7 +91,7 @@ export default function AdminInquiriesPage() {
                     ) : inquiries.length === 0 ? (
                         <div className="glass-panel rounded-3xl p-10 text-center animate-fade-in border border-[#00e5ff]/20">
                             <div className="text-4xl mb-4 opacity-30">📭</div>
-                            <p className="text-slate-400 font-medium">お問ぁE��わせはまだありません、E/p>
+                            <p className="text-slate-400 font-medium">お問い合わせはまだありません。</p>
                         </div>
                     ) : (
                         <div className="space-y-4 animate-fade-in">
@@ -138,7 +141,7 @@ export default function AdminInquiriesPage() {
                         className="glass-panel rounded-3xl p-8 max-w-xl w-full mx-4 border border-[#00e5ff]/20 max-h-[80vh] overflow-y-auto"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* スチE�Eタスバッジ */}
+                        {/* ステータスバッジ */}
                         <div className="flex items-center justify-between mb-6">
                             <span className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${STATUS_LABELS[selectedInquiry.status]?.className || ''}`}>
                                 {STATUS_LABELS[selectedInquiry.status]?.label || selectedInquiry.status}
@@ -148,19 +151,19 @@ export default function AdminInquiriesPage() {
                             </span>
                         </div>
 
-                        {/* 惁E�� */}
+                        {/* 情報 */}
                         <div className="space-y-4 mb-6">
                             <div>
-                                <p className="text-xs text-slate-500 mb-1">お問ぁE��わせ種顁E/p>
+                                <p className="text-xs text-slate-500 mb-1">お問い合わせ種類</p>
                                 <p className="text-sm text-white font-bold">{CATEGORY_LABELS[selectedInquiry.category] || selectedInquiry.category}</p>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <p className="text-xs text-slate-500 mb-1">会社吁E/p>
+                                    <p className="text-xs text-slate-500 mb-1">会社名</p>
                                     <p className="text-sm text-slate-200">{selectedInquiry.company_name}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 mb-1">ユーザー吁E/p>
+                                    <p className="text-xs text-slate-500 mb-1">ユーザー名</p>
                                     <p className="text-sm text-slate-200">{selectedInquiry.user_name}</p>
                                 </div>
                             </div>
@@ -169,16 +172,16 @@ export default function AdminInquiriesPage() {
                                 <p className="text-sm text-slate-200 font-mono">{selectedInquiry.email}</p>
                             </div>
                             <div>
-                                <p className="text-xs text-slate-500 mb-1">お問ぁE��わせ冁E��</p>
+                                <p className="text-xs text-slate-500 mb-1">お問い合わせ内容</p>
                                 <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700/30">
                                     <p className="text-sm text-slate-200 whitespace-pre-wrap leading-relaxed">{selectedInquiry.message}</p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* スチE�Eタス変更ボタン */}
+                        {/* ステータス変更ボタン */}
                         <div className="border-t border-slate-700/50 pt-5">
-                            <p className="text-xs text-slate-500 mb-3">スチE�Eタスを変更</p>
+                            <p className="text-xs text-slate-500 mb-3">ステータスを変更</p>
                             <div className="flex gap-2">
                                 {Object.entries(STATUS_LABELS).map(([key, val]) => (
                                     <button
@@ -196,12 +199,13 @@ export default function AdminInquiriesPage() {
                             </div>
                         </div>
 
-                        {/* 閉じめE*/}
+                        {/* 閉じる */}
                         <button
                             onClick={() => setSelectedInquiry(null)}
                             className="w-full mt-5 py-3 text-sm text-slate-400 hover:text-white border border-slate-700 hover:border-slate-500 rounded-xl transition-all"
                         >
-                            閉じめE                        </button>
+                            閉じる
+                        </button>
                     </div>
                 </div>
             )}
