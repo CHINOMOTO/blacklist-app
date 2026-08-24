@@ -113,7 +113,7 @@ function DashboardCard({
   return (
     <button
       onClick={onClick}
-      className={`group relative text-left p-8 rounded-3xl border transition-all duration-300 glass-panel hover:-translate-y-2 flex flex-col h-full overflow-hidden ${isAdmin ? 'border-slate-700/30 bg-[#00e5ff]/10 hover:bg-[#00e5ff]/20' : 'border-white/10 hover:border-white/20' }`}
+      className={`group relative text-left p-8 rounded-3xl border border-slate-400/30 transition-all duration-300 glass-panel hover:-translate-y-2 flex flex-col h-full overflow-hidden hover:border-slate-300/50 hover:bg-slate-800/20 ${isAdmin ? 'bg-[#00e5ff]/5' : ''}`}
     >
       {/* Background Hover Glow */}
       <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${bgGradient} ${isAdmin ? 'opacity-100' : 'group-hover:opacity-100'}`} />
