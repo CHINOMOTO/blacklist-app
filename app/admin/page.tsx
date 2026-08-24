@@ -68,12 +68,12 @@ export default function AdminDashboardPage() {
     return (
         <RequireAdmin>
             <div className="min-h-screen text-slate-100 flex items-center justify-center pt-24 pb-12">
-                <div className="max-w-4xl w-full mx-4">
+                <div className="max-w-5xl w-full mx-4">
                     <h1 className="text-3xl font-bold text-[#00e5ff] mb-8 text-center">
                         管理者ダッシュボード
                     </h1>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {/* 承認待ちタイル */}
                         <Link
                             href="/admin/cases"
