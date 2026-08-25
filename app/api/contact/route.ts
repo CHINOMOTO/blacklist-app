@@ -65,7 +65,7 @@ export async function POST(request: Request) {
             const adminUserId = process.env.LINE_ADMIN_USER_ID;
 
             if (lineToken && adminUserId) {
-                const messageText = `【SCOUTER システム通知】\n\n📩 お問い合わせが届きました\n━━━━━━━━━━━━━━━\n種類：${categoryLabels[category] || category}\n会社：${companyName || '未所属'}\n氏名：${userName || '不明'}\n━━━━━━━━━━━━━━━\n${message.trim().substring(0, 200)}${message.trim().length > 200 ? '...' : ''}\n\n管理画面でご確認ください。`;
+                const messageText = `【SCOUTER システム通知】\n\n📩 お問い合わせが届きました\n━━━━━━━━━━━━━━━\n種類：${categoryLabels[category] || category}\n会社名：${companyName || '未所属'}\n氏名：${userName || '不明'}\n━━━━━━━━━━━━━━━\n【お問い合わせ内容】\n${message.trim().substring(0, 200)}${message.trim().length > 200 ? '...' : ''}\n\n管理画面でご確認ください。`;
 
                 const targetIds = adminUserId.split(',').map((id: string) => id.trim()).filter((id: string) => id);
 
