@@ -34,7 +34,7 @@ export default function DashboardPage() {
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
               ダッシュボード
             </h1>
-            <p className="text-slate-400 font-medium">SCOUTERシステムのメインメニュー</p>
+            <p className="text-slate-400 font-medium">メインメニュー</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -164,10 +164,20 @@ export default function AdminInquiriesPage() {
                                     <p className="text-sm text-slate-200">{selectedInquiry.user_name}</p>
                                 </div>
                             </div>
-                            <div>
-                                <p className="text-xs text-slate-500 mb-1">メールアドレス</p>
-                                <p className="text-sm text-slate-200 font-mono">{selectedInquiry.email}</p>
-                            </div>
+                            
+                                <div>
+                                    <p className="text-xs text-slate-500 mb-1">メールアドレス</p>
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-sm text-slate-200 font-mono">{selectedInquiry.email}</p>
+                                        <a 
+                                            href={`mailto:${selectedInquiry.email}?subject=【SCOUTER】お問い合わせの件について&body=${selectedInquiry.company_name}%0D%0A${selectedInquiry.user_name} 様%0D%0A%0D%0Aお問い合わせありがとうございます。%0D%0A%0D%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A【お問い合わせ内容】%0D%0A${selectedInquiry.message}%0D%0A%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A`}
+                                            className="px-3 py-1 bg-[#00e5ff]/10 text-[#00e5ff] text-xs font-bold rounded hover:bg-[#00e5ff]/20 transition-colors border border-[#00e5ff]/30 flex items-center gap-1"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                            メールで返信
+                                        </a>
+                                    </div>
+                                </div>
                             <div>
                                 <p className="text-xs text-slate-500 mb-1">お問い合わせ内容</p>
                                 <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700/30">
