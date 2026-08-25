@@ -105,6 +105,37 @@ export default function NewCasePage() {
         throw new Error("氏名（カナ）は全角カタカナで入力してください。");
       }
 
+      // 共通の日付バリデーション関数
+      const validateDate = (y, m, d, label) => {
+        if (!y && !m && !d) return; // 空ならOK
+        if (!y || !m || !d) {
+          throw new Error(`${label}は「年・月・日」すべてを入力するか、すべて空にしてください。`);
+        }
+        const yearInt = parseInt(y, 10);
+        const monthInt = parseInt(m, 10);
+        const dayInt = parseInt(d, 10);
+        
+        const dateObj = new Date(yearInt, monthInt - 1, dayInt);
+        // Dateオブジェクトが自動補正した結果が元の値と異なる場合は無効な日付（例: 2月30日 -> 3月2日）
+        if (dateObj.getFullYear() !== yearInt || dateObj.getMonth() + 1 !== monthInt || dateObj.getDate() !== dayInt) {
+          throw new Error(`${label}に存在しない日付（${yearInt}年${monthInt}月${dayInt}日）が入力されています。正しい日付を入力してください。`);
+        }
+        
+        // 常識的な年の範囲チェック
+        if (yearInt < 1900 || yearInt > 2100) {
+          throw new Error(`${label}の「年」は1900〜2100の範囲で入力してください。`);
+        }
+      };
+
+      // 生年月日と発生時期のバリデーションを実行
+      validateDate(birthYear, birthMonth, birthDay, "生年月日");
+      validateDate(occurrenceYear, occurrenceMonth, occurrenceDay, "トラブル発生時期");
+
+      // 電話番号のバリデーション
+      if (phoneLast4 && phoneLast4.length !== 4) {
+        throw new Error("電話番号（下4桁）は必ず4桁の数字で入力してください。");
+      }
+
       // ファイルアップロード処理
       const uploadedUrls: string[] = [];
       if (selectedFiles.length > 0) {
