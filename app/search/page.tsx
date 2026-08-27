@@ -70,12 +70,9 @@ export default function SearchPage() {
         .from("blacklist_cases")
         .select("*");
 
-      // 管理者でない場合は自社データのみ＋承認済みのみ（個人情報保護法対応）
+      // 管理者でない場合は承認済みデータのみ（他社データも検索可能）
       if (!isAdmin) {
         query = query.eq("status", "approved");
-        if (userCompanyId) {
-          query = query.eq("registered_company_id", userCompanyId);
-        }
       }
 
       const { data, error } = await query;

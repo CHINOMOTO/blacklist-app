@@ -126,9 +126,12 @@ export default function CaseDetailPage() {
                 return;
             }
 
-            // アクセス権限チェック: 管理者(admin)であるか、または自社のデータである場合のみ閲覧可能
-            if (currentUser.role !== 'admin' && data.registered_company_id !== currentUser.company_id) {
-                setErrorMsg("アクセス権限がありません。他社のデータは閲覧できません。");
+            // アクセス権限チェック: 管理者(admin)であるか、自社のデータであるか、またはステータスが「承認済み(approved)」の場合のみ閲覧可能
+            const isOwnCompany = data.registered_company_id === currentUser.company_id;
+            const isApproved = data.status === 'approved';
+            
+            if (currentUser.role !== 'admin' && !isOwnCompany && !isApproved) {
+                setErrorMsg("アクセス権限がありません。他社の審査中データは閲覧できません。");
                 setLoading(false);
                 return;
             }
