@@ -12,6 +12,7 @@ export default function SettingsPage() {
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
     const [companyName, setCompanyName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     
     // Password state
     const [newPassword, setNewPassword] = useState("");
@@ -33,12 +34,13 @@ export default function SettingsPage() {
 
                 const { data: appUser } = await supabase
                     .from("app_users")
-                    .select("display_name, companies(name)")
+                    .select("display_name, phone_number, companies(name)")
                     .eq("id", user.id)
                     .single();
 
                 if (appUser) {
                     setDisplayName(appUser.display_name || "");
+                    setPhoneNumber(appUser.phone_number || "");
                     setCompanyName((appUser.companies as any)?.name || "未所属");
                 }
             }
@@ -56,7 +58,7 @@ export default function SettingsPage() {
         try {
             const { error } = await supabase
                 .from("app_users")
-                .update({ display_name: displayName })
+                .update({ display_name: displayName, phone_number: phoneNumber })
                 .eq("id", userId);
 
             if (error) throw error;

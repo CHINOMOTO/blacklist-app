@@ -17,6 +17,7 @@ const MAX_MESSAGE_LENGTH = 2000;
 export default function ContactPage() {
     const [companyName, setCompanyName] = useState("");
     const [userName, setUserName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [category, setCategory] = useState("");
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +31,7 @@ export default function ContactPage() {
             if (user) {
                 const { data: appUser } = await supabase
                     .from("app_users")
-                    .select("display_name, companies(name)")
+                    .select("display_name, phone_number, companies(name)")
                     .eq("id", user.id)
                     .single();
 
@@ -82,6 +83,7 @@ export default function ContactPage() {
                     message: message.trim(),
                     companyName,
                     userName,
+                    phoneNumber,
                 }),
             });
 

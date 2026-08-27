@@ -10,6 +10,7 @@ type Inquiry = {
     user_name: string;
     company_name: string;
     email: string;
+    phone_number: string | null;
     category: string;
     message: string;
     status: string;
@@ -155,6 +156,12 @@ export default function AdminInquiriesPage() {
                                 <p className="text-sm text-white font-bold">{CATEGORY_LABELS[selectedInquiry.category] || selectedInquiry.category}</p>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
+
+                                <div>
+                                    <p className="text-xs text-slate-500 mb-1">電話番号</p>
+                                    <p className="text-sm text-slate-200 font-mono">{selectedInquiry.phone_number || "未入力"}</p>
+                                </div>
+
                                 <div>
                                     <p className="text-xs text-slate-500 mb-1">会社名</p>
                                     <p className="text-sm text-slate-200">{selectedInquiry.company_name}</p>
