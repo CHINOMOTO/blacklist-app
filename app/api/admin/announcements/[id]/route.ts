@@ -3,7 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function PATCH(request: Request, context: any) {
     try {
-        const { id } = context.params;
+        const params = await context.params;
+        const { id } = params;
         const body = await request.json();
         const { is_active } = body;
 
@@ -54,7 +55,8 @@ export async function PATCH(request: Request, context: any) {
 
 export async function DELETE(request: Request, context: any) {
     try {
-        const { id } = context.params;
+        const params = await context.params;
+        const { id } = params;
 
         const authHeader = request.headers.get("Authorization");
         if (!authHeader || !authHeader.startsWith("Bearer ")) {

@@ -6,7 +6,8 @@ export async function DELETE(
     context: any
 ) {
     try {
-        const { id } = context.params;
+        const params = await context.params;
+        const { id } = params;
 
         // 1. Authorizationヘッダーからトークンを取得
         const authHeader = request.headers.get("Authorization");

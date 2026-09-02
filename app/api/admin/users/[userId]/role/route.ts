@@ -6,7 +6,8 @@ export async function PATCH(
     context: any
 ) {
     try {
-        const { userId } = context.params;
+        const params = await context.params;
+        const { userId } = params;
         const body = await request.json();
         const { role } = body;
 
